@@ -1,0 +1,48 @@
+# base
+linux
+pacman
+initscripts
+sudo
+vim
+# gnome base
+gnome-backgrounds
+gnome-control-center
+gnome-icon-theme-extras
+gnome-panel
+gnome-themes-standard
+metacity
+nautilus
+notification-daemon
+gdm
+# browser
+firefox
+flashplugin
+# file-roller
+file-roller
+zip
+unzip
+# zh-TW support
+ibus-chewing
+ttf-droid
+# extra apps
+gnome-mplayer
+gimp
+transmission-gtk
+gnome-terminal
+eog
+evince
+geany
+network-manager-applet
+# xorg
+xf86-input-synaptics
+xf86-video-ati
+xf86-video-intel
+xf86-video-nouveau
+xf86-video-vesa
+xorg-server
+# libreoffice
+libreoffice-calc
+libreoffice-writer
+libreoffice-impress
+libreoffice-gnome
+libreoffice-en-US
