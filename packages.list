@@ -46,3 +46,9 @@ libreoffice-writer
 libreoffice-impress
 libreoffice-gnome
 libreoffice-en-US
+# printing
+cups
+ghostscript
+gsfonts
+gutenprint
+xdg-utils

@@ -27,7 +27,7 @@ make_customize_root_image() {
 	# change march/setup permission
 	chmod 755 ${work_dir}/root-image/march/setup
 	# setup rc.conf
-	sed -i -e 's|^DAEMONS=.*|DAEMONS=(dbus networkmanager gdm)|' ${work_dir}/root-image/etc/rc.conf
+	sed -i -e 's|^DAEMONS=.*|DAEMONS=(dbus networkmanager gdm avahi-daemon cupsd)|' ${work_dir}/root-image/etc/rc.conf
 	# remove unused manual and locale
 	find ${work_dir}/root-image/usr/share/locale/* -maxdepth 0 ! -name locale.alias -exec rm -rf {} \;
 	rm -rf ${work_dir}/root-image/usr/share/X11/locale/
@@ -41,8 +41,8 @@ make_customize_root_image() {
 	rm -rf ${work_dir}/root-image/usr/share/gtk-3.0/
 	# adduser and setup locale
 	chroot ${work_dir}/root-image/ locale-gen
-	chroot ${work_dir}/root-image/ usermod -p U6aMy0wojraho root
-	chroot ${work_dir}/root-image/ useradd -m -p U6aMy0wojraho -g users -G audio,lp,network,optical,power,storage,video,wheel march
+	chroot ${work_dir}/root-image/ usermod -p ZYCnDaw9NK8NI root
+	chroot ${work_dir}/root-image/ useradd -m -p ZYCnDaw9NK8NI -g users -G audio,lp,network,optical,power,storage,video,wheel march
 	: > ${work_dir}/build.${FUNCNAME}
     fi
 }
