@@ -6,7 +6,6 @@ sudo
 vim
 # gnome base
 gnome-control-center
-gnome-icon-theme
 gnome-panel
 gnome-themes-standard
 metacity
