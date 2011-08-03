@@ -5,9 +5,8 @@ initscripts
 sudo
 vim
 # gnome base
-gnome-backgrounds
 gnome-control-center
-gnome-icon-theme-extras
+gnome-icon-theme
 gnome-panel
 gnome-themes-standard
 metacity
