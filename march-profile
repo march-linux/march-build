@@ -3,8 +3,8 @@
 depend_procedure core base
 
 worker_intro () {
-	inform "MARCH will perform a clean installation. To stop, press Ctrl+C within 10 seconds."
-	sleep 10
+	inform "This might take a while. Have a cup of coffee."
+	sleep 5
 }
 
 
@@ -12,8 +12,6 @@ worker_configure ()
 {
 	var_UI_TYPE="dia"
 	ui_init
-	HARDWARECLOCK="UTC"
-	TIMEZONE="Canada/Pacific"
 }
 
 worker_select_source ()
