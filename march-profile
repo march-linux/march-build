@@ -26,7 +26,7 @@ worker_select_source ()
 
 worker_prepare_disks ()
 {
-	get_possible_fs && interactive_prepare_disks
+	interactive_prepare_disks
 }
 
 worker_package_list ()
