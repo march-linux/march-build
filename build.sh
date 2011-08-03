@@ -21,7 +21,7 @@ make_customize_root_image() {
 	# copy march config
 	cp -r root-image ${work_dir}
 	# copy aif config
-	cp march-profile ${work_dir}/root-image/usr/lib/aif/user/
+	cp march-profile ${work_dir}/root-image/usr/lib/aif/core/procedures/
 	cp packages.list ${work_dir}/root-image/march/
 	# change sudoers permission
 	chmod 440 ${work_dir}/root-image/etc/sudoers
