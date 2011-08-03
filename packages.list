@@ -15,12 +15,13 @@ nautilus
 notification-daemon
 gdm
 # browser
-firefox
+chromium
 flashplugin
 # file-roller
 file-roller
 zip
 unzip
+unrar
 # zh-TW support
 ibus-chewing
 ttf-droid
