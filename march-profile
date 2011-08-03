@@ -2,8 +2,6 @@
 
 depend_procedure core base
 
-DEFAULTFS="/boot:100:ext2 swap:256:swap /:*:ext4"
-
 worker_intro () {
 	inform "MARCH will perform a clean installation. To stop, press Ctrl+C within 10 seconds."
 	sleep 10
@@ -12,7 +10,7 @@ worker_intro () {
 
 worker_configure ()
 {
-	var_UI_TYPE="cli"
+	var_UI_TYPE="dia"
 	ui_init
 	HARDWARECLOCK="UTC"
 	TIMEZONE="Canada/Pacific"
