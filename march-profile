@@ -3,7 +3,7 @@
 depend_procedure core base
 
 worker_intro () {
-	inform "This might take a while. Have a cup of coffee."
+	inform "March installation may take a while. Have some coffee."
 	sleep 5
 }
 
