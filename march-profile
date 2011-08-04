@@ -2,6 +2,8 @@
 
 depend_procedure core base
 
+BLOCK_ROLLBACK_USELESS=1
+
 worker_intro () {
 	inform "March installation may take a while. Have some coffee."
 	sleep 5
@@ -61,5 +63,6 @@ worker_set_clock ()
 
 worker_install_bootloader ()
 {
+	bootloader="grub"
 	interactive_install_bootloader
 }
