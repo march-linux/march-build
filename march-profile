@@ -70,7 +70,7 @@ worker_configure_system () {
 
 worker_set_clock ()
 {
-	copy_timezone_file
+	true
 }
 
 
