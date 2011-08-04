@@ -12,7 +12,7 @@ worker_intro () {
 
 worker_configure ()
 {
-	var_UI_TYPE="dia"
+	var_UI_TYPE="cli"
 	ui_init
 }
 
