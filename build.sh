@@ -28,7 +28,7 @@ make_customize_root_image() {
 	# change march/setup permission
 	chmod 755 ${work_dir}/root-image/march/setup
 	# setup rc.conf
-	sed -i -e 's|^DAEMONS=.*|DAEMONS=(dbus networkmanager gdm avahi-daemon cupsd)|' ${work_dir}/root-image/etc/rc.conf
+	sed -i -e "s|^DAEMONS=.*|DAEMONS=(dbus networkmanager gdm avahi-daemon cupsd)|" ${work_dir}/root-image/etc/rc.conf
 	# remove unused manual and locale
 	find ${work_dir}/root-image/usr/share/locale/* -maxdepth 0 ! -name locale.alias -exec rm -rf {} \;
 	rm -rf ${work_dir}/root-image/usr/share/X11/locale/
