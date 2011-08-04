@@ -2,8 +2,6 @@
 
 depend_procedure core base
 
-BLOCK_ROLLBACK_USELESS=1
-
 worker_intro () {
 	inform "March installation may take a while. Have some coffee."
 	sleep 5
@@ -12,8 +10,13 @@ worker_intro () {
 
 worker_configure ()
 {
-	var_UI_TYPE="cli"
+	var_UI_TYPE="dia"
 	ui_init
+	var_GRUB_DEVICE="/dev/sda"
+	var_PARTITIONS="/dev/sda 100:ext2:+ 512:swap *:ext4"
+	var_BLOCKDATA="/dev/sda1 raw no_label ext2;yes;/boot;target;no_opts;no_label;no_params
+/dev/sda2 raw no_label swap;yes;no_mountpoint;target;no_opts;no_label;no_params
+/dev/sda3 raw no_label ext4;yes;/;target;no_opts;no_label;no_params"
 }
 
 worker_select_source ()
@@ -24,13 +27,22 @@ worker_select_source ()
 
 worker_prepare_disks ()
 {
-	interactive_prepare_disks
+	echo "$var_PARTITIONS" > $TMP_PARTITIONS
+	echo "$var_BLOCKDATA" > $TMP_BLOCKDEVICES
+	process_disks       || die_error "Could not process_disks"
+	if ! process_filesystems
+	then
+		show_warning 'Disk processing' "Could not process_filesystems"
+		txt='also failed to execute properly'
+		rollback_filesystems && txt='ended successfully'
+		die_error "Something failed while processing the filesystem.  A rollback was executed, which $txt"
+	fi
+	inform "Partitions and filesystems made successfully"
 }
 
 worker_package_list ()
 {
 	var_TARGET_PACKAGES="$(grep -v ^# /march/packages.list)"
-	true
 }
 
 
@@ -57,12 +69,16 @@ worker_configure_system () {
 worker_set_clock ()
 {
 	#TODO implement this
-	true
 }
 
 
 worker_install_bootloader ()
 {
-	bootloader="grub"
-	interactive_install_bootloader
+	get_grub_map || return 1
+	grub-install $var_GRUB_DEVICE --root-directory=/mnt || return 1
+	# check if we have a seperate bootdev (/boot)
+	# ToDo: This is double-work, find a better place!
+	# See comment in generate_grub_menulst and interactive_grub
+	bootdev=$(mount | grep $var_TARGET_DIR/boot | cut -d' ' -f 1)
+	generate_grub_menulst || return 1
 }
