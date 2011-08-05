@@ -35,7 +35,7 @@ worker_package_list ()
 
 worker_install_packages ()
 {
-	target_prepare_pacman testing core extra community community-testing && installpkg
+	target_prepare_pacman core extra community && installpkg
 }
 
 worker_configure_system () {
