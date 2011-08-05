@@ -5,8 +5,7 @@ depend_procedure core base
 BLOCK_ROLLBACK_USELESS=1
 
 worker_intro () {
-	inform "March installation may take a while. Have some coffee."
-	sleep 5
+	notify "March installation may take a while. Have some coffee."
 }
 
 
@@ -32,13 +31,13 @@ worker_package_list ()
 	var_TARGET_PACKAGES="$(grep -v ^# /march/packages.list)"
 }
 
-
 worker_install_packages ()
 {
 	target_prepare_pacman core extra community && installpkg
 }
 
-worker_configure_system () {
+worker_configure_system ()
+{
 	# copy march config
 	cp /etc/sudoers $var_TARGET_DIR/etc/
 	cp /etc/pacman.d/mirrorlist $var_TARGET_DIR/etc/pacman.d/
@@ -50,19 +49,21 @@ worker_configure_system () {
 	chroot $var_TARGET_DIR locale-gen
 	chroot $var_TARGET_DIR usermod -p ZYCnDaw9NK8NI root
 	chroot $var_TARGET_DIR useradd -m -p ZYCnDaw9NK8NI -g users -G audio,lp,network,optical,power,storage,video,wheel march
-	inform "March configured successfully"
+	notify "March configured successfully"
 }
-
 
 worker_set_clock ()
 {
 	true
 }
 
-
 worker_install_bootloader ()
 {
-	bootloader="grub"
-	EDITOR="vim"
-	interactive_install_bootloader
+	get_grub_map || return 1
+	grub-install $DISC --root-directory=/mnt || return 1
+	# check if we have a seperate bootdev (/boot)
+	# ToDo: This is double-work, find a better place!
+	# See comment in generate_grub_menulst and interactive_grub
+	bootdev=$(mount | grep $var_TARGET_DIR/boot | cut -d' ' -f 1)
+	generate_grub_menulst || return 1
 }
