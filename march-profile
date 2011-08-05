@@ -19,7 +19,7 @@ worker_configure ()
 worker_select_source ()
 {
 	var_PKG_SOURCE_TYPE="net"
-	var_SYNC_URL="http://mirrors.kernel.org/archlinux/\$repo/os/\$arch"
+	var_SYNC_URL="ftp://mirror.rit.edu/archlinux/\$repo/os/\$arch"
 }
 
 worker_prepare_disks ()
