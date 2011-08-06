@@ -60,7 +60,7 @@ worker_set_clock ()
 worker_install_bootloader ()
 {
 	get_grub_map || return 1
-	grub-install $DISC --root-directory=/mnt || return 1
+	grub-install $DISC || return 1
 	# check if we have a seperate bootdev (/boot)
 	# ToDo: This is double-work, find a better place!
 	# See comment in generate_grub_menulst and interactive_grub
