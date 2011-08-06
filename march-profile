@@ -4,10 +4,10 @@ depend_procedure core base
 
 BLOCK_ROLLBACK_USELESS=1
 
-worker_intro () {
+worker_intro ()
+{
 	notify "March installation may take a while. Have some coffee."
 }
-
 
 worker_configure ()
 {
@@ -66,4 +66,10 @@ worker_install_bootloader ()
 	# See comment in generate_grub_menulst and interactive_grub
 	bootdev=$(mount | grep $var_TARGET_DIR/boot | cut -d' ' -f 1)
 	generate_grub_menulst || return 1
+}
+
+worker_msg_report ()
+{
+	show_report
+	notify "If there is no error, March is installed."
 }
