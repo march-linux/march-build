@@ -59,13 +59,9 @@ worker_set_clock ()
 
 worker_install_bootloader ()
 {
-	get_grub_map || return 1
-	grub-install $DISC || return 1
-	# check if we have a seperate bootdev (/boot)
-	# ToDo: This is double-work, find a better place!
-	# See comment in generate_grub_menulst and interactive_grub
-	bootdev=$(mount | grep $var_TARGET_DIR/boot | cut -d' ' -f 1)
-	generate_grub_menulst || return 1
+	bootloader="grub"
+	export EDITOR="vim"
+	interactive_install_bootloader
 }
 
 worker_msg_report ()
