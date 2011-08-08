@@ -1,39 +1,20 @@
 #!/bin/bash
 
-depend_procedure core base
+arg_ui_type="dia"
+SOURCE="net"
+SYNC_URL="ftp://mirrors.kernel.org/archlinux/\$repo/os/\$arch"
 
-BLOCK_ROLLBACK_USELESS=1
+TARGET_PACKAGES="$(grep -v ^# /march/packages.list)"
+
+GRUB_DEVICE="/dev/sda"
+PARTITIONS="/dev/sda 100:ext2:+ 512:swap *:ext4"
+BLOCKDATA="/dev/sda1 raw no_label ext2;yes;/boot;target;no_opts;no_label;no_params
+/dev/sda2 raw no_label swap;yes;no_mountpoint;target;no_opts;no_label;no_params
+/dev/sda3 raw no_label ext4;yes;/;target;no_opts;no_label;no_params"
 
 worker_intro ()
 {
 	notify "March installation may take a while. Have some coffee."
-}
-
-worker_configure ()
-{
-	var_UI_TYPE="dia"
-	ui_init
-}
-
-worker_select_source ()
-{
-	var_PKG_SOURCE_TYPE="net"
-	var_SYNC_URL="ftp://mirror.rit.edu/archlinux/\$repo/os/\$arch"
-}
-
-worker_prepare_disks ()
-{
-	get_possible_fs && interactive_prepare_disks
-}
-
-worker_package_list ()
-{
-	var_TARGET_PACKAGES="$(grep -v ^# /march/packages.list)"
-}
-
-worker_install_packages ()
-{
-	target_prepare_pacman core extra community && installpkg
 }
 
 worker_configure_system ()
@@ -52,20 +33,7 @@ worker_configure_system ()
 	notify "March configured successfully."
 }
 
-worker_set_clock ()
-{
-	true
-}
-
-worker_install_bootloader ()
-{
-	bootloader="grub"
-	export EDITOR="vim"
-	interactive_install_bootloader
-}
-
 worker_msg_report ()
 {
-	show_report
-	notify "If there is no error, March is installed."
+	notify $(show_report)
 }
