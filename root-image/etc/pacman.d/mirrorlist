@@ -1,1 +1,1 @@
-Server = ftp://mirror.rit.edu/archlinux/$repo/os/$arch
+Server = ftp://mirrors.kernel.org/archlinux/$repo/os/$arch
