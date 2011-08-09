@@ -45,6 +45,11 @@ worker_configure_system ()
 	chroot $var_TARGET_DIR useradd -m -p ZYCnDaw9NK8NI -g users -G audio,lp,network,optical,power,storage,video,wheel march
 }
 
+worker_set_clock ()
+{
+	true
+}
+
 worker_install_bootloader ()
 {
 	bootloader="grub"
