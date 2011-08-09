@@ -31,7 +31,7 @@ worker_package_list ()
 
 worker_configure_system ()
 {
-	notify "Configuring March"
+	notify "Configuring March..."
 	# copy march config
 	cp /etc/sudoers $var_TARGET_DIR/etc/
 	cp /etc/pacman.d/mirrorlist $var_TARGET_DIR/etc/pacman.d/
