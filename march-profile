@@ -1,6 +1,5 @@
 #!/bin/bash
 
-arg_ui_type="dia"
 SOURCE="net"
 SYNC_URL="ftp://mirrors.kernel.org/archlinux/\$repo/os/\$arch"
 
@@ -14,7 +13,8 @@ BLOCKDATA="/dev/sda1 raw no_label ext2;yes;/boot;target;no_opts;no_label;no_para
 
 worker_intro ()
 {
-	notify "March installation may take a while. Have some coffee."
+	inform "March installation may take a while. Have some coffee."
+	sleep 10
 }
 
 worker_configure_system ()
@@ -27,13 +27,7 @@ worker_configure_system ()
 	# setup rc.conf
 	sed -i -e "s|^DAEMONS=.*|DAEMONS=(dbus networkmanager gdm avahi-daemon cupsd)|" $var_TARGET_DIR/etc/rc.conf
 	# adduser and setup locale
-	target_locale-gen
+	chroot $var_TARGET_DIR locale-gen
 	chroot $var_TARGET_DIR usermod -p ZYCnDaw9NK8NI root
 	chroot $var_TARGET_DIR useradd -m -p ZYCnDaw9NK8NI -g users -G audio,lp,network,optical,power,storage,video,wheel march
-	notify "March configured successfully."
-}
-
-worker_msg_report ()
-{
-	notify $(show_report)
 }
