@@ -10,14 +10,14 @@ worker_intro ()
 
 worker_configure ()
 {
-	var_UI_TYPE="dia"
+	var_UI_TYPE=dia
 	ui_init
 }
 
 worker_select_source ()
 {
-	var_PKG_SOURCE_TYPE="net"
-	var_SYNC_URL="ftp://mirrors.kernel.org/archlinux/\$repo/os/\$arch"
+	var_PKG_SOURCE_TYPE=net
+	var_SYNC_URL=ftp://mirrors.kernel.org/archlinux/\$repo/os/\$arch
 }
 
 worker_prepare_disks ()
@@ -27,7 +27,7 @@ worker_prepare_disks ()
 
 worker_package_list ()
 {
-	var_TARGET_PACKAGES="$(grep -v ^# /march/packages.list)"
+	var_TARGET_PACKAGES=$(grep -v ^# /march/packages.list)
 }
 
 worker_configure_system ()
@@ -59,12 +59,12 @@ worker_set_clock ()
 
 worker_install_bootloader ()
 {
-	bootloader="grub"
-	export EDITOR="vim"
+	bootloader=grub
+	export EDITOR=vim
 	interactive_install_bootloader
 }
 
 worker_msg_report ()
 {
-	notify $(show_report)
+	notify "If the install finished successfully, you can type 'reboot' to restart the system."
 }
