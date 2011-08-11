@@ -1,4 +1,5 @@
 #!/bin/bash
+depend_procedure core base
 
 BLOCK_ROLLBACK_USELESS=1
 
@@ -43,6 +44,12 @@ worker_configure_system ()
 	target_locale-gen
 	chroot $var_TARGET_DIR usermod -p ZYCnDaw9NK8NI root
 	chroot $var_TARGET_DIR useradd -m -p ZYCnDaw9NK8NI -g users -G audio,lp,network,optical,power,storage,video,wheel march
+}
+
+
+worker_install_packages ()
+{
+	target_prepare_pacman core extra community && installpkg
 }
 
 worker_set_clock ()
