@@ -1,11 +1,9 @@
 #!/bin/bash
 depend_procedure core base
 
-BLOCK_ROLLBACK_USELESS=1
-
 worker_intro ()
 {
-	notify "March installation may take a while. Have some coffee."
+	notify "March installation may take a while. Make sure you have Internet connection."
 }
 
 worker_configure ()
@@ -22,7 +20,13 @@ worker_select_source ()
 
 worker_prepare_disks ()
 {
-	get_possible_fs && interactive_prepare_disks
+	notify "March will prepare the filesystem."
+	get_possible_fs
+	echo "/dev/sda 100:ext2:+ 512:swap *:ext4" > $TMP_PARTITIONS
+	echo "/dev/sda1 raw no_label ext2;yes;/boot;target;no_opts;no_label;no_params
+/dev/sda2 raw no_label swap;yes;no_mountpoint;target;no_opts;no_label;no_params
+/dev/sda3 raw no_label ext4;yes;/;target;no_opts;no_label;no_params" > $TMP_BLOCKDEVICES
+	process_disks && process_filesystems || die_error "Oops! March cannot prepare the filesystem."
 }
 
 worker_package_list ()
@@ -59,12 +63,13 @@ worker_set_clock ()
 
 worker_install_bootloader ()
 {
-	bootloader=grub
-	export EDITOR=vim
-	interactive_install_bootloader
+	get_grub_map
+	grub-install /dev/sda --root-directory=/mnt
+	bootdev=$(mount | grep $var_TARGET_DIR/boot | cut -d' ' -f 1)
+	generate_grub_menulst
 }
 
 worker_msg_report ()
 {
-	notify "If the install finished successfully, you can type 'reboot' to restart the system."
+	notify "March installation completes. Your system is ready."
 }
