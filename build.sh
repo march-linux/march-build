@@ -10,6 +10,8 @@ arch=$(uname -m)
 work_dir=work
 verbose="y"
 
+script_path=$(readlink -f ${0%/*})
+
 # Base installation (root-image)
 make_basefs() {
     mkarchiso ${verbose} -D "${install_dir}" -p "aif dialog syslinux $(grep -v ^# packages.list)" create "${work_dir}"
@@ -19,10 +21,10 @@ make_basefs() {
 make_customize_root_image() {
     if [[ ! -e ${work_dir}/build.${FUNCNAME} ]]; then
 	# copy march config
-	cp -r root-image ${work_dir}
+	cp -r ${script_path}/root-image ${work_dir}
 	# copy aif config
-	cp march-profile ${work_dir}/root-image/usr/lib/aif/core/procedures/
-	cp packages.list ${work_dir}/root-image/march/
+	cp ${script_path}/march-profile ${work_dir}/root-image/usr/lib/aif/core/procedures/
+	cp ${script_path}/packages.list ${work_dir}/root-image/march/
 	# change sudoers permission
 	chmod 440 ${work_dir}/root-image/etc/sudoers
 	# change march/setup permission
@@ -62,7 +64,7 @@ make_boot() {
     if [[ ! -e ${work_dir}/build.${FUNCNAME} ]]; then
         mkdir -p ${work_dir}/iso/${install_dir}/boot/${arch}
         mkinitcpio \
-            -c ./mkinitcpio.conf \
+            -c ${script_path}/mkinitcpio.conf \
             -b ${work_dir}/root-image \
             -k /boot/vmlinuz-linux \
             -g ${work_dir}/iso/${install_dir}/boot/${arch}/archiso.img
@@ -77,8 +79,8 @@ make_syslinux() {
         mkdir -p ${work_dir}/iso/${install_dir}/boot/syslinux
         sed "s|%ARCHISO_LABEL%|${iso_label}|g;
             s|%INSTALL_DIR%|${install_dir}|g;
-            s|%ARCH%|${arch}|g" syslinux/syslinux.cfg > ${work_dir}/iso/${install_dir}/boot/syslinux/syslinux.cfg
-	cp syslinux/splash.png ${work_dir}/iso/${install_dir}/boot/syslinux/
+            s|%ARCH%|${arch}|g" ${script_path}/syslinux/syslinux.cfg > ${work_dir}/iso/${install_dir}/boot/syslinux/syslinux.cfg
+	cp ${script_path}/syslinux/splash.png ${work_dir}/iso/${install_dir}/boot/syslinux/
         cp ${work_dir}/root-image/usr/lib/syslinux/vesamenu.c32 ${work_dir}/iso/${install_dir}/boot/syslinux/
         : > ${work_dir}/build.${FUNCNAME}
     fi
@@ -88,7 +90,7 @@ make_syslinux() {
 make_isolinux() {
     if [[ ! -e ${work_dir}/build.${FUNCNAME} ]]; then
         mkdir -p ${work_dir}/iso/isolinux
-        sed "s|%INSTALL_DIR%|${install_dir}|g" isolinux/isolinux.cfg > ${work_dir}/iso/isolinux/isolinux.cfg
+        sed "s|%INSTALL_DIR%|${install_dir}|g" ${script_path}/isolinux/isolinux.cfg > ${work_dir}/iso/isolinux/isolinux.cfg
         cp ${work_dir}/root-image/usr/lib/syslinux/isolinux.bin ${work_dir}/iso/isolinux/
         : > ${work_dir}/build.${FUNCNAME}
     fi
@@ -97,7 +99,7 @@ make_isolinux() {
 # Process aitab
 make_aitab() {
     if [[ ! -e ${work_dir}/build.${FUNCNAME} ]]; then
-        sed "s|%ARCH%|${arch}|g" aitab > ${work_dir}/iso/${install_dir}/aitab
+        sed "s|%ARCH%|${arch}|g" ${script_path}/aitab > ${work_dir}/iso/${install_dir}/aitab
         : > ${work_dir}/build.${FUNCNAME}
     fi
 }
@@ -109,6 +111,7 @@ make_prepare() {
 
 # Build ISO
 make_iso() {
+    mkarchiso ${verbose} -D "${install_dir}" checksum "${work_dir}"
     mkarchiso ${verbose} -D "${install_dir}" -L "${iso_label}" iso "${work_dir}" "${name}-${version}-${arch}.iso"
 }
 
