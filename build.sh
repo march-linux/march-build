@@ -14,7 +14,7 @@ script_path=$(readlink -f ${0%/*})
 
 # Base installation (root-image)
 make_basefs() {
-    mkarchiso ${verbose} -D "${install_dir}" -p "aif dialog syslinux $(grep -v ^# packages.list)" create "${work_dir}"
+    mkarchiso ${verbose} -D "${install_dir}" -p "aif dialog syslinux $(grep -v ^# ${script_path}/packages.list)" create "${work_dir}"
 }
 
 # Customize installation (root-image)
