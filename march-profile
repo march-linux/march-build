@@ -53,7 +53,7 @@ worker_configure_system ()
 
 worker_install_packages ()
 {
-	target_prepare_pacman core extra community && installpkg
+	target_prepare_pacman testing core extra community-testing community && installpkg
 }
 
 worker_set_clock ()
