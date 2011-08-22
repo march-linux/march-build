@@ -26,7 +26,7 @@ ibus-chewing
 ttf-droid
 # extra apps
 gnome-mplayer
-gimp
+gimp-devel
 transmission-gtk
 gnome-terminal
 eog
