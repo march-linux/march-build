@@ -1,1 +1,1 @@
-sudo aif -p march-profile
+sudo aif -p automatic -c march-profile

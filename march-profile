@@ -1,42 +1,16 @@
 #!/bin/bash
-depend_procedure core base
 
-worker_intro ()
-{
-	notify "March installation may take a while. Make sure you have Internet connection."
+SOURCE=net
+SYNC_URL=ftp://mirrors.kernel.org/archlinux/\$repo/os/\$arch
+TARGET_PACKAGES=$(grep -v ^# /march/packages.list)
+
+worker_intro () {
+	inform "March installation may take a while. Make sure you have Internet connection."
+	sleep 5
 }
 
-worker_configure ()
-{
-	var_UI_TYPE=dia
-	ui_init
-}
-
-worker_select_source ()
-{
-	var_PKG_SOURCE_TYPE=net
-	var_SYNC_URL=ftp://mirrors.kernel.org/archlinux/\$repo/os/\$arch
-}
-
-worker_prepare_disks ()
-{
-	notify "March will prepare the filesystem."
-	get_possible_fs
-	echo "/dev/sda 100:ext2:+ 512:swap *:ext4" > $TMP_PARTITIONS
-	echo "/dev/sda1 raw no_label ext2;yes;/boot;target;no_opts;no_label;no_params
-/dev/sda2 raw no_label swap;yes;no_mountpoint;target;no_opts;no_label;no_params
-/dev/sda3 raw no_label ext4;yes;/;target;no_opts;no_label;no_params" > $TMP_BLOCKDEVICES
-	process_disks && process_filesystems || die_error "Oops! March cannot prepare the filesystem."
-}
-
-worker_package_list ()
-{
-	var_TARGET_PACKAGES=$(grep -v ^# /march/packages.list)
-}
-
-worker_configure_system ()
-{
-	notify "You're almost there. March will set up the system for you in seconds."
+worker_configure_system () {
+	inform "You're almost there. March will set up the system for you in seconds."
 	# copy march config
 	cp /etc/sudoers $var_TARGET_DIR/etc/
 	cp /etc/pacman.d/mirrorlist $var_TARGET_DIR/etc/pacman.d/
@@ -51,25 +25,8 @@ worker_configure_system ()
 }
 
 
-worker_install_packages ()
-{
-	target_prepare_pacman testing core extra community-testing community && installpkg
-}
-
-worker_set_clock ()
-{
-	true
-}
-
-worker_install_bootloader ()
-{
-	get_grub_map
-	grub-install /dev/sda --root-directory=/mnt
-	bootdev=$(mount | grep $var_TARGET_DIR/boot | cut -d' ' -f 1)
-	generate_grub_menulst
-}
-
-worker_msg_report ()
-{
-	notify "March installation completes. Your system is ready."
-}
+GRUB_DEVICE=/dev/sda
+PARTITIONS='/dev/sda 100:ext2:+ 512:swap *:ext4'
+BLOCKDATA='/dev/sda1 raw no_label ext2;yes;/boot;target;no_opts;no_label;no_params
+/dev/sda2 raw no_label swap;yes;no_mountpoint;target;no_opts;no_label;no_params
+/dev/sda3 raw no_label ext4;yes;/;target;no_opts;no_label;no_params'

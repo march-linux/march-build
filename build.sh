@@ -14,7 +14,7 @@ script_path=$(readlink -f ${0%/*})
 
 # Base installation (root-image)
 make_basefs() {
-    mkarchiso ${verbose} -D "${install_dir}" -p "aif dialog syslinux $(grep -v ^# ${script_path}/packages.list)" create "${work_dir}"
+    mkarchiso ${verbose} -D "${install_dir}" -p "aif syslinux $(grep -v ^# ${script_path}/packages.list)" create "${work_dir}"
 }
 
 # Customize installation (root-image)
@@ -23,7 +23,7 @@ make_customize_root_image() {
 	# copy march config
 	cp -r ${script_path}/root-image ${work_dir}
 	# copy aif config
-	cp ${script_path}/march-profile ${work_dir}/root-image/usr/lib/aif/core/procedures/
+	cp ${script_path}/march-profile ${work_dir}/root-image/march/
 	cp ${script_path}/packages.list ${work_dir}/root-image/march/
 	# change sudoers permission
 	chmod 440 ${work_dir}/root-image/etc/sudoers
