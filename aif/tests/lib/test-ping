@@ -1,5 +1,0 @@
-#!/bin/bash
-# $1 iterations
-# $2 host
-
-ping -c $1 $2

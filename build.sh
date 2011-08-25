@@ -21,9 +21,10 @@ make_basefs() {
 make_customize_root_image() {
     if [[ ! -e ${work_dir}/build.${FUNCNAME} ]]; then
 	# install aif
-	cp ${script_path}/aif/src/aif.sh ${work_dir}/root-image/sbin/aif
+	cp ${script_path}/aif/aif.sh ${work_dir}/root-image/sbin/aif
 	mkdir ${work_dir}/root-image/usr/lib/aif/
-	cp -r ${script_path}/aif/src/core/ ${work_dir}/root-image/usr/lib/aif/
+	cp -r ${script_path}/aif/core/ ${work_dir}/root-image/usr/lib/aif/
+	cp ${script_path}/aif/libui.sh ${work_dir}/root-image/usr/lib/libui.sh
 	# copy march config
 	cp -r ${script_path}/root-image ${work_dir}
 	# copy aif config

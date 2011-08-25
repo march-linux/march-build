@@ -1,4 +1,0 @@
-#!/bin/bash
-# $1 filename
-
-[ ! -f "$1" ]
