@@ -1,0 +1,185 @@
+#!/bin/bash
+depend_procedure core base # esp for auto_network, intro and set_clock workers
+
+
+# This is a port of the original /arch/setup script.  It doesn't use aif phases but uses it's own menu-based flow (phase) control
+
+BLOCK_ROLLBACK_USELESS=1
+
+# clock
+HARDWARECLOCK=
+TIMEZONE=
+
+# default filesystem specs (the + is bootable flag)
+# <mountpoint>:<partsize>:<fstype>[:+]
+DEFAULTFS="/boot:32:ext2:+ swap:256:swap /:7500:ext3 /home:*:ext3"
+
+# this is a workaround for bash <4.2, where associative arrays are inherently local
+# once we have 4.2 we can just declare this array global. eval $settitles where needed
+settitles="declare -A workertitles
+workertitles['select_source']='Select source'
+workertitles['set_editor']='Set editor'
+workertitles['runtime_network']='Setup network'
+workertitles['set_clock']='Set clock'
+workertitles['prepare_disks']='Prepare hard drive(s)'
+workertitles['package_list']='Select packages'
+workertitles['install_packages']='Install packages'
+workertitles['configure_system']='Configure system'
+workertitles['install_bootloader']='Install bootloader'
+workertitles['msg_report']='Exit Install'"
+
+menu_workers=(select_source set_editor set_clock prepare_disks package_list install_packages configure_system install_bootloader msg_report)
+
+start_process ()
+{
+	#####################
+	## begin execution ##
+
+	execute worker configure
+	execute worker intro
+	execute worker sysprep
+
+	mainmenu
+}
+
+
+mainmenu()  
+{
+	local default=1
+	while true
+	do
+		eval "$settitles"
+		menu=()
+		for i in ${!menu_workers[@]}
+		do
+			worker=${menu_workers[$i]}
+			title=${workertitles[$worker]}
+			let i+=1 # in menu, we count from 1 onwards, not from 0
+			menu+=($i "$title")
+		done
+
+		ask_option $default "MAIN MENU" '' required "${menu[@]}"
+		case $ANSWER_OPTION in
+		"1")                                         execute worker select_source       && \
+													 execute worker runtime_packages    && default=2 ;;
+		"2")                                         execute worker set_editor          && default=3 ;;
+		"3")                                         execute worker set_clock           && default=4 ;;
+		"4")                                         execute worker prepare_disks       && default=5 ;;
+		"5") check_depend worker prepare_disks    && \
+			 check_depend worker select_source    && execute worker package_list        && default=6 ;;
+		"6") check_depend worker package_list     && \
+			 check_depend worker select_source    && execute worker install_packages    && default=7 ;;
+		"7") check_depend worker install_packages && execute worker configure_system    && default=8 ;;
+		"8") check_depend worker configure_system && execute worker install_bootloader  && default=9 ;;
+		"9") execute worker msg_report ;;
+		*)   execute worker abort_installer;;
+		esac
+	done
+}
+
+
+worker_configure_system()
+{
+	interactive_configure_system
+}
+
+
+worker_prepare_disks()
+{
+	get_possible_fs && interactive_prepare_disks
+}
+
+
+worker_select_source ()
+{
+	interactive_select_source || return $?
+	if [ -n "$MIRROR" ]; then
+		if ask_yesno "Make sure the network is ok before continuing the installer. ${workertitles['runtime_network']} now?"; then
+			execute worker runtime_network || return $?
+		fi
+	fi
+	return 0
+}
+
+worker_set_editor ()
+{
+	seteditor force
+}
+
+worker_intro ()
+{
+	notify "Welcome to the Arch Linux Installation program. The install\
+ process is fairly straightforward, and you should run through the options in\
+ the order they are presented. If you are unfamiliar with partitioning/making\
+ filesystems, you may want to consult some documentation before continuing.\
+ You can view all output from commands by viewing your VC7 console (ALT-F7).\
+ ALT-F1 will bring you back here.\n\n$DISCLAIMER"
+}
+
+
+worker_configure ()
+{
+	var_UI_TYPE=${arg_ui_type:-dia}
+	ui_init
+}
+
+
+# select_packages()
+# prompts the user to select packages to install
+worker_package_list() {
+	# if selection has been done before, warn about loss of input and let the user exit gracefully
+	ended_ok worker package_list && ! ask_yesno "WARNING: Running this stage again will result in the loss of previous package selections.\n\nDo you wish to continue?" && return 0
+
+	interactive_select_packages
+}
+
+
+worker_install_packages ()
+{
+	installpkg
+}
+
+
+# Hand-hold through setting up networking
+worker_runtime_network() {
+	interactive_runtime_network
+}
+
+worker_install_bootloader ()
+{
+	interactive_install_bootloader
+}
+
+# override show_report because this procedure does not use phases, but it's own menu
+show_report ()
+{
+	eval "$settitles"
+	data="Execution Report:"
+	data="$data\n-----------------"
+	for worker in ${menu_workers[@]}
+	do
+		[ "$worker" = 'msg_report' ] && continue # this worker is the one calling show_report, we can't know our exitcode yet
+		title=${workertitles[$worker]}
+		exit_var=exit_worker_$worker
+		local ret=${!exit_var}
+		case "$ret" in
+			"")  data="$data\n > $title: Skipped";;
+			"0") data="$data\n > $title: Sucess";;
+			*)   data="$data\n > $title: Failed";;
+		esac
+	done
+	notify "$data\nIf the install finished successfully, you can type 'reboot' to restart the system." || return $?
+}
+
+worker_msg_report () {
+	show_report && stop_installer
+}
+
+worker_abort_installer ()
+{
+	local ret=0
+	ask_yesno "Abort Installation?" || return
+	maybe_interactive_rollback_filesystems || ret=$?
+	stop_installer || ret=$?
+	return $ret
+}

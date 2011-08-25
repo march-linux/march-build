@@ -14,12 +14,14 @@ script_path=$(readlink -f ${0%/*})
 
 # Base installation (root-image)
 make_basefs() {
-    mkarchiso ${verbose} -D "${install_dir}" -p "aif syslinux $(grep -v ^# ${script_path}/packages.list)" create "${work_dir}"
+    mkarchiso ${verbose} -D "${install_dir}" -p "syslinux $(grep -v ^# ${script_path}/packages.list)" create "${work_dir}"
 }
 
 # Customize installation (root-image)
 make_customize_root_image() {
     if [[ ! -e ${work_dir}/build.${FUNCNAME} ]]; then
+    # install aif
+    chroot ${work_dir}/root-image/ make -f ${script_path}/aif/Makefile install
 	# copy march config
 	cp -r ${script_path}/root-image ${work_dir}
 	# copy aif config
