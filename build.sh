@@ -21,7 +21,9 @@ make_basefs() {
 make_customize_root_image() {
     if [[ ! -e ${work_dir}/build.${FUNCNAME} ]]; then
 	# install aif
-	make -f ${script_path}/aif/Makefile DESTDIR=${work_dir}/root-image install
+	cp ${script_path}/aif/src/aif.sh ${work_dir}/root-image/sbin/aif
+	mkdir ${work_dir}/root-image/usr/lib/aif/
+	cp -r ${script_path}/aif/src/core/ ${work_dir}/root-image/usr/lib/aif/
 	# copy march config
 	cp -r ${script_path}/root-image ${work_dir}
 	# copy aif config
