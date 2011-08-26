@@ -11,17 +11,16 @@ worker_intro () {
 
 worker_configure_system () {
 	inform "You're almost there. March will set up the system for you in seconds."
+	preconfigure_target
 	# copy march config
 	cp /etc/sudoers $var_TARGET_DIR/etc/
-	cp /etc/pacman.d/mirrorlist $var_TARGET_DIR/etc/pacman.d/
-	cp /etc/locale.gen $var_TARGET_DIR/etc/
 	cp /etc/modprobe.d/modprobe.conf $var_TARGET_DIR/etc/modprobe.d/
 	# setup rc.conf
 	sed -i -e "s|^DAEMONS=.*|DAEMONS=(dbus networkmanager gdm avahi-daemon cupsd)|" $var_TARGET_DIR/etc/rc.conf
-	# adduser and setup locale
-	target_locale-gen
+	# adduser
 	chroot $var_TARGET_DIR usermod -p ZYCnDaw9NK8NI root
 	chroot $var_TARGET_DIR useradd -m -p ZYCnDaw9NK8NI -g users -G audio,lp,network,optical,power,storage,video,wheel march
+	postconfigure_target
 }
 
 GRUB_DEVICE=/dev/sda
