@@ -1,7 +1,7 @@
 #!/bin/bash
 
-SOURCE=net
-SYNC_URL=ftp://mirrors.kernel.org/archlinux/\$repo/os/\$arch
+MIRROR='ftp://mirrors.kernel.org/archlinux/$repo/os/$arch'
+TARGET_REPOSITORIES=(core $var_MIRRORLIST extra $var_MIRRORLIST community $var_MIRRORLIST)
 TARGET_PACKAGES=$(grep -v ^# /march/packages.list)
 
 worker_intro () {
@@ -23,7 +23,6 @@ worker_configure_system () {
 	chroot $var_TARGET_DIR usermod -p ZYCnDaw9NK8NI root
 	chroot $var_TARGET_DIR useradd -m -p ZYCnDaw9NK8NI -g users -G audio,lp,network,optical,power,storage,video,wheel march
 }
-
 
 GRUB_DEVICE=/dev/sda
 PARTITIONS='/dev/sda 100:ext2:+ 512:swap *:ext4'
