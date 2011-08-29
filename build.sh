@@ -39,9 +39,9 @@ make_customize_root_image() {
 	sed -i -e "s|^DAEMONS=.*|DAEMONS=(dbus networkmanager gdm avahi-daemon cupsd)|" ${work_dir}/root-image/etc/rc.conf
 	# remove unused manual and locale
 	find ${work_dir}/root-image/usr/share/locale/* -maxdepth 0 ! -name locale.alias -exec rm -rf {} \;
+	find ${work_dir}/root-image/usr/share/ -name doc -exec rm -rf {} \;
 	rm -rf ${work_dir}/root-image/usr/share/X11/locale/
 	rm -rf ${work_dir}/root-image/usr/share/man/
-	rm -rf ${work_dir}/root-image/usr/share/doc/
 	rm -rf ${work_dir}/root-image/usr/share/gtk-doc/
 	rm -rf ${work_dir}/root-image/usr/share/licenses/
 	rm -rf ${work_dir}/root-image/usr/share/kbd/locale/
