@@ -40,7 +40,9 @@ make_customize_root_image() {
 	# remove unused manual and locale
 	find ${work_dir}/root-image/usr/share/locale/* -maxdepth 0 ! -name locale.alias -exec rm -rf {} \;
 	find ${work_dir}/root-image/usr/share/ -name doc -exec rm -rf {} \;
+	find ${work_dir}/root-image/usr/share/ -name examples -exec rm -rf {} \;
 	rm -rf ${work_dir}/root-image/usr/share/X11/locale/
+	rm -rf ${work_dir}/root-image/usr/share/i18n/
 	rm -rf ${work_dir}/root-image/usr/share/man/
 	rm -rf ${work_dir}/root-image/usr/share/gtk-doc/
 	rm -rf ${work_dir}/root-image/usr/share/licenses/
