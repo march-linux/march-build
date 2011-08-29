@@ -2,19 +2,20 @@
 
 set -e -u
 
-name=march
+iso_name=march
 iso_label="ARCH_$(date +%Y%m)"
-version=$(date +%Y.%m.%d)
+iso_version=$(date +%Y.%m.%d)
 install_dir=arch
 arch=$(uname -m)
 work_dir=work
+out_dir=out
 verbose="y"
 
 script_path=$(readlink -f ${0%/*})
 
 # Base installation (root-image)
 make_basefs() {
-    mkarchiso ${verbose} -D "${install_dir}" -p "syslinux $(grep -v ^# ${script_path}/packages.list)" create "${work_dir}"
+    mkarchiso ${verbose} -w "${work_dir}" -D "${install_dir}" -p "syslinux $(grep -v ^# ${script_path}/packages.list)" create
 }
 
 # Customize installation (root-image)
@@ -51,7 +52,7 @@ make_customize_root_image() {
 	chroot ${work_dir}/root-image/ locale-gen
 	chroot ${work_dir}/root-image/ usermod -p ZYCnDaw9NK8NI root
 	chroot ${work_dir}/root-image/ useradd -m -p ZYCnDaw9NK8NI -g users -G audio,lp,network,optical,power,storage,video,wheel march
-	: > ${work_dir}/build.${FUNCNAME}
+        : > ${work_dir}/build.${FUNCNAME}
     fi
 }
 
@@ -85,8 +86,8 @@ make_syslinux() {
         sed "s|%ARCHISO_LABEL%|${iso_label}|g;
             s|%INSTALL_DIR%|${install_dir}|g;
             s|%ARCH%|${arch}|g" ${script_path}/syslinux/syslinux.cfg > ${work_dir}/iso/${install_dir}/boot/syslinux/syslinux.cfg
-	cp ${script_path}/syslinux/splash.png ${work_dir}/iso/${install_dir}/boot/syslinux/
-        cp ${work_dir}/root-image/usr/lib/syslinux/vesamenu.c32 ${work_dir}/iso/${install_dir}/boot/syslinux/
+        cp ${script_path}/syslinux/splash.png ${work_dir}/iso/${install_dir}/boot/syslinux/
+        cp ${work_dir}/root-image/usr/lib/syslinux/menu.c32 ${work_dir}/iso/${install_dir}/boot/syslinux/
         : > ${work_dir}/build.${FUNCNAME}
     fi
 }
@@ -97,6 +98,7 @@ make_isolinux() {
         mkdir -p ${work_dir}/iso/isolinux
         sed "s|%INSTALL_DIR%|${install_dir}|g" ${script_path}/isolinux/isolinux.cfg > ${work_dir}/iso/isolinux/isolinux.cfg
         cp ${work_dir}/root-image/usr/lib/syslinux/isolinux.bin ${work_dir}/iso/isolinux/
+        cp ${work_dir}/root-image/usr/lib/syslinux/isohdpfx.bin ${work_dir}/iso/isolinux/
         : > ${work_dir}/build.${FUNCNAME}
     fi
 }
@@ -111,13 +113,13 @@ make_aitab() {
 
 # Build all filesystem images specified in aitab (.fs .fs.sfs .sfs)
 make_prepare() {
-    mkarchiso ${verbose} -D "${install_dir}" prepare "${work_dir}"
+    mkarchiso ${verbose} -w "${work_dir}" -D "${install_dir}" prepare
 }
 
 # Build ISO
 make_iso() {
-    mkarchiso ${verbose} -D "${install_dir}" checksum "${work_dir}"
-    mkarchiso ${verbose} -D "${install_dir}" -L "${iso_label}" iso "${work_dir}" "${name}-${version}-${arch}.iso"
+    mkarchiso ${verbose} -w "${work_dir}" -D "${install_dir}" checksum
+    mkarchiso ${verbose} -w "${work_dir}" -D "${install_dir}" -L "${iso_label}" -o "${out_dir}" iso "${iso_name}-${iso_version}-${arch}.iso"
 }
 
 if [[ $verbose == "y" ]]; then
@@ -135,4 +137,3 @@ make_isolinux
 make_aitab
 make_prepare
 make_iso
-
