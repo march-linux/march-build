@@ -41,7 +41,7 @@ make_customize_root_image() {
 	find ${work_dir}/root-image/usr/share/locale/* ! -name locale.alias | xargs rm -rf
 	find ${work_dir}/root-image/usr/share/ -name doc -type d | xargs rm -rf
 	find ${work_dir}/root-image/usr/share/ -name examples -type d | xargs rm -rf
-	find ${work_dir}/root-image/usr/share/i18n/locales/* ! -name en_US ! -name en_GB ! -name i18n ! -name iso14651_t1 ! -name iso14651_t1_common ! -name translit_neutral ! -name translit_combining ! -name translit_circle ! -name translit_cjk_compat | xargs rm -rf
+	find ${work_dir}/root-image/usr/share/i18n/locales/* ! -name en_US ! -name en_GB ! -name i18n ! -name iso14651_t1_* ! -name translit_* | xargs rm -rf
 	find ${work_dir}/root-image/usr/share/i18n/charmaps/* ! -name UTF-8.gz | xargs rm -rf
 	rm -rf ${work_dir}/root-image/usr/share/X11/locale/
 	rm -rf ${work_dir}/root-image/usr/share/man/
