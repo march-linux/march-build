@@ -1,5 +1,6 @@
 # base
 grub
+lvm2
 linux
 pacman
 initscripts
