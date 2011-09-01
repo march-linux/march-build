@@ -18,10 +18,10 @@ worker_configure_system () {
 	# setup rc.conf
 	sed -i -e "s|^DAEMONS=.*|DAEMONS=(dbus networkmanager gdm cupsd)|" $var_TARGET_DIR/etc/rc.conf
 	# remove unused app icon
-	echo NoDisplay=true >> $var_TARGET_DIR/usr/share/applications/avahi-discover.desktop
-	echo NoDisplay=true >> $var_TARGET_DIR/usr/share/applications/bssh.desktop
-	echo NoDisplay=true >> $var_TARGET_DIR/usr/share/applications/bvnc.desktop
-	echo NoDisplay=true >> $var_TARGET_DIR/usr/share/applications/qv4l2.desktop
+	rm $var_TARGET_DIR/usr/share/applications/avahi-discover.desktop
+	rm $var_TARGET_DIR/usr/share/applications/bssh.desktop
+	rm $var_TARGET_DIR/usr/share/applications/bvnc.desktop
+	rm $var_TARGET_DIR/usr/share/applications/qv4l2.desktop
 	# adduser
 	chroot $var_TARGET_DIR usermod -p ZYCnDaw9NK8NI root
 	chroot $var_TARGET_DIR useradd -m -p ZYCnDaw9NK8NI -g users -G audio,lp,network,optical,power,storage,video,wheel march
