@@ -36,7 +36,7 @@ make_customize_root_image() {
 	# change march/setup permission
 	chmod 755 ${work_dir}/root-image/march/setup
 	# setup rc.conf
-	sed -i -e "s|^DAEMONS=.*|DAEMONS=(dbus networkmanager gdm avahi-daemon cupsd)|" ${work_dir}/root-image/etc/rc.conf
+	sed -i -e "s|^DAEMONS=.*|DAEMONS=(dbus networkmanager gdm cupsd)|" ${work_dir}/root-image/etc/rc.conf
 	# remove unused manual and locale
 	find ${work_dir}/root-image/usr/share/locale/* ! -name locale.alias | xargs rm -rf
 	find ${work_dir}/root-image/usr/share/i18n/locales/* ! -name en_US ! -name en_GB ! -name i18n ! -name iso14651_t1* ! -name translit_* | xargs rm -rf
@@ -50,6 +50,10 @@ make_customize_root_image() {
 	rm -rf ${work_dir}/root-image/usr/share/gnome/help/
 	rm -rf ${work_dir}/root-image/usr/share/gtk-2.0/
 	rm -rf ${work_dir}/root-image/usr/share/gtk-3.0/
+	# remove unused app icon
+	rm ${work_dir}/root-image/usr/share/applications/avahi-discover.desktop
+	rm ${work_dir}/root-image/usr/share/applications/bssh.desktop
+	rm ${work_dir}/root-image/usr/share/applications/bvnc.desktop
 	# adduser and setup locale
 	chroot ${work_dir}/root-image/ locale-gen
 	chroot ${work_dir}/root-image/ usermod -p ZYCnDaw9NK8NI root
