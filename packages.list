@@ -24,8 +24,10 @@ unrar
 # zh-TW support
 ibus-chewing
 ttf-droid
+# music/video player
+totem
+gstreamer0.10-ffmpeg
 # extra apps
-gnome-mplayer
 gimp-devel
 transmission-gtk
 gnome-terminal
