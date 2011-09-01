@@ -51,10 +51,10 @@ make_customize_root_image() {
 	rm -rf ${work_dir}/root-image/usr/share/gtk-2.0/
 	rm -rf ${work_dir}/root-image/usr/share/gtk-3.0/
 	# remove unused app icon
-	echo NoDisplay=true >> ${work_dir}/root-image/usr/share/applications/avahi-discover.desktop
-	echo NoDisplay=true >> ${work_dir}/root-image/usr/share/applications/bssh.desktop
-	echo NoDisplay=true >> ${work_dir}/root-image/usr/share/applications/bvnc.desktop
-	echo NoDisplay=true >> ${work_dir}/root-image/usr/share/applications/qv4l2.desktop
+	rm ${work_dir}/root-image/usr/share/applications/avahi-discover.desktop
+	rm ${work_dir}/root-image/usr/share/applications/bssh.desktop
+	rm ${work_dir}/root-image/usr/share/applications/bvnc.desktop
+	rm ${work_dir}/root-image/usr/share/applications/qv4l2.desktop
 	# adduser and setup locale
 	chroot ${work_dir}/root-image/ locale-gen
 	chroot ${work_dir}/root-image/ usermod -p ZYCnDaw9NK8NI root
