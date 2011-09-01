@@ -16,7 +16,11 @@ worker_configure_system () {
 	cp /etc/sudoers $var_TARGET_DIR/etc/
 	cp /etc/modprobe.d/modprobe.conf $var_TARGET_DIR/etc/modprobe.d/
 	# setup rc.conf
-	sed -i -e "s|^DAEMONS=.*|DAEMONS=(dbus networkmanager gdm avahi-daemon cupsd)|" $var_TARGET_DIR/etc/rc.conf
+	sed -i -e "s|^DAEMONS=.*|DAEMONS=(dbus networkmanager gdm cupsd)|" $var_TARGET_DIR/etc/rc.conf
+	# remove unused app icon
+	rm $var_TARGET_DIR/usr/share/applications/avahi-discover.desktop
+	rm $var_TARGET_DIR/usr/share/applications/bssh.desktop
+	rm $var_TARGET_DIR/usr/share/applications/bvnc.desktop
 	# adduser
 	chroot $var_TARGET_DIR usermod -p ZYCnDaw9NK8NI root
 	chroot $var_TARGET_DIR useradd -m -p ZYCnDaw9NK8NI -g users -G audio,lp,network,optical,power,storage,video,wheel march
