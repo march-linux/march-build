@@ -3,9 +3,9 @@
 set -e -u
 
 iso_name=march
-iso_label="ARCH_$(date +%Y%m)"
+iso_label=march
 iso_version=$(date +%Y.%m.%d)
-install_dir=arch
+install_dir=march
 arch=$(uname -m)
 work_dir=work
 out_dir=out
