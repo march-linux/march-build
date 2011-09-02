@@ -100,8 +100,9 @@ make_syslinux() {
         sed "s|%ARCHISO_LABEL%|${iso_label}|g;
             s|%INSTALL_DIR%|${install_dir}|g;
             s|%ARCH%|${arch}|g" ${script_path}/syslinux/syslinux.cfg > ${work_dir}/iso/${install_dir}/boot/syslinux/syslinux.cfg
-		convert -size 640x480 -fill white xc:darkgrey \
-			-pointsize 120 -draw "text 100,200 ${iso_name}!" \
+		convert -size 640x480 -background grey11 \
+			-fill khaki1 -pointsize 120 -draw "text 100,200 M" \
+			-fill grey77 -draw "text 130,200 ARCH!"
 			-pointsize 20 -draw "text 100,240 'Developer: #1331' \
 			text 100,270 'Install: $ /march/setup' \
 			text 100,300 'Password: pass'" \
