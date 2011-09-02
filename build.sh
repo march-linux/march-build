@@ -39,7 +39,13 @@ make_customize_root_image() {
 	sed -i -e "s|^DAEMONS=.*|DAEMONS=(dbus networkmanager gdm cupsd)|" ${work_dir}/root-image/etc/rc.conf
 	# remove unused manual and locale
 	find ${work_dir}/root-image/usr/share/locale/* ! -name locale.alias | xargs rm -rf
-	find ${work_dir}/root-image/usr/share/i18n/locales/* ! -name en_US ! -name en_GB ! -name i18n ! -name iso14651_t1* ! -name translit_* | xargs rm -rf
+	find ${work_dir}/root-image/usr/share/i18n/locales/* \
+		! -name en_US \
+		! -name en_GB \
+		! -name i18n \
+		! -name iso14651_t1* \
+		! -name translit_* \
+		| xargs rm -rf
 	find ${work_dir}/root-image/usr/share/i18n/charmaps/* ! -name UTF-8.gz | xargs rm -rf
 	rm -rf ${work_dir}/root-image/usr/share/X11/locale/
 	rm -rf ${work_dir}/root-image/usr/share/man/
@@ -58,7 +64,8 @@ make_customize_root_image() {
 	# adduser and setup locale
 	chroot ${work_dir}/root-image/ locale-gen
 	chroot ${work_dir}/root-image/ usermod -p ZYCnDaw9NK8NI root
-	chroot ${work_dir}/root-image/ useradd -m -p ZYCnDaw9NK8NI -g users -G audio,lp,network,optical,power,storage,video,wheel march
+	chroot ${work_dir}/root-image/ useradd -m -p ZYCnDaw9NK8NI -g users \
+		-G audio,lp,network,optical,power,storage,video,wheel march
         : > ${work_dir}/build.${FUNCNAME}
     fi
 }
@@ -93,7 +100,13 @@ make_syslinux() {
         sed "s|%ARCHISO_LABEL%|${iso_label}|g;
             s|%INSTALL_DIR%|${install_dir}|g;
             s|%ARCH%|${arch}|g" ${script_path}/syslinux/syslinux.cfg > ${work_dir}/iso/${install_dir}/boot/syslinux/syslinux.cfg
-        cp ${script_path}/syslinux/splash.png ${work_dir}/iso/${install_dir}/boot/syslinux/
+		convert -size 640x480 -fill white xc:darkgrey \
+			-pointsize 120 -draw "text 100,200 ${iso_name}!" \
+			-pointsize 20 -draw "text 100,240 'Developer: #1331' \
+			text 100,270 'Install: $ /march/setup' \
+			text 100,300 'Password: pass'" \
+			-pointsize 12  -draw "text 540,20 '${iso_version}-${arch}'" \
+			${work_dir}/iso/${install_dir}/boot/syslinux/splash.png
         cp ${work_dir}/root-image/usr/lib/syslinux/vesamenu.c32 ${work_dir}/iso/${install_dir}/boot/syslinux/
         : > ${work_dir}/build.${FUNCNAME}
     fi
