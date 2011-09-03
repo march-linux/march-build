@@ -1,6 +1,6 @@
 #!/bin/bash
 
-MIRROR='ftp://mirrors.kernel.org/archlinux/$repo/os/$arch'
+MIRROR='http://mirror.rit.edu/archlinux/$repo/os/$arch'
 TARGET_REPOSITORIES=(core $var_MIRRORLIST extra $var_MIRRORLIST community $var_MIRRORLIST)
 TARGET_PACKAGES=$(grep -v ^# /march/packages.list)
 
