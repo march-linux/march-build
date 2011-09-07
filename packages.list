@@ -14,7 +14,7 @@ nautilus
 notification-daemon
 gdm
 # browser
-firefox
+chromium
 flashplugin
 # file-roller
 file-roller
