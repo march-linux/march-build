@@ -24,7 +24,8 @@ worker_configure_system () {
 	rm $var_TARGET_DIR/usr/share/applications/qv4l2.desktop
 	# adduser
 	chroot $var_TARGET_DIR usermod -p ZYCnDaw9NK8NI root
-	chroot $var_TARGET_DIR useradd -m -p ZYCnDaw9NK8NI -g users -G audio,lp,network,optical,power,storage,video,wheel march
+	chroot $var_TARGET_DIR useradd -m -p ZYCnDaw9NK8NI -g users \
+		-G audio,lp,network,optical,power,storage,video,wheel march
 	postconfigure_target
 }
 

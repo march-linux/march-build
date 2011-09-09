@@ -16,7 +16,7 @@ gdm
 # browser
 chromium
 flashplugin
-# file-roller
+# archiver
 file-roller
 zip
 unzip
