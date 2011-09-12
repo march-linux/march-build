@@ -1,5 +1,4 @@
 # base
-grub
 linux
 pacman
 initscripts

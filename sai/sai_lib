@@ -1,0 +1,148 @@
+#!/bin/bash
+
+say() {
+	tput setaf 4
+	echo ":: $1"
+	tput sgr0
+}
+
+ask() {
+	tput setaf 6
+	echo -n "!! $1? "
+	read ans
+	tput sgr0
+}
+
+rc_conf() {
+	sed -i -e "s|^$1=.*|$1=$2|" /mnt/etc/rc.conf
+}
+
+format_disks() {
+	local _device=$1
+	local _mp=$2
+	local _fstype=$3
+	case $_fstype in
+		swap)
+			swapoff $_device
+			mkswap $_device
+			swapon $_device
+			;;
+		ext2)
+			mke2fs $_device
+			;;
+		ext3)
+			mke2fs -j $_device
+			;;
+		ext4)
+			mke2fs -t ext4 $_device
+			;;
+	esac
+	sleep 2
+	
+	mkdir -p /mnt$_mp
+	mount -t $_fstype $_device /mnt$_mp
+	
+	echo -n "$_device $_mp $_fstype defaults 0 " >> $FSTAB
+	if [ "$_fstype" = "swap" ]; then
+		echo "0" >> $FSTAB
+	else
+		echo "1" >> $FSTAB
+	fi
+}
+
+find_disks() {
+	workdir="$PWD"
+	cd /sys/block
+	ls | grep '^[hs]d'
+	cd "$workdir"
+}
+
+find_partitions() {
+	workdir="$PWD"
+	for disk in $(find_disks); do
+		cd /sys/block/$disk
+		for part in $disk*; do
+			if [ -d $part ]; then
+				echo "$part"
+			fi
+		done
+	done
+}
+
+disk_capacity() {
+	fdisk -l $1 2>/dev/null | sed -n '2p' | cut -d ' ' -f5
+}
+
+avail_disks() {
+	for disk in $(find_disks); do
+		size=$(disk_capacity /dev/$disk)
+		echo "$disk: $((size / 2**20)) MiB ($((size / 2**30)) GiB)"
+	done
+}
+
+# chroot_mount()
+# prepares target system as a chroot
+#
+chroot_mount() {
+	[ -e /mnt/sys ] || mkdir /mnt/sys
+	[ -e /mnt/proc ] || mkdir /mnt/proc
+	[ -e /mnt/dev ] || mkdir /mnt/dev
+	mount -t sysfs sysfs /mnt/sys
+	mount -t proc proc /mnt/proc
+	mount -o bind /dev /mnt/dev
+}
+
+# chroot_umount()
+# tears down chroot in target system
+#
+chroot_umount() {
+	umount /mnt/proc /mnt/sys /mnt/dev
+}
+
+umount_dest() {
+	swapoff -a
+	umount $(mount | grep -v '/mnt ' | grep '/mnt' | sed 's|\ .*||g')
+	umount $(mount | grep '/mnt ' | sed 's|\ .*||g')
+}
+
+search_device() {
+	grep " $1 " $FS | cut -d ' ' -f 1
+}
+
+generate_syslinux_menu() {
+	sed -i -e '|#-\*|q' "$syslinuxmenu"
+	
+	cat >> $syslinuxmenu <<EOF
+
+# (0) Arch Linux
+LABEL arch
+    MENU LABEL Arch Linux
+    LINUX ../vmlinuz-linux
+    APPEND $kernel_parameters
+    INITRD ../initramfs-linux.img
+
+# (1) Arch Linux Fallback
+LABEL archfallback
+    MENU LABEL Arch Linux Fallback
+    LINUX ../vmlinuz-linux
+    APPEND $kernel_parameters
+    INITRD ../initramfs-linux-fallback.img
+
+# (2) Windows
+#LABEL windows
+#COM32 chain.c32
+#APPEND hd0 0
+
+LABEL hdt
+    MENU LABEL HDT (Hardware Detection Tool)
+    COM32 hdt.c32
+
+LABEL reboot
+    MENU LABEL Reboot
+    COM32 reboot.c32
+
+LABEL off
+    MENU LABEL Power Off
+    COMBOOT poweroff.com
+EOF
+}

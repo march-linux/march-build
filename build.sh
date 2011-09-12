@@ -21,15 +21,12 @@ make_basefs() {
 # Customize installation (root-image)
 make_customize_root_image() {
     if [[ ! -e ${work_dir}/build.${FUNCNAME} ]]; then
-	# install aif
-	cp ${script_path}/aif/aif.sh ${work_dir}/root-image/sbin/aif
-	mkdir ${work_dir}/root-image/usr/lib/aif/
-	cp -r ${script_path}/aif/core/ ${work_dir}/root-image/usr/lib/aif/
-	cp ${script_path}/aif/libui.sh ${work_dir}/root-image/usr/lib/libui.sh
+	# install sai
+	cp -r ${script_path}/sai ${work_dir}/root-image/
 	# copy march config
 	cp -r ${script_path}/root-image ${work_dir}
-	cp ${script_path}/march-profile ${work_dir}/root-image/march/
-	cp ${script_path}/packages.list ${work_dir}/root-image/march/
+	cp ${script_path}/sai_config ${work_dir}/root-image/sai/
+	cp ${script_path}/packages.list ${work_dir}/root-image/sai/
 	# change permission
 	chmod 440 ${work_dir}/root-image/etc/sudoers
 	chmod 755 ${work_dir}/root-image/march/setup
