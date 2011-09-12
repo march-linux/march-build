@@ -63,6 +63,7 @@ find_partitions() {
 			fi
 		done
 	done
+	cd "$workdir"
 }
 
 disk_capacity() {
