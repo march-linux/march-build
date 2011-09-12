@@ -13,10 +13,6 @@ ask() {
 	tput sgr0
 }
 
-rc_conf() {
-	sed -i -e "s|^$1=.*|$1=$2|" /mnt/etc/rc.conf
-}
-
 format_disks() {
 	local _device=$1
 	local _mp=$2
@@ -70,13 +66,12 @@ find_partitions() {
 }
 
 disk_capacity() {
-	fdisk -l $1 2>/dev/null | sed -n '2p' | cut -d ' ' -f5
+	fdisk -l $1 | sed -n '2p' | cut -d ' ' -f 3,4 | sed 's|,$||'
 }
 
 avail_disks() {
 	for disk in $(find_disks); do
-		size=$(disk_capacity /dev/$disk)
-		echo "$disk: $((size / 2**20)) MiB ($((size / 2**30)) GiB)"
+		echo "$disk: $(disk_capacity /dev/$disk)"
 	done
 }
 
