@@ -65,9 +65,7 @@ find_partitions() {
 	for disk in $(find_disks); do
 		cd /sys/block/$disk
 		for part in $disk*; do
-			if [ -d $part ]; then
-				echo "$part"
-			fi
+			echo "$part"
 		done
 	done
 	cd "$workdir"
