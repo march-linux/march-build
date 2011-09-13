@@ -20,29 +20,34 @@ sai_prepare() {
 	say $FUNCNAME
 	
 	# cfdisk
+	tput rev
 	avail_disks
-	ask "pick a disk to partition? (sai will call cfdisk) "
-	cfdisk "/dev/$ans"
+	tput sgr0
+	ask "pick a disk to partition? (type 'no' to skip)"
+	if [ "$ans" != "no" ]; then
+		cfdisk "/dev/$ans"
+	fi
 	
 	# mountpount
-	say "here is a list of partitions"
+	tput rev
 	find_partitions
-	ask "select a partition for swap? (type 'no' if dont need one) "
-	if [ "$ans" != "no" ]; then
-		echo "/dev/$ans:swap:swap" >> $FS
-	fi
-
-	ask "select a partition for '/'? "
+	tput sgr0
+	
+	ask "select a partition for '/'?"
 	echo "/dev/$ans:/:ext4" >> $FS
 	
-	ask "select a partition for '/boot'? (type 'no' if dont need one) "
+	ask "select a partition for '/boot'? (type 'no' if dont need one)"
 	if [ "$ans" != "no" ]; then
 		echo "/dev/$ans:/boot:ext2" >> $FS
+	fi
+
+	ask "select a partition for swap? (type 'no' if dont need one)"
+	if [ "$ans" != "no" ]; then
+		echo "/dev/$ans:swap:swap" >> $FS
 	fi
 	
 	ask "sai asks you to use 'vim' to double-check everything. Hit 'enter' to continue."
 	vim $FS
-	
 	
 	for line in $(cat $FS); do
 		PART=$(echo $line | cut -d : -f 1)
@@ -56,14 +61,17 @@ sai_installpkgs() {
 	say $FUNCNAME
 	ask "sai asks you to edit the packages you want to install. Hit 'enter' to continue."
 	vim /sai/packages.list
+	mkdir -p /mnt/var/lib/pacman
 	chroot_mount
-	pacman --root /mnt --noconfirm -Sy "syslinux $(grep -v ^# /sai/packages.list)"
+	pacman --root /mnt --noconfirm --needed -Sy $(grep -v ^# /sai/packages.list)
 	chroot_umount
 }
 
 sai_postconfig() {
 	say $FUNCNAME
+	chroot_mount
 	chroot /mnt mkinitcpio -p linux
+	chroot_umount
 	sort $FSTAB > /mnt/etc/fstab
 }
 

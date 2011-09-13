@@ -8,9 +8,16 @@ say() {
 
 ask() {
 	tput setaf 6
-	echo -n "!! $1? "
+	echo -n "=> $1  "
 	tput sgr0
 	read ans
+}
+
+yell() {
+	tput setaf 1
+	echo -n "!! $1  "
+	tput sgr0
+	echo "$1" >> $LOG
 }
 
 format_disks() {
@@ -100,7 +107,7 @@ search_device() {
 }
 
 generate_syslinux_menu() {
-	sed -i -e '|#-\*|q' "$syslinuxmenu"
+	sed -i -e '/#-\*/q' "$syslinuxmenu"
 	
 	cat >> $syslinuxmenu <<EOF
 
@@ -108,14 +115,14 @@ generate_syslinux_menu() {
 LABEL arch
     MENU LABEL Arch Linux
     LINUX ../vmlinuz-linux
-    APPEND $kernel_parameters
+    APPEND root=$1 ro
     INITRD ../initramfs-linux.img
 
 # (1) Arch Linux Fallback
 LABEL archfallback
     MENU LABEL Arch Linux Fallback
     LINUX ../vmlinuz-linux
-    APPEND $kernel_parameters
+    APPEND root=$1 ro
     INITRD ../initramfs-linux-fallback.img
 
 # (2) Windows

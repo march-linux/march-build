@@ -1,6 +1,0 @@
-#!/bin/bash
-
-sai_config() {
-	say $FUNCNAME
-	echo "sai has nothing to do here"
-}
