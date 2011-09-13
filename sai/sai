@@ -10,7 +10,6 @@ LOG='/tmp/sai_log'
 : > $LOG
 
 source /sai/sai_lib
-source /sai/sai_config
 
 sai_start() {
 	say "sai will help you install Arch Linux"
@@ -88,6 +87,7 @@ sai_end() {
 	say "sai did its job! you may 'reboot'"
 }
 
+source /sai/sai_config
 
 sai_start
 sai_prepare
