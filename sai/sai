@@ -19,7 +19,6 @@ sai_start() {
 sai_prepare() {
 	say $FUNCNAME
 	
-	umount_dest
 	# cfdisk
 	avail_disks
 	ask "pick a disk to partition? (sai will call cfdisk) "
