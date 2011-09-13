@@ -97,38 +97,5 @@ search_device() {
 
 generate_syslinux_menu() {
 	rootpart=$(search_device '/')
-	sed -i -e '/#-\*/q' $syslinuxmenu
-	cat >> $syslinuxmenu <<EOF
-
-# (0) Arch Linux
-LABEL arch
-    MENU LABEL Arch Linux
-    LINUX ../vmlinuz-linux
-    APPEND root=$rootpart ro
-    INITRD ../initramfs-linux.img
-
-# (1) Arch Linux Fallback
-LABEL archfallback
-    MENU LABEL Arch Linux Fallback
-    LINUX ../vmlinuz-linux
-    APPEND root=$rootpart ro
-    INITRD ../initramfs-linux-fallback.img
-
-# (2) Windows
-#LABEL windows
-#COM32 chain.c32
-#APPEND hd0 0
-
-LABEL hdt
-    MENU LABEL HDT (Hardware Detection Tool)
-    COM32 hdt.c32
-
-LABEL reboot
-    MENU LABEL Reboot
-    COM32 reboot.c32
-
-LABEL off
-    MENU LABEL Power Off
-    COMBOOT poweroff.com
-EOF
+	sed -i -e "s|root=/dev/sda3|root=$rootpart|g" $syslinuxmenu
 }
