@@ -3,6 +3,7 @@ linux
 pacman
 initscripts
 sudo
+syslinux
 vim
 # gnome base
 gnome-control-center
