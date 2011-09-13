@@ -96,22 +96,22 @@ search_device() {
 }
 
 generate_syslinux_menu() {
-	sed -i -e '/#-\*/q' "$syslinuxmenu"
-	
+	rootpart=$(search_device '/')
+	sed -i -e '/#-\*/q' $syslinuxmenu
 	cat >> $syslinuxmenu <<EOF
 
 # (0) Arch Linux
 LABEL arch
     MENU LABEL Arch Linux
     LINUX ../vmlinuz-linux
-    APPEND root=$1 ro
+    APPEND root=$rootpart ro
     INITRD ../initramfs-linux.img
 
 # (1) Arch Linux Fallback
 LABEL archfallback
     MENU LABEL Arch Linux Fallback
     LINUX ../vmlinuz-linux
-    APPEND root=$1 ro
+    APPEND root=$rootpart ro
     INITRD ../initramfs-linux-fallback.img
 
 # (2) Windows
