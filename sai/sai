@@ -73,7 +73,7 @@ sai_bootloader() {
 	say $FUNCNAME
 	syslinux-install_update -iam -c /mnt
 	syslinuxmenu='/mnt/boot/syslinux/syslinux.cfg'
-	generate_syslinux_menu $(search_device '/')
+	generate_syslinux_menu
 	ask "sai asks you to edit the bootloader menu. Hit 'enter' to continue."
 	vim $syslinuxmenu
 }
