@@ -48,12 +48,7 @@ sai_prepare() {
 	ask "sai asks you to use 'vim' to double-check everything. Hit 'enter' to continue."
 	vim $FS
 	
-	for line in $(cat $FS); do
-		PART=$(echo $line | cut -d : -f 1)
-		MP=$(echo $line | cut -d : -f 2)
-		FSTYPE=$(echo $line | cut -d : -f 3)
-		format_disks $PART $MP $FSTYPE
-	done
+	prepare_disks
 }
 
 sai_installpkgs() {
