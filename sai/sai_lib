@@ -95,12 +95,6 @@ chroot_umount() {
 	umount /mnt/proc /mnt/sys /mnt/dev
 }
 
-umount_dest() {
-	swapoff -a
-	umount $(mount | grep -v '/mnt ' | grep '/mnt' | sed 's|\ .*||g')
-	umount $(mount | grep '/mnt ' | sed 's|\ .*||g')
-}
-
 search_device() {
 	grep " $1 " $FS | cut -d ' ' -f 1
 }
