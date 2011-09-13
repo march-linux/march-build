@@ -25,17 +25,19 @@ sai_prepare() {
 	cfdisk "/dev/$ans"
 	
 	# mountpount
+	say "here is a list of partitions"
 	find_partitions
 	ask "select a partition for swap? (type 'no' if dont need one) "
 	if [ "$ans" != "no" ]; then
-		echo "/dev/$ans swap swap" >> $FS
+		echo "/dev/$ans:swap:swap" >> $FS
 	fi
+
 	ask "select a partition for '/'? "
-	echo "/dev/$ans / ext4" >> $FS
+	echo "/dev/$ans:/:ext4" >> $FS
 	
 	ask "select a partition for '/boot'? (type 'no' if dont need one) "
 	if [ "$ans" != "no" ]; then
-		echo "/dev/$ans /boot ext2" >> $FS
+		echo "/dev/$ans:/boot:ext2" >> $FS
 	fi
 	
 	ask "sai asks you to use 'vim' to double-check everything. Hit 'enter' to continue."
@@ -43,11 +45,10 @@ sai_prepare() {
 	
 	
 	for line in $(cat $FS); do
-		PART=$(echo $line | cut -d ' ' -f 1)
-		MP=$(echo $line | cut -d ' ' -f 2)
-		FSTYPE=$(echo $line | cut -d ' ' -f 3)
+		PART=$(echo $line | cut -d : -f 1)
+		MP=$(echo $line | cut -d : -f 2)
+		FSTYPE=$(echo $line | cut -d : -f 3)
 		format_disks $PART $MP $FSTYPE
-		sleep 1
 	done
 }
 

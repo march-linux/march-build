@@ -9,8 +9,8 @@ say() {
 ask() {
 	tput setaf 6
 	echo -n "!! $1? "
-	read ans
 	tput sgr0
+	read ans
 }
 
 format_disks() {
@@ -33,7 +33,7 @@ format_disks() {
 			mke2fs -t ext4 $_device
 			;;
 	esac
-	sleep 2
+	sleep 1
 	
 	mkdir -p /mnt$_mp
 	mount -t $_fstype $_device /mnt$_mp
@@ -96,7 +96,7 @@ chroot_umount() {
 }
 
 search_device() {
-	grep " $1 " $FS | cut -d ' ' -f 1
+	grep ":$1:" $FS | cut -d : -f 1
 }
 
 generate_syslinux_menu() {
