@@ -17,8 +17,7 @@ sai_start() {
 
 sai_prepare() {
 	say $FUNCNAME
-	
-	# cfdisk
+
 	tput rev
 	avail_disks
 	tput sgr0
@@ -27,7 +26,6 @@ sai_prepare() {
 		cfdisk "/dev/$ans"
 	fi
 	
-	# mountpount
 	tput rev
 	find_partitions
 	tput sgr0
@@ -48,6 +46,7 @@ sai_prepare() {
 	ask "sai asks you to use 'vim' to double-check everything. Hit 'enter' to continue."
 	vim $FS
 	
+	# format and create tmp fstab
 	prepare_disks
 }
 
@@ -55,9 +54,11 @@ sai_installpkgs() {
 	say $FUNCNAME
 	ask "sai asks you to edit the packages you want to install. Hit 'enter' to continue."
 	vim /sai/packages.list
-	mkdir -p /mnt/var/lib/pacman
+
+	mkdir -p /mnt/var/lib/pacman /mnt/var/cache/pacman/pkg
 	chroot_mount
-	pacman --root /mnt --noconfirm --needed -Sy $(grep -v ^# /sai/packages.list)
+	pacman --root /mnt --cachedir /mnt/var/cache/pacman/pkg --noconfirm --needed \
+		-Sy $(grep -v ^# /sai/packages.list)
 	chroot_umount
 }
 
@@ -69,6 +70,7 @@ sai_postconfig() {
 sai_bootloader() {
 	say $FUNCNAME
 	syslinux-install_update -iam -c /mnt
+
 	syslinuxmenu='/mnt/boot/syslinux/syslinux.cfg'
 	generate_syslinux_menu
 	ask "sai asks you to edit the bootloader menu. Hit 'enter' to continue."
