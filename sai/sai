@@ -22,7 +22,7 @@ sai_prepare() {
 	tput rev
 	avail_disks
 	tput sgr0
-	ask "pick a disk to partition? (type 'no' to skip)"
+	ask "select a disk to partition? (type 'no' to skip)"
 	if [ "$ans" != "no" ]; then
 		cfdisk "/dev/$ans"
 	fi
