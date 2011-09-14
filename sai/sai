@@ -60,10 +60,8 @@ sai_installpkgs() {
 	pacman --root /mnt --cachedir /mnt/var/cache/pacman/pkg --noconfirm --needed \
 		-Sy $(grep -v ^# /sai/packages.list)
 	chroot_umount
-}
-
-sai_postconfig() {
-	say $FUNCNAME
+	
+	# setup fstab asap
 	sort $FSTAB > /mnt/etc/fstab
 }
 
@@ -87,6 +85,5 @@ sai_start
 sai_prepare
 sai_installpkgs
 sai_config
-sai_postconfig
 sai_bootloader
 sai_end
