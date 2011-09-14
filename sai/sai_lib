@@ -45,21 +45,11 @@ prepare_disks() {
 }
 
 find_disks() {
-	workdir="$PWD"
-	cd /sys/block
-	ls | grep '^[hs]d'
-	cd "$workdir"
+	find /sys/block/* -name [hs]d* | cut -d / -f 4
 }
 
 find_partitions() {
-	workdir="$PWD"
-	for disk in $(find_disks); do
-		cd /sys/block/$disk
-		for part in $disk*; do
-			echo "$part"
-		done
-	done
-	cd "$workdir"
+	find /sys/block/[hs]d*/* -name [hs]d* | cut -d / -f 5
 }
 
 disk_capacity() {
