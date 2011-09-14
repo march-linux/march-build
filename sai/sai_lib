@@ -30,10 +30,9 @@ prepare_disks() {
 			mkswap $part
 		else
 			mkfs.$fstype $part
+			mkdir -p /mnt$mp
+			mount -t $fstype $part /mnt$mp
 		fi
-		
-		mkdir -p /mnt$mp
-		mount -t $fstype $part /mnt$mp
 		
 		echo -n "$part $mp $fstype defaults 0 " >> $FSTAB
 		if [ "$fstype" == "swap" ]; then
