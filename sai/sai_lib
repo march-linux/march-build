@@ -15,7 +15,7 @@ ask() {
 
 yell() {
 	tput setaf 1
-	echo -n "!! $1  "
+	echo -n "!! $1"
 	tput sgr0
 	echo "$1" >> $LOG
 }
@@ -65,9 +65,7 @@ avail_disks() {
 # prepares target system as a chroot
 #
 chroot_mount() {
-	[ -e /mnt/sys ] || mkdir /mnt/sys
-	[ -e /mnt/proc ] || mkdir /mnt/proc
-	[ -e /mnt/dev ] || mkdir /mnt/dev
+	mkdir -p /mnt/sys /mnt/proc /mnt/dev
 	mount -t sysfs sysfs /mnt/sys
 	mount -t proc proc /mnt/proc
 	mount -o bind /dev /mnt/dev
