@@ -63,9 +63,6 @@ sai_installpkgs() {
 
 sai_postconfig() {
 	say $FUNCNAME
-	chroot_mount
-	chroot /mnt mkinitcpio -p linux
-	chroot_umount
 	sort $FSTAB > /mnt/etc/fstab
 }
 
