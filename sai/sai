@@ -62,7 +62,7 @@ sai_installpkgs() {
 	chroot_umount
 	
 	# setup fstab asap
-	sort $FSTAB > /mnt/etc/fstab
+	cp $FSTAB /mnt/etc/fstab
 }
 
 sai_bootloader() {
