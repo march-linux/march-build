@@ -33,12 +33,12 @@ sai_prepare() {
 	ask "select a partition for '/'?"
 	echo "/dev/$ans:/:ext4" >> $FS
 	
-	ask "select a partition for '/boot'? (type 'no' if dont need one)"
+	ask "select a partition for '/boot'? (type 'no' if you don't need it)"
 	if [ "$ans" != "no" ]; then
 		echo "/dev/$ans:/boot:ext2" >> $FS
 	fi
 
-	ask "select a partition for swap? (type 'no' if dont need one)"
+	ask "select a partition for swap? (type 'no' if you don't need it)"
 	if [ "$ans" != "no" ]; then
 		echo "/dev/$ans:swap:swap" >> $FS
 	fi
@@ -62,7 +62,7 @@ sai_installpkgs() {
 	chroot_umount
 	
 	# setup fstab asap
-	cp $FSTAB /mnt/etc/fstab
+	cat $FSTAB >> /mnt/etc/fstab
 }
 
 sai_bootloader() {
