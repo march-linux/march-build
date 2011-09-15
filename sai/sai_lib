@@ -15,9 +15,12 @@ ask() {
 
 yell() {
 	tput setaf 1
-	echo -n "!! $1"
+	echo "!! $1  (see the error message above)"
 	tput sgr0
-	echo "$1" >> $LOG
+	ask "sai found an error. type 'yes' to continue anyway."
+	if [ "$ans" != "yes" ]; then
+		exit
+	fi
 }
 
 prepare_disks() {
@@ -27,11 +30,11 @@ prepare_disks() {
 		fstype=$(echo $line | cut -d : -f 3)
 
 		if [ "$fstype" == "swap" ]; then
-			mkswap $part
+			mkswap $part || yell "sai can't format $part as swap"
 		else
-			mkfs.$fstype $part
+			mkfs.$fstype $part || yell "sai can't format $part as $fstype"
 			mkdir -p /mnt$mp
-			mount -t $fstype $part /mnt$mp
+			mount -t $fstype $part /mnt$mp || yell "sai can't mount $part as $mp"
 		fi
 		
 		echo -n "$part $mp $fstype defaults 0 " >> $FSTAB
@@ -66,16 +69,23 @@ avail_disks() {
 #
 chroot_mount() {
 	mkdir -p /mnt/sys /mnt/proc /mnt/dev
-	mount -t sysfs sysfs /mnt/sys
-	mount -t proc proc /mnt/proc
-	mount -o bind /dev /mnt/dev
+	mount -t sysfs sysfs /mnt/sys && mount -t proc proc /mnt/proc && mount -o bind /dev /mnt/dev \
+	|| yell "sai can't enable chroot"
 }
 
 # chroot_umount()
 # tears down chroot in target system
 #
 chroot_umount() {
-	umount /mnt/proc /mnt/sys /mnt/dev
+	umount /mnt/proc /mnt/sys /mnt/dev || yell "sai can't disable chroot"
+}
+
+pacman_install() {
+	mkdir -p /mnt/var/lib/pacman /mnt/var/cache/pacman/pkg
+	chroot_mount
+	pacman --root /mnt --cachedir /mnt/var/cache/pacman/pkg --noconfirm --needed \
+		-Sy $(grep -v ^# /sai/packages.list) || yell "pacman has some problems"
+	chroot_umount
 }
 
 search_device() {
@@ -84,5 +94,5 @@ search_device() {
 
 generate_syslinux_menu() {
 	rootpart=$(search_device '/')
-	sed -i -e "s|root=/dev/sda3|root=$rootpart|g" $syslinuxmenu
+	sed -i -e "s|root=/dev/sda3|root=$rootpart|g" $syslinuxmenu || yell "sai can't find the bootloader menu"
 }
