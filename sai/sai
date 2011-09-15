@@ -2,12 +2,10 @@
 
 FS='/tmp/sai_fs'
 FSTAB='/tmp/sai_fstab'
-LOG='/tmp/sai_log'
 
 # init files
 : > $FS
 : > $FSTAB
-: > $LOG
 
 source /sai/sai_lib
 
@@ -23,7 +21,7 @@ sai_prepare() {
 	tput sgr0
 	ask "select a disk to partition? (type 'no' to skip)"
 	if [ "$ans" != "no" ]; then
-		cfdisk "/dev/$ans"
+		cfdisk "/dev/$ans" || yell "sai can't find that device"
 	fi
 	
 	tput rev
@@ -50,16 +48,12 @@ sai_prepare() {
 	prepare_disks
 }
 
-sai_installpkgs() {
+sai_install() {
 	say $FUNCNAME
 	ask "sai asks you to edit the packages you want to install. Hit 'enter' to continue."
 	vim /sai/packages.list
 
-	mkdir -p /mnt/var/lib/pacman /mnt/var/cache/pacman/pkg
-	chroot_mount
-	pacman --root /mnt --cachedir /mnt/var/cache/pacman/pkg --noconfirm --needed \
-		-Sy $(grep -v ^# /sai/packages.list)
-	chroot_umount
+	pacman_install
 	
 	# setup fstab asap
 	cat $FSTAB >> /mnt/etc/fstab
@@ -67,7 +61,7 @@ sai_installpkgs() {
 
 sai_bootloader() {
 	say $FUNCNAME
-	syslinux-install_update -iam -c /mnt
+	syslinux-install_update -iam -c /mnt || yell "syslinux can't be installed"
 
 	syslinuxmenu='/mnt/boot/syslinux/syslinux.cfg'
 	generate_syslinux_menu
@@ -83,7 +77,7 @@ source /sai/sai_config
 
 sai_start
 sai_prepare
-sai_installpkgs
+sai_install
 sai_config
 sai_bootloader
 sai_end
