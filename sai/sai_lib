@@ -43,21 +43,27 @@ find_disks() {
 	find /sys/block/* -name [hs]d* | cut -d / -f 4
 }
 
-find_partitions() {
+find_parts() {
 	find /sys/block/[hs]d*/* -name [hs]d* | cut -d / -f 5
 }
 
-disk_capacity() {
-	fdisk -l $1 | sed -n 2p | cut -d , -f 1 | cut -d ' ' -f 3,4
+get_size() {
+	fdisk -l $1 2>/dev/null | sed -n 2p | cut -d , -f 1 | cut -d ' ' -f 3,4
 }
 
 avail_disks() {
 	for disk in $(find_disks); do
-		echo "$disk: $(disk_capacity /dev/$disk)"
+		echo "$disk: $(get_size /dev/$disk)"
 	done
 }
 
-ask_partition() {
+avail_parts() {
+	for part in $(find_parts); do
+		echo "$part: $(get_size /dev/$part)"
+	done
+}
+
+ask_cfdisk() {
 	tput rev
 	avail_disks
 	tput sgr0
@@ -70,7 +76,7 @@ ask_partition() {
 
 ask_mkfs() {
 	tput rev
-	find_partitions
+	avail_parts
 	tput sgr0
 
 	ask "select a partition for '/'?"
