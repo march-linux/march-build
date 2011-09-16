@@ -64,11 +64,11 @@ avail_parts() {
 }
 
 ask_cfdisk() {
-	tput rev
-	avail_disks
-	tput sgr0
-	
 	while true; do
+		tput rev
+		avail_disks
+		tput sgr0
+		
 		ask "select a disk to partition? (type 'no' to skip)"
 		if [ "$ans" == "no" ]; then
 			break
