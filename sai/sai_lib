@@ -21,6 +21,7 @@ yell() {
 }
 
 prepare_disks() {
+	: > $FSTAB
 	for line in $(cat $FS); do
 		part=$(echo $line | cut -d : -f 1)
 		mp=$(echo $line | cut -d : -f 2)
@@ -78,13 +79,13 @@ ask_cfdisk() {
 }
 
 ask_mkfs() {
+	: > $FS
 	tput rev
 	avail_parts
 	tput sgr0
-
+	
 	ask "select a partition for '/'?"
 	echo "/dev/$ans:/" >> $FS
-	
 	for mp in /boot swap; do
 		ask "select a partition for '$mp'? (type 'no' if you don't need it)"
 		if [ "$ans" != "no" ]; then
@@ -112,7 +113,7 @@ chroot_umount() {
 pacman_install() {
 	mkdir -p /mnt/var/lib/pacman /mnt/var/cache/pacman/pkg
 	chroot_mount
-	pacman --root /mnt --cachedir /mnt/var/cache/pacman/pkg --noconfirm \
+	pacman --root /mnt --cachedir /mnt/var/cache/pacman/pkg --noconfirm --needed \
 		-Sy $(grep -v ^# /sai/packages.list) || yell "pacman has some problems"
 	chroot_umount
 }
