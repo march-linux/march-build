@@ -2,21 +2,24 @@
 
 sai_config() {
 	say "$FUNCNAME: March customized"
-	# copy march config
-	cp /etc/sudoers /mnt/etc/
-	cp /etc/pacman.d/mirrorlist /mnt/etc/pacman.d/
-	cp /etc/modprobe.d/modprobe.conf /mnt/etc/modprobe.d/
-	# setup rc.conf
-	sed -i -e "s|^DAEMONS=.*|DAEMONS=(dbus networkmanager gdm cupsd)|" /mnt/etc/rc.conf
-	# setup pacman.conf
-	sed -i -e "s|^#\[custom\]|[aur]|" -e "s|^#Server.*|Server = http://dl.dropbox.com/u/10527821/repo/i686|" /mnt/etc/pacman.conf
-	# remove unused app icon
-	rm /mnt/usr/share/applications/avahi-discover.desktop
-	rm /mnt/usr/share/applications/bssh.desktop
-	rm /mnt/usr/share/applications/bvnc.desktop
-	rm /mnt/usr/share/applications/qv4l2.desktop
-	# adduser
-	chroot /mnt usermod -p ZYCnDaw9NK8NI root
-	chroot /mnt useradd -m -p ZYCnDaw9NK8NI -g users \
-		-G audio,lp,network,optical,power,storage,video,wheel march
+	if [ -f /tmp/$FUNCNAME ]; then
+		# copy march config
+		cp /etc/sudoers /mnt/etc/
+		cp /etc/pacman.d/mirrorlist /mnt/etc/pacman.d/
+		cp /etc/modprobe.d/modprobe.conf /mnt/etc/modprobe.d/
+		# setup rc.conf
+		sed -i -e "s|^DAEMONS=.*|DAEMONS=(dbus networkmanager gdm cupsd)|" /mnt/etc/rc.conf
+		# setup pacman.conf
+		sed -i -e "s|^#\[custom\]|[aur]|" -e "s|^#Server.*|Server = http://dl.dropbox.com/u/10527821/repo/i686|" /mnt/etc/pacman.conf
+		# remove unused app icon
+		rm /mnt/usr/share/applications/avahi-discover.desktop
+		rm /mnt/usr/share/applications/bssh.desktop
+		rm /mnt/usr/share/applications/bvnc.desktop
+		rm /mnt/usr/share/applications/qv4l2.desktop
+		# adduser
+		chroot /mnt usermod -p ZYCnDaw9NK8NI root
+		chroot /mnt useradd -m -p ZYCnDaw9NK8NI -g users \
+			-G audio,lp,network,optical,power,storage,video,wheel march
+		: > /tmp/$FUNCNAME
+	fi
 }
