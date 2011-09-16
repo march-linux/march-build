@@ -16,7 +16,7 @@ sai_start() {
 sai_prepare() {
 	say $FUNCNAME
 
-	ask_partition
+	ask_cfdisk
 	ask_mkfs
 	ask "sai opens 'vim' to double-check the partitions. Hit 'enter' to continue."
 	vim $FS
