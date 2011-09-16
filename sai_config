@@ -2,7 +2,7 @@
 
 sai_config() {
 	say "$FUNCNAME: March customized"
-	if [ -f /tmp/$FUNCNAME ]; then
+	if [ ! -f /tmp/$FUNCNAME ]; then
 		# copy march config
 		cp /etc/sudoers /mnt/etc/
 		cp /etc/pacman.d/mirrorlist /mnt/etc/pacman.d/
