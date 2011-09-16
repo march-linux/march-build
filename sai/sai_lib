@@ -67,11 +67,14 @@ ask_cfdisk() {
 	tput rev
 	avail_disks
 	tput sgr0
-
-	ask "select a disk to partition? (type 'no' to skip)"
-	if [ "$ans" != "no" ]; then
+	
+	while true; do
+		ask "select a disk to partition? (type 'no' to skip)"
+		if [ "$ans" == "no" ]; then
+			break
+		fi
 		cfdisk "/dev/$ans" || yell "sai can't find that device"
-	fi
+	done
 }
 
 ask_mkfs() {
