@@ -17,31 +17,24 @@ yell() {
 	tput setaf 1
 	echo "!! $1  (see the error message above)"
 	tput sgr0
-	ask "sai found an error. type 'yes' to continue anyway."
-	if [ "$ans" != "yes" ]; then
-		exit
-	fi
+	exit
 }
 
 prepare_disks() {
 	for line in $(cat $FS); do
 		part=$(echo $line | cut -d : -f 1)
 		mp=$(echo $line | cut -d : -f 2)
-		fstype=$(echo $line | cut -d : -f 3)
 
-		if [ "$fstype" == "swap" ]; then
+		if [ "$mp" == "swap" ]; then
 			mkswap $part || yell "sai can't format $part as swap"
+			
+			echo "$part swap swap defaults 0 0" >> $FSTAB
 		else
-			mkfs.$fstype $part || yell "sai can't format $part as $fstype"
+			mkfs.ext4 $part || yell "sai can't format $part as ext4"
 			mkdir -p /mnt$mp
-			mount -t $fstype $part /mnt$mp || yell "sai can't mount $part as $mp"
-		fi
-		
-		echo -n "$part $mp $fstype defaults 0 " >> $FSTAB
-		if [ "$fstype" == "swap" ]; then
-			echo "0" >> $FSTAB
-		else
-			echo "1" >> $FSTAB
+			mount -t ext4 $part /mnt$mp || yell "sai can't mount $part as $mp"
+
+			echo "$part $mp ext4 defaults 0 1" >> $FSTAB
 		fi
 	done
 }
@@ -55,12 +48,39 @@ find_partitions() {
 }
 
 disk_capacity() {
-	fdisk -l $1 | sed -n '2p' | cut -d ' ' -f 3,4 | sed 's|,$||'
+	fdisk -l $1 | sed -n 2p | cut -d , -f 1 | cut -d ' ' -f 3,4
 }
 
 avail_disks() {
 	for disk in $(find_disks); do
 		echo "$disk: $(disk_capacity /dev/$disk)"
+	done
+}
+
+ask_partition() {
+	tput rev
+	avail_disks
+	tput sgr0
+
+	ask "select a disk to partition? (type 'no' to skip)"
+	if [ "$ans" != "no" ]; then
+		cfdisk "/dev/$ans" || yell "sai can't find that device"
+	fi
+}
+
+ask_mkfs() {
+	tput rev
+	find_partitions
+	tput sgr0
+
+	ask "select a partition for '/'?"
+	echo "/dev/$ans:/" >> $FS
+	
+	for mp in /boot swap; do
+		ask "select a partition for '$mp'? (type 'no' if you don't need it)"
+		if [ "$ans" != "no" ]; then
+			echo "/dev/$ans:$mp" >> $FS
+		fi
 	done
 }
 
@@ -70,26 +90,26 @@ avail_disks() {
 chroot_mount() {
 	mkdir -p /mnt/sys /mnt/proc /mnt/dev
 	mount -t sysfs sysfs /mnt/sys && mount -t proc proc /mnt/proc && mount -o bind /dev /mnt/dev \
-	|| yell "sai can't enable chroot"
+	|| yell "sai can't start chroot"
 }
 
 # chroot_umount()
 # tears down chroot in target system
 #
 chroot_umount() {
-	umount /mnt/proc /mnt/sys /mnt/dev || yell "sai can't disable chroot"
+	umount /mnt/proc /mnt/sys /mnt/dev || yell "sai can't stop chroot"
 }
 
 pacman_install() {
 	mkdir -p /mnt/var/lib/pacman /mnt/var/cache/pacman/pkg
 	chroot_mount
-	pacman --root /mnt --cachedir /mnt/var/cache/pacman/pkg --noconfirm --needed \
+	pacman --root /mnt --cachedir /mnt/var/cache/pacman/pkg --noconfirm \
 		-Sy $(grep -v ^# /sai/packages.list) || yell "pacman has some problems"
 	chroot_umount
 }
 
 search_device() {
-	grep ":$1:" $FS | cut -d : -f 1
+	grep ":$1$" $FS | cut -d : -f 1
 }
 
 generate_syslinux_menu() {
