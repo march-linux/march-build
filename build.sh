@@ -31,7 +31,7 @@ make_customize_root_image() {
 	chmod 440 ${work_dir}/root-image/etc/sudoers
 	chmod 755 ${work_dir}/root-image/march/setup
 	# setup rc.conf
-	sed -i -e "s|^DAEMONS=.*|DAEMONS=(@gdm @networkmanager @cupsd)|" ${work_dir}/root-image/etc/rc.conf
+	sed -i -e "s|^DAEMONS=.*|DAEMONS=(dbus @gdm @networkmanager @cupsd)|" ${work_dir}/root-image/etc/rc.conf
 	# setup pacman.conf
 	sed -i -e "s|^#\[custom\]|[aur]|" -e "s|^#Server.*|Server = http://dl.dropbox.com/u/10527821/repo/i686|" ${work_dir}/root-image/etc/pacman.conf
 	# remove unused manual and locale
