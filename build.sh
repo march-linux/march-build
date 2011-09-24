@@ -21,15 +21,13 @@ make_basefs() {
 # Customize installation (root-image)
 make_customize_root_image() {
     if [[ ! -e ${work_dir}/build.${FUNCNAME} ]]; then
-	# install sai
-	cp -r ${script_path}/sai ${work_dir}/root-image/
 	# copy march config
 	cp -r ${script_path}/root-image ${work_dir}
 	cp ${script_path}/sai_config ${work_dir}/root-image/sai/
 	cp ${script_path}/packages.list ${work_dir}/root-image/sai/
 	# change permission
 	chmod 440 ${work_dir}/root-image/etc/sudoers
-	chmod 755 ${work_dir}/root-image/march/setup
+	chmod 755 ${work_dir}/root-image/install
 	# setup rc.conf
 	sed -i -e "s|^DAEMONS=.*|DAEMONS=(dbus @gdm @networkmanager @cupsd)|" ${work_dir}/root-image/etc/rc.conf
 	# setup pacman.conf
@@ -101,7 +99,7 @@ make_syslinux() {
 		-fill khaki1 -pointsize 120 -draw "text 100,200 'M'" \
 		-fill grey -draw "text 210,200 'arch!'" \
 		-pointsize 20 -draw "text 100,250 'Developer: #1331' \
-		text 100,280 'Install: $ /march/setup' \
+		text 100,280 'Install: $ /install' \
 		text 100,310 'Password: pass'" \
 		-pointsize 12 -draw "text 540,20 '${iso_version}-${arch}'" \
 		${work_dir}/iso/${install_dir}/boot/syslinux/splash.png
