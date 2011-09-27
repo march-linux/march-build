@@ -5,7 +5,6 @@ sai_config() {
 	if [ ! -f /tmp/$FUNCNAME ]; then
 		# copy march config
 		cp /etc/sudoers /mnt/etc/
-		cp /etc/locale.gen /mnt/etc/
 		cp /etc/pacman.d/mirrorlist /mnt/etc/pacman.d/
 		cp /etc/modprobe.d/modprobe.conf /mnt/etc/modprobe.d/
 		# setup rc.conf
