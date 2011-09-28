@@ -57,7 +57,7 @@ make_customize_root_image() {
 	rm ${work_dir}/root-image/usr/share/applications/bvnc.desktop
 	rm ${work_dir}/root-image/usr/share/applications/qv4l2.desktop
 	# setup locale
-	sed -i -e "s|^#en_US.UTF-8|en_US.UTF-8|" ${work_dir}/root-image/etc/locale.gen
+	sed -i -e "s|^#en_US\.UTF-8|en_US.UTF-8|" ${work_dir}/root-image/etc/locale.gen
 	chroot ${work_dir}/root-image/ locale-gen
 	# setup mirrorlist
 	sed -i -e "s|^#\(.*rit\.edu.*\)|\1|g" ${work_dir}/root-image/etc/pacman.d/mirrorlist
