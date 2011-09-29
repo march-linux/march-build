@@ -4,6 +4,7 @@ pacman
 initscripts
 sudo
 syslinux
+device-mapper
 vim
 # xfce
 xfce4
