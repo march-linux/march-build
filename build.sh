@@ -38,7 +38,6 @@ make_customize_root_image() {
 	find ${work_dir}/root-image/usr/share/locale/* ! -name locale.alias | xargs rm -rf
 	find ${work_dir}/root-image/usr/share/i18n/locales/* \
 		! -name en_US \
-		! -name de_DE \
 		! -name en_GB \
 		! -name i18n \
 		! -name iso14651_t1* \
@@ -58,6 +57,9 @@ make_customize_root_image() {
 	rm -f ${work_dir}/root-image/usr/share/applications/avahi-discover.desktop
 	rm -f ${work_dir}/root-image/usr/share/applications/bssh.desktop
 	rm -f ${work_dir}/root-image/usr/share/applications/bvnc.desktop
+	# setup locale
+	sed -i -e "s|^#en_US\.UTF-8|en_US.UTF-8|" ${work_dir}/root-image/etc/locale.gen
+	chroot /mnt locale-gen
 	# setup mirrorlist
 	sed -i -e "s|^#\(.*rit\.edu.*\)|\1|g" ${work_dir}/root-image/etc/pacman.d/mirrorlist
 	# adduser
