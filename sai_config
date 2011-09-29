@@ -8,7 +8,7 @@ sai_config() {
 		cp /etc/skel/.xinitrc /mnt/etc/skel/
 		cp /etc/modprobe.d/modprobe.conf /mnt/etc/modprobe.d/
 		# setup rc.conf
-		sed -i -e "s|^HOSTNAME=.*|HOSTNAME=localhost|" -e "s|^DAEMONS=.*|DAEMONS=(dbus @slim @networkmanager @cupsd)|" /mnt/etc/rc.conf
+		sed -i -e "s|^HOSTNAME=.*|HOSTNAME=localhost|" -e "s|^DAEMONS=.*|DAEMONS=(dbus networkmanager cupsd slim)|" /mnt/etc/rc.conf
 		# setup slim.conf
 		sed -i -e "s|^#default_user.*|default_user march|" -e "s|^# daemon|daemon|" -e "s|^current_theme.*|current_theme archlinux-simplyblack|" /mnt/etc/slim.conf
 		# setup pacman.conf
