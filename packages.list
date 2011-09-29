@@ -23,7 +23,7 @@ zip
 unzip
 unrar
 # zh-TW support
-ibus-chewing
+scim-chewing
 ttf-droid
 # music/video player
 gnome-mplayer
@@ -33,7 +33,7 @@ transmission-gtk
 zathura
 geany
 ristretto
-network-manager-applet
+wicd-gtk
 # xorg
 xf86-input-synaptics
 xf86-video-ati
