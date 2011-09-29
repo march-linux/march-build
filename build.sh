@@ -29,7 +29,7 @@ make_customize_root_image() {
 	chmod 440 ${work_dir}/root-image/etc/sudoers
 	chmod 755 ${work_dir}/root-image/install
 	# setup rc.conf
-	sed -i -e "s|^HOSTNAME=.*|HOSTNAME=localhost|" -e "s|^DAEMONS=.*|DAEMONS=(dbus networkmanager cupsd slim)|" ${work_dir}/root-image/etc/rc.conf
+	sed -i -e "s|^HOSTNAME=.*|HOSTNAME=localhost|" -e "s|^DAEMONS=.*|DAEMONS=(dbus wicd cupsd slim)|" ${work_dir}/root-image/etc/rc.conf
 	# setup slim.conf
 	sed -i -e "s|^#default_user.*|default_user march|" -e "s|^# daemon|daemon|" -e "s|^current_theme.*|current_theme archlinux-simplyblack|" ${work_dir}/root-image/etc/slim.conf	
 	# setup pacman.conf
