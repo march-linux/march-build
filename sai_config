@@ -17,6 +17,7 @@ sai_config() {
 		rm -f /mnt/usr/share/applications/avahi-discover.desktop
 		rm -f /mnt/usr/share/applications/bssh.desktop
 		rm -f /mnt/usr/share/applications/bvnc.desktop
+		rm -f /mnt/usr/share/applications/qv4l2.desktop
 		# adduser
 		chroot /mnt usermod -p ZYCnDaw9NK8NI root
 		chroot /mnt useradd -m -p ZYCnDaw9NK8NI -g users \
