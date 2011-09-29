@@ -30,7 +30,7 @@ gnome-mplayer
 # extra apps
 gimp
 transmission-gtk
-epdfview
+zathura
 geany
 ristretto
 network-manager-applet
