@@ -5,19 +5,19 @@ initscripts
 sudo
 syslinux
 vim
-# gnome base
-gnome-control-center
-gnome-panel
-gnome-themes-standard
-metacity
-nautilus
-notification-daemon
-gdm
+# xfce
+xfce4
+slim
+archlinux-themes-slim
+gstreamer0.10-base-plugins
+thunar-volman
+thunar-archive-plugin
+xfce4-notifyd
 # browser
 chromium
 flashplugin
 # archiver
-file-roller
+xarchiver
 zip
 unzip
 unrar
@@ -25,15 +25,13 @@ unrar
 ibus-chewing
 ttf-droid
 # music/video player
-totem
-gstreamer0.10-ffmpeg
+gnome-mplayer
 # extra apps
-gimp-devel
+gimp
 transmission-gtk
-gnome-terminal
-eog
-evince
+epdfview
 geany
+ristretto
 network-manager-applet
 # xorg
 xf86-input-synaptics

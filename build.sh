@@ -29,7 +29,9 @@ make_customize_root_image() {
 	chmod 440 ${work_dir}/root-image/etc/sudoers
 	chmod 755 ${work_dir}/root-image/install
 	# setup rc.conf
-	sed -i -e "s|^DAEMONS=.*|DAEMONS=(dbus @gdm @networkmanager @cupsd)|" ${work_dir}/root-image/etc/rc.conf
+	sed -i -e "s|^HOSTNAME=.*|HOSTNAME=localhost|" -e "s|^DAEMONS=.*|DAEMONS=(dbus @slim @networkmanager @cupsd)|" ${work_dir}/root-image/etc/rc.conf
+	# setup slim.conf
+	sed -i -e "s|^#default_user.*|default_user march|" -e "s|^# daemon|daemon|" -e "s|^current_theme.*|current_theme archlinux-simplyblack|" ${work_dir}/root-image/etc/slim.conf	
 	# setup pacman.conf
 	sed -i -e "s|^#\[custom\]|[aur]|" -e "s|^#Server.*|Server = http://dl.dropbox.com/u/10527821/repo/i686|" ${work_dir}/root-image/etc/pacman.conf
 	# remove unused manual and locale
@@ -53,10 +55,9 @@ make_customize_root_image() {
 	rm -rf ${work_dir}/root-image/usr/share/gtk-2.0/
 	rm -rf ${work_dir}/root-image/usr/share/gtk-3.0/
 	# remove unused app icon
-	rm ${work_dir}/root-image/usr/share/applications/avahi-discover.desktop
-	rm ${work_dir}/root-image/usr/share/applications/bssh.desktop
-	rm ${work_dir}/root-image/usr/share/applications/bvnc.desktop
-	rm ${work_dir}/root-image/usr/share/applications/qv4l2.desktop
+	rm -f ${work_dir}/root-image/usr/share/applications/avahi-discover.desktop
+	rm -f ${work_dir}/root-image/usr/share/applications/bssh.desktop
+	rm -f ${work_dir}/root-image/usr/share/applications/bvnc.desktop
 	# setup mirrorlist
 	sed -i -e "s|^#\(.*rit\.edu.*\)|\1|g" ${work_dir}/root-image/etc/pacman.d/mirrorlist
 	# adduser
