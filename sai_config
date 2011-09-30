@@ -8,11 +8,12 @@ sai_config() {
 		cp /etc/skel/.xinitrc /mnt/etc/skel/
 		cp /etc/modprobe.d/modprobe.conf /mnt/etc/modprobe.d/
 		# setup rc.conf
-		sed -i -e "s|^HOSTNAME=.*|HOSTNAME=localhost|" -e "s|^DAEMONS=.*|DAEMONS=(dbus wicd cupsd slim)|" /mnt/etc/rc.conf
-		# setup slim.conf
-		sed -i -e "s|^#default_user.*|default_user march|" -e "s|^# daemon|daemon|" -e "s|^current_theme.*|current_theme archlinux-simplyblack|" /mnt/etc/slim.conf
+		sed -i -e "s|^HOSTNAME=.*|HOSTNAME=localhost|" -e "s|^DAEMONS=.*|DAEMONS=(dbus wicd cupsd)|" /mnt/etc/rc.conf
 		# setup pacman.conf
 		sed -i -e "s|^#\[custom\]|[aur]|" -e "s|^#Server.*|Server = http://dl.dropbox.com/u/10527821/repo/i686|" /mnt/etc/pacman.conf
+		# setup autologin
+		echo "exec login -f march" >> /mnt/etc/rc.local
+		echo "exec startx" >> /mnt/etc/skel/.bash_profile
 		# remove unused app icon
 		rm -f /mnt/usr/share/applications/avahi-discover.desktop
 		rm -f /mnt/usr/share/applications/bssh.desktop

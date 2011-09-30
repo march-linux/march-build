@@ -29,11 +29,12 @@ make_customize_root_image() {
 	chmod 440 ${work_dir}/root-image/etc/sudoers
 	chmod 755 ${work_dir}/root-image/install
 	# setup rc.conf
-	sed -i -e "s|^HOSTNAME=.*|HOSTNAME=localhost|" -e "s|^DAEMONS=.*|DAEMONS=(dbus wicd cupsd slim)|" ${work_dir}/root-image/etc/rc.conf
-	# setup slim.conf
-	sed -i -e "s|^#default_user.*|default_user march|" -e "s|^# daemon|daemon|" -e "s|^current_theme.*|current_theme archlinux-simplyblack|" ${work_dir}/root-image/etc/slim.conf	
+	sed -i -e "s|^HOSTNAME=.*|HOSTNAME=localhost|" -e "s|^DAEMONS=.*|DAEMONS=(dbus wicd cupsd)|" ${work_dir}/root-image/etc/rc.conf
 	# setup pacman.conf
 	sed -i -e "s|^#\[custom\]|[aur]|" -e "s|^#Server.*|Server = http://dl.dropbox.com/u/10527821/repo/i686|" ${work_dir}/root-image/etc/pacman.conf
+	# setup autologin
+	echo "exec login -f march" >> ${work_dir}/root-image/etc/rc.local
+	echo "exec startx" >> ${work_dir}/root-image/etc/skel/.bash_profile
 	# remove unused manual and locale
 	find ${work_dir}/root-image/usr/share/locale/* ! -name locale.alias | xargs rm -rf
 	find ${work_dir}/root-image/usr/share/i18n/locales/* \

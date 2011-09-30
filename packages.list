@@ -8,8 +8,6 @@ device-mapper
 vim
 # xfce
 xfce4
-slim
-archlinux-themes-slim
 gstreamer0.10-base-plugins
 thunar-archive-plugin
 xfce4-notifyd
