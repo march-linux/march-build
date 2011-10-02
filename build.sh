@@ -29,12 +29,9 @@ make_customize_root_image() {
 	chmod 440 ${work_dir}/root-image/etc/sudoers
 	chmod 755 ${work_dir}/root-image/install
 	# setup rc.conf
-	sed -i -e "s|^HOSTNAME=.*|HOSTNAME=localhost|" -e "s|^DAEMONS=.*|DAEMONS=(dbus wicd cupsd)|" ${work_dir}/root-image/etc/rc.conf
+	sed -i -e "s|^HOSTNAME=.*|HOSTNAME=localhost|" -e "s|^DAEMONS=.*|DAEMONS=(dbus kdm networkmanager cupsd)|" ${work_dir}/root-image/etc/rc.conf
 	# setup pacman.conf
 	sed -i -e "s|^#\[custom\]|[aur]|" -e "s|^#Server.*|Server = http://dl.dropbox.com/u/10527821/repo/i686|" ${work_dir}/root-image/etc/pacman.conf
-	# setup autologin
-	echo "exec login -f march" >> ${work_dir}/root-image/etc/rc.local
-	echo "exec startx" >> ${work_dir}/root-image/etc/skel/.bash_profile
 	# remove unused manual and locale
 	find ${work_dir}/root-image/usr/share/locale/* ! -name locale.alias | xargs rm -rf
 	find ${work_dir}/root-image/usr/share/i18n/locales/* \
@@ -51,14 +48,12 @@ make_customize_root_image() {
 	rm -rf ${work_dir}/root-image/usr/share/gtk-doc/
 	rm -rf ${work_dir}/root-image/usr/share/licenses/
 	rm -rf ${work_dir}/root-image/usr/share/kbd/locale/
-	rm -rf ${work_dir}/root-image/usr/share/gnome/help/
 	rm -rf ${work_dir}/root-image/usr/share/gtk-2.0/
 	rm -rf ${work_dir}/root-image/usr/share/gtk-3.0/
 	# remove unused app icon
 	rm -f ${work_dir}/root-image/usr/share/applications/avahi-discover.desktop
 	rm -f ${work_dir}/root-image/usr/share/applications/bssh.desktop
 	rm -f ${work_dir}/root-image/usr/share/applications/bvnc.desktop
-	rm -f ${work_dir}/root-image/usr/share/applications/qv4l2.desktop
 	# setup locale
 	sed -i -e "s|^#en_US\.UTF-8|en_US.UTF-8|" ${work_dir}/root-image/etc/locale.gen
 	chroot ${work_dir}/root-image locale-gen

@@ -6,31 +6,29 @@ sudo
 syslinux
 device-mapper
 vim
-# xfce
-xfce4
-gstreamer0.10-base-plugins
-thunar-archive-plugin
-xfce4-notifyd
+# DE
+kdebase
+# media player
+phonon-vlc
 # browser
 chromium
 flashplugin
 # archiver
-xarchiver
+kdeutils-ark
+p7zip
 zip
 unzip
 unrar
 # zh-TW support
+kdeplasma-addons-applets-kimpanel
 scim-chewing
 ttf-droid
-# music/video player
-gnome-mplayer
 # extra apps
-gimp
-transmission-gtk
-zathura
-geany
-ristretto
-wicd-gtk
+ktorrent
+kdegraphics-okular
+kdesdk-kate
+kdegraphics-gwenview
+kdeplasma-applets-networkmanagement
 # xorg
 xf86-input-synaptics
 xf86-video-ati
@@ -42,7 +40,7 @@ xorg-server
 libreoffice-calc
 libreoffice-writer
 libreoffice-impress
-libreoffice-gnome
+libreoffice-kde4
 libreoffice-en-US
 # printing
 cups
