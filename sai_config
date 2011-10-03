@@ -6,7 +6,7 @@ sai_config() {
 		# copy march config
 		cp -r /sai/etc /mnt/
 		# setup rc.conf
-		sed -i -e "s|^HOSTNAME=.*|HOSTNAME=localhost|" -e "s|^DAEMONS=.*|DAEMONS=(dbus @wicd @cupsd)|" /mnt/etc/rc.conf
+		sed -i -e "s|^HOSTNAME=.*|HOSTNAME=localhost|" -e "s|^DAEMONS=.*|DAEMONS=(dbus @alsa @wicd @cupsd)|" /mnt/etc/rc.conf
 		# adduser
 		chroot /mnt usermod -p ZYCnDaw9NK8NI root
 		chroot /mnt useradd -m -p ZYCnDaw9NK8NI -g users \
