@@ -20,7 +20,7 @@ zip
 unzip
 unrar
 # zh-TW support
-scim-chewing
+fcitx-qt
 ttf-droid
 # extra apps
 ktorrent
