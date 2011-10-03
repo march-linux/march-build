@@ -8,6 +8,7 @@ device-mapper
 vim
 # DE
 kdebase
+kde-wallpapaers
 # media player
 phonon-vlc
 # browser
