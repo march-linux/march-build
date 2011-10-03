@@ -15,12 +15,10 @@ chromium
 flashplugin
 # archiver
 kdeutils-ark
-p7zip
 zip
 unzip
 unrar
 # zh-TW support
-kdeplasma-addons-applets-kimpanel
 scim-chewing
 ttf-droid
 # extra apps
