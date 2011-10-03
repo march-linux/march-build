@@ -28,6 +28,7 @@ make_customize_root_image() {
 	# change permission
 	chmod 440 ${work_dir}/root-image/etc/sudoers
 	chmod 755 ${work_dir}/root-image/install
+	chmod 755 ${work_dir}/root-image/etc/profile.d/march.sh
 	# setup rc.conf
 	sed -i -e "s|^HOSTNAME=.*|HOSTNAME=localhost|" -e "s|^DAEMONS=.*|DAEMONS=(dbus @kdm @networkmanager @cupsd)|" ${work_dir}/root-image/etc/rc.conf
 	# setup pacman.conf
