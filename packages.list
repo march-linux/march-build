@@ -6,6 +6,7 @@ sudo
 syslinux
 device-mapper
 vim
+alsa-utils
 # DE
 i3
 rxvt-unicode
@@ -36,6 +37,7 @@ xf86-video-intel
 xf86-video-nouveau
 xf86-video-vesa
 xorg-server
+xorg-xinit
 # printing
 cups
 ghostscript
