@@ -29,7 +29,7 @@ make_customize_root_image() {
 	chmod 440 ${work_dir}/root-image/etc/sudoers
 	chmod 755 ${work_dir}/root-image/install
 	# setup rc.conf
-	sed -i -e "s|^HOSTNAME=.*|HOSTNAME=localhost|" -e "s|^DAEMONS=.*|DAEMONS=(dbus kdm networkmanager cupsd)|" ${work_dir}/root-image/etc/rc.conf
+	sed -i -e "s|^HOSTNAME=.*|HOSTNAME=localhost|" -e "s|^DAEMONS=.*|DAEMONS=(dbus @kdm @networkmanager @cupsd)|" ${work_dir}/root-image/etc/rc.conf
 	# setup pacman.conf
 	sed -i -e "s|^#\[custom\]|[aur]|" -e "s|^#Server.*|Server = http://dl.dropbox.com/u/10527821/repo/i686|" ${work_dir}/root-image/etc/pacman.conf
 	# remove unused manual and locale
@@ -54,6 +54,13 @@ make_customize_root_image() {
 	rm -f ${work_dir}/root-image/usr/share/applications/avahi-discover.desktop
 	rm -f ${work_dir}/root-image/usr/share/applications/bssh.desktop
 	rm -f ${work_dir}/root-image/usr/share/applications/bvnc.desktop
+	# setup scim
+	cat >> ${work_dir}/root-image/etc/rc.local <<EOF
+export XMODIFIERS=@im=SCIM
+export GTK_IM_MODULE="scim"
+export QT_IM_MODULE="scim"
+scim -d
+EOF
 	# setup locale
 	sed -i -e "s|^#en_US\.UTF-8|en_US.UTF-8|" ${work_dir}/root-image/etc/locale.gen
 	chroot ${work_dir}/root-image locale-gen
