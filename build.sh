@@ -54,13 +54,6 @@ make_customize_root_image() {
 	rm -f ${work_dir}/root-image/usr/share/applications/avahi-discover.desktop
 	rm -f ${work_dir}/root-image/usr/share/applications/bssh.desktop
 	rm -f ${work_dir}/root-image/usr/share/applications/bvnc.desktop
-	# setup scim
-	cat >> ${work_dir}/root-image/etc/profile <<EOF
-export XMODIFIERS=@im=SCIM
-export GTK_IM_MODULE="scim"
-export QT_IM_MODULE="scim"
-scim -d
-EOF
 	# setup locale
 	sed -i -e "s|^#en_US\.UTF-8|en_US.UTF-8|" ${work_dir}/root-image/etc/locale.gen
 	chroot ${work_dir}/root-image locale-gen

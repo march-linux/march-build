@@ -6,6 +6,7 @@ sai_config() {
 		# copy march config
 		cp /etc/sudoers /mnt/etc/
 		cp /etc/modprobe.d/modprobe.conf /mnt/etc/modprobe.d/
+		cp /etc/profile.d/march.sh /mnt/etc/profile.d/
 		# setup rc.conf
 		sed -i -e "s|^HOSTNAME=.*|HOSTNAME=localhost|" -e "s|^DAEMONS=.*|DAEMONS=(dbus @kdm @networkmanager @cupsd)|" /mnt/etc/rc.conf
 		# setup pacman.conf
@@ -14,13 +15,6 @@ sai_config() {
 		rm -f /mnt/usr/share/applications/avahi-discover.desktop
 		rm -f /mnt/usr/share/applications/bssh.desktop
 		rm -f /mnt/usr/share/applications/bvnc.desktop
-		# setup scim
-		cat >> /mnt/etc/profile <<EOF
-export XMODIFIERS=@im=SCIM
-export GTK_IM_MODULE="scim"
-export QT_IM_MODULE="scim"
-scim -d
-EOF
 		# adduser
 		chroot /mnt usermod -p ZYCnDaw9NK8NI root
 		chroot /mnt useradd -m -p ZYCnDaw9NK8NI -g users \
