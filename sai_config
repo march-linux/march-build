@@ -15,7 +15,7 @@ sai_config() {
 		rm -f /mnt/usr/share/applications/bssh.desktop
 		rm -f /mnt/usr/share/applications/bvnc.desktop
 		# setup scim
-		cat >> ${work_dir}/root-image/etc/rc.local <<EOF
+		cat >> /mnt/etc/rc.local <<EOF
 export XMODIFIERS=@im=SCIM
 export GTK_IM_MODULE="scim"
 export QT_IM_MODULE="scim"
