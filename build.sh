@@ -55,7 +55,7 @@ make_customize_root_image() {
 	rm -f ${work_dir}/root-image/usr/share/applications/bssh.desktop
 	rm -f ${work_dir}/root-image/usr/share/applications/bvnc.desktop
 	# setup scim
-	cat >> ${work_dir}/root-image/etc/rc.local <<EOF
+	cat >> ${work_dir}/root-image/etc/profile <<EOF
 export XMODIFIERS=@im=SCIM
 export GTK_IM_MODULE="scim"
 export QT_IM_MODULE="scim"
