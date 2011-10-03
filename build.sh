@@ -30,7 +30,7 @@ make_customize_root_image() {
 	chmod 440 ${work_dir}/root-image/etc/sudoers
 	chmod 755 ${work_dir}/root-image/install
 	# setup rc.conf
-	sed -i -e "s|^HOSTNAME=.*|HOSTNAME=localhost|" -e "s|^DAEMONS=.*|DAEMONS=(dbus @wicd @cupsd)|" ${work_dir}/root-image/etc/rc.conf
+	sed -i -e "s|^HOSTNAME=.*|HOSTNAME=localhost|" -e "s|^DAEMONS=.*|DAEMONS=(dbus @alsa @wicd @cupsd)|" ${work_dir}/root-image/etc/rc.conf
 	# remove unused manual and locale
 	find ${work_dir}/root-image/usr/share/locale/* ! -name locale.alias | xargs rm -rf
 	find ${work_dir}/root-image/usr/share/i18n/locales/* \
