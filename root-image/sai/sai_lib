@@ -99,15 +99,16 @@ ask_mkfs() {
 #
 chroot_mount() {
 	mkdir -p /mnt/sys /mnt/proc /mnt/dev
-	mount -t sysfs sysfs /mnt/sys && mount -t proc proc /mnt/proc && mount -o bind /dev /mnt/dev \
-	|| yell "sai can't start chroot"
+	mount -t sysfs sysfs /mnt/sys
+	mount -t proc proc /mnt/proc
+	mount -o bind /dev /mnt/dev
 }
 
 # chroot_umount()
 # tears down chroot in target system
 #
 chroot_umount() {
-	umount /mnt/proc /mnt/sys /mnt/dev || yell "sai can't stop chroot"
+	umount /mnt/proc /mnt/sys /mnt/dev
 }
 
 pacman_install() {
