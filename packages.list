@@ -6,6 +6,7 @@ sudo
 syslinux
 device-mapper
 vim
+less
 alsa-utils
 # DE
 i3
@@ -29,7 +30,6 @@ zathura
 feh
 wicd
 ranger
-git
 # xorg
 xf86-input-synaptics
 xf86-video-ati
