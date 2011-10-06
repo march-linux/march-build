@@ -31,6 +31,11 @@ vim
 less
 alsa-utils
 htop
+# libreoffice
+libreoffice-writer
+libreoffice-calc
+libreoffice-impress
+libreoffice-en-US
 # xorg
 xf86-input-synaptics
 xf86-video-ati
