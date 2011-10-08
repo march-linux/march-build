@@ -28,7 +28,7 @@ prepare_disks() {
 
 		if [ "$mp" == "swap" ]; then
 			mkswap $part || yell "sai can't format $part as swap"
-			
+
 			echo "$part swap swap defaults 0 0" >> $FSTAB
 		else
 			mkfs.ext4 $part || yell "sai can't format $part as ext4"
@@ -69,7 +69,7 @@ ask_cfdisk() {
 		tput rev
 		avail_disks
 		tput sgr0
-		
+
 		ask "select a disk to partition? (type 'no' to skip)"
 		if [ "$ans" == "no" ]; then
 			break
@@ -83,7 +83,7 @@ ask_mkfs() {
 	tput rev
 	avail_parts
 	tput sgr0
-	
+
 	ask "select a partition for '/'?"
 	echo "/dev/$ans:/" >> $FS
 	for mp in /boot swap; do
@@ -98,7 +98,8 @@ ask_mkfs() {
 # prepares target system as a chroot
 #
 chroot_mount() {
-	mkdir -p /mnt/proc /mnt/dev
+	mkdir -p /mnt/sys /mnt/proc /mnt/dev
+	mount -t sysfs sysfs /mnt/sys
 	mount -t proc proc /mnt/proc
 	mount -o bind /dev /mnt/dev
 }
@@ -107,7 +108,7 @@ chroot_mount() {
 # tears down chroot in target system
 #
 chroot_umount() {
-	umount /mnt/proc /mnt/dev
+	umount /mnt/sys /mnt/proc /mnt/dev
 }
 
 pacman_install() {
