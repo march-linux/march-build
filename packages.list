@@ -12,7 +12,7 @@ dmenu
 # media player
 mplayer2
 # browser
-firefox
+chromium
 flashplugin
 # archiver
 tar
