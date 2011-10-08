@@ -98,8 +98,7 @@ ask_mkfs() {
 # prepares target system as a chroot
 #
 chroot_mount() {
-	mkdir -p /mnt/sys /mnt/proc /mnt/dev
-	mount -t sysfs sysfs /mnt/sys
+	mkdir -p /mnt/proc /mnt/dev
 	mount -t proc proc /mnt/proc
 	mount -o bind /dev /mnt/dev
 }
@@ -108,7 +107,7 @@ chroot_mount() {
 # tears down chroot in target system
 #
 chroot_umount() {
-	umount /mnt/proc /mnt/sys /mnt/dev
+	umount /mnt/proc /mnt/dev
 }
 
 pacman_install() {
