@@ -46,6 +46,7 @@ make_customize_root_image() {
 	rm -rf ${work_dir}/root-image/usr/share/doc/
 	rm -rf ${work_dir}/root-image/usr/share/gtk-doc/
 	rm -rf ${work_dir}/root-image/usr/share/licenses/
+	rm -rf ${work_dir}/root-image/usr/share/info/
 	rm -rf ${work_dir}/root-image/usr/share/kbd/locale/
 	rm -rf ${work_dir}/root-image/usr/share/gtk-2.0/
 	rm -rf ${work_dir}/root-image/usr/share/gtk-3.0/
