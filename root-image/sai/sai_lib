@@ -26,7 +26,7 @@ prepare_disks() {
 		part=$(echo $line | cut -d : -f 1)
 		mp=$(echo $line | cut -d : -f 2)
 
-		if [ "$mp" == "swap" ]; then
+		if [[ $mp == swap ]]; then
 			mkswap $part || yell "sai can't format $part as swap"
 
 			echo "$part swap swap defaults 0 0" >> $FSTAB
@@ -41,7 +41,7 @@ prepare_disks() {
 }
 
 find_disks() {
-	find /sys/block/* -name [hs]d* | cut -d / -f 4
+	find /sys/block/ -name [hs]d* | cut -d / -f 4
 }
 
 find_parts() {
@@ -71,7 +71,7 @@ ask_cfdisk() {
 		tput sgr0
 
 		ask "select a disk to partition? (type 'no' to skip)"
-		if [ "$ans" == "no" ]; then
+		if [[ $ans == no ]]; then
 			break
 		fi
 		cfdisk "/dev/$ans" || yell "sai can't find that device"
@@ -88,7 +88,7 @@ ask_mkfs() {
 	echo "/dev/$ans:/" >> $FS
 	for mp in /boot swap; do
 		ask "select a partition for '$mp'? (type 'no' if you don't need it)"
-		if [ "$ans" != "no" ]; then
+		if [[ $ans != no ]]; then
 			echo "/dev/$ans:$mp" >> $FS
 		fi
 	done
@@ -124,6 +124,6 @@ search_device() {
 }
 
 generate_syslinux_menu() {
-	rootpart=$(search_device '/')
+	rootpart=$(search_device /)
 	sed -i -e "s|root=/dev/sda3|root=$rootpart|g" $syslinuxmenu || yell "sai can't find the bootloader menu"
 }
