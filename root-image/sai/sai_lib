@@ -41,11 +41,11 @@ prepare_disks() {
 }
 
 find_disks() {
-	find /sys/block/ -name [hs]d* | cut -d / -f 4
+	find /dev/ -name [hs]d[a-z] | cut -d / -f 3
 }
 
 find_parts() {
-	find /sys/block/[hs]d*/* -name [hs]d* | cut -d / -f 5
+	find /dev/ -name [hs]d[a-z][0-9] | cut -d / -f 3
 }
 
 get_size() {
