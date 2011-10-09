@@ -1,7 +1,7 @@
 #!/bin/bash
 
-FS='/tmp/sai_fs'
-FSTAB='/tmp/sai_fstab'
+FS=/tmp/sai_fs
+FSTAB=/tmp/sai_fstab
 
 source /sai/sai_lib
 source /sai/sai_config
@@ -12,8 +12,8 @@ sai_start() {
 
 sai_prepare() {
 	say $FUNCNAME
-	if [ ! -f /tmp/$FUNCNAME ]; then
-		ask_cfdisk	
+	if [[ ! -f /tmp/$FUNCNAME ]]; then
+		ask_cfdisk
 		ask_mkfs
 		ask "sai opens 'vim' to double-check the partitions. Hit 'enter' to continue."
 		vim $FS
@@ -26,7 +26,7 @@ sai_prepare() {
 
 sai_install() {
 	say $FUNCNAME
-	if [ ! -f /tmp/$FUNCNAME ]; then
+	if [[ ! -f /tmp/$FUNCNAME ]]; then
 		ask "sai opens 'vim' to edit the packages you want to install. Hit 'enter' to continue."
 		vim /sai/packages.list
 		pacman_install
@@ -44,9 +44,9 @@ sai_install() {
 
 sai_bootloader() {
 	say $FUNCNAME
-	if [ ! -f /tmp/$FUNCNAME ]; then		
+	if [[ ! -f /tmp/$FUNCNAME ]]; then		
 		/mnt/usr/sbin/syslinux-install_update -iam -c /mnt || yell "syslinux can't be installed"
-		syslinuxmenu='/mnt/boot/syslinux/syslinux.cfg'
+		syslinuxmenu=/mnt/boot/syslinux/syslinux.cfg
 		generate_syslinux_menu
 		
 		: > /tmp/$FUNCNAME
