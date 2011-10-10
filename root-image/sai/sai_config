@@ -5,7 +5,6 @@ sai_config() {
 	if [[ ! -f /tmp/$FUNCNAME ]]; then
 		# copy march config
 		cp -r /sai/etc/ /mnt/
-		cp -r /sai/lib/ /mnt/
 		# setup rc.conf
 		sed -i -e "s|^HOSTNAME=.*|HOSTNAME=localhost|" -e "s|^DAEMONS=.*|DAEMONS=(dbus @alsa @wicd @cupsd)|" /mnt/etc/rc.conf
 		# adduser

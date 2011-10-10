@@ -25,7 +25,6 @@ make_customize_root_image() {
 	cp -r ${script_path}/root-image/ ${work_dir}
 	cp ${script_path}/packages.list ${work_dir}/root-image/sai/
 	cp -r ${script_path}/root-image/etc/ ${work_dir}/root-image/sai/
-	cp -r ${script_path}/root-image/lib/ ${work_dir}/root-image/sai/
 	# change permission
 	chmod 440 ${work_dir}/root-image/etc/sudoers
 	chmod 755 ${work_dir}/root-image/install
