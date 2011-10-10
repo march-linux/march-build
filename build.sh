@@ -22,10 +22,10 @@ make_basefs() {
 make_customize_root_image() {
     if [[ ! -e ${work_dir}/build.${FUNCNAME} ]]; then
 	# copy march config
-	cp -r ${script_path}/root-image ${work_dir}
+	cp -r ${script_path}/root-image/ ${work_dir}
 	cp ${script_path}/sai_config ${work_dir}/root-image/sai/
 	cp ${script_path}/packages.list ${work_dir}/root-image/sai/
-	cp -r ${script_path}/root-image/etc ${work_dir}/root-image/sai/
+	cp -r ${script_path}/root-image/ ${work_dir}/root-image/sai/
 	# change permission
 	chmod 440 ${work_dir}/root-image/etc/sudoers
 	chmod 755 ${work_dir}/root-image/install
