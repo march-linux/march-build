@@ -22,7 +22,7 @@ unrar
 # zh-TW support
 ttf-droid
 # extra apps
-rtorrent
+transmission-gtk
 zathura
 feh
 wicd
@@ -31,7 +31,7 @@ vim
 less
 alsa-utils
 htop
-irssi
+geany
 # libreoffice
 libreoffice-writer
 libreoffice-calc
