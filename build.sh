@@ -50,7 +50,8 @@ make_customize_root_image() {
 	rm -rf ${work_dir}/root-image/usr/share/gtk-2.0/
 	rm -rf ${work_dir}/root-image/usr/share/gtk-3.0/
 	# setup locale
-	sed -i -e "s|^#en_US\.UTF-8|en_US.UTF-8|" ${work_dir}/root-image/etc/locale.gen
+	# devtools enables de_DE.UTF-8 and en_US.UTF-8
+	sed -i -e "s|^de_DE\.UTF-8|#de_DE.UTF-8|" ${work_dir}/root-image/etc/locale.gen
 	chroot ${work_dir}/root-image locale-gen
 	# setup mirrorlist
 	sed -i -e "s|^#\(.*http://mirror\.rit\.edu.*\)|\1|g" ${work_dir}/root-image/etc/pacman.d/mirrorlist
