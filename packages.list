@@ -22,8 +22,8 @@ unrar
 # zh-TW support
 ttf-droid
 # extra apps
-transmission-gtk
-epdfview
+rtorrent
+zathura
 feh
 wicd
 ranger
