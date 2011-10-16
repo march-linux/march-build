@@ -23,7 +23,7 @@ unrar
 ttf-droid
 # extra apps
 transmission-gtk
-zathura
+epdfview
 feh
 wicd
 ranger
