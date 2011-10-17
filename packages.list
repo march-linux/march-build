@@ -4,7 +4,6 @@ pacman
 initscripts
 sudo
 syslinux
-device-mapper
 # DE
 i3
 rxvt-unicode
@@ -28,7 +27,6 @@ feh
 wicd
 ranger
 nano
-less
 alsa-utils
 htop
 geany
