@@ -15,8 +15,8 @@ sai_prepare() {
 	if [[ ! -f /tmp/$FUNCNAME ]]; then
 		ask_cfdisk
 		ask_mkfs
-		ask "sai opens 'vim' to double-check the partitions. Hit 'enter' to continue."
-		vim $FS
+		ask "sai will double-check the partitions. Hit 'enter' to continue."
+		nano $FS
 		: > /tmp/$FUNCNAME
 
 		# format and create tmp fstab
@@ -27,8 +27,8 @@ sai_prepare() {
 sai_install() {
 	say $FUNCNAME
 	if [[ ! -f /tmp/$FUNCNAME ]]; then
-		ask "sai opens 'vim' to edit the packages you want to install. Hit 'enter' to continue."
-		vim /sai/packages.list
+		ask "sai will edit the packages you want to install. Hit 'enter' to continue."
+		nano /sai/packages.list
 		pacman_install
 
 		# setup fstab asap
@@ -50,8 +50,8 @@ sai_bootloader() {
 		generate_syslinux_menu
 		
 		: > /tmp/$FUNCNAME
-		ask "sai opens 'vim' to edit the bootloader menu. Hit 'enter' to continue."
-		vim $syslinuxmenu
+		ask "sai will edit the bootloader menu. Hit 'enter' to continue."
+		nano $syslinuxmenu
 	fi
 }
 
