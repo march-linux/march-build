@@ -152,5 +152,5 @@ bindsym $mod+r mode "resize"
 exec i3status | i3bar -d
 
 # march
-exec feh --bg-scale ~/.i3/wallpaper.png
+exec feh --bg-scale ~/.i3/wallpaper.*
 workspace_layout tabbed
