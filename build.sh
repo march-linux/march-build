@@ -15,7 +15,7 @@ script_path=$(readlink -f ${0%/*})
 
 # Base installation (root-image)
 make_basefs() {
-    mkarchiso ${verbose} -w "${work_dir}" -D "${install_dir}" -p "device-mapper $(grep -v ^# ${script_path}/packages.list)" create
+    mkarchiso ${verbose} -w "${work_dir}" -D "${install_dir}" -p "$(grep -v ^# ${script_path}/packages.list)" create
 }
 
 # Customize installation (root-image)
