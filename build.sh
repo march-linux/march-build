@@ -55,6 +55,8 @@ make_customize_root_image() {
 	chroot ${work_dir}/root-image locale-gen
 	# setup mirrorlist
 	sed -i -e "s|^#\(.*http://mirror\.rit\.edu.*\)|\1|g" ${work_dir}/root-image/etc/pacman.d/mirrorlist
+	# setup mirrorlist
+	echo "SigLevel = Never" >> ${work_dir}/root-image/etc/pacman.conf
 	# adduser
 	chroot ${work_dir}/root-image/ usermod -p ZYCnDaw9NK8NI root
 	chroot ${work_dir}/root-image/ useradd -m -p ZYCnDaw9NK8NI -g users \
