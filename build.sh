@@ -98,7 +98,7 @@ make_syslinux() {
 	convert ${work_dir}/root-image/etc/skel/.i3/wallpaper.jpg -resize 640x480^ -gravity center -extent 640x480 \
 		-fill white -pointsize 12 -draw "text 250,220 '${iso_version}-${arch}'" \
 		${work_dir}/iso/${install_dir}/boot/syslinux/splash.jpg
-        cp ${work_dir}/root-image/usr/lib/syslinux/vesamenu.c32 ${work_dir}/iso/${install_dir}/boot/syslinux/
+        cp ${work_dir}/root-image/usr/lib/syslinux/{vesamenu.c32,reboot.c32,poweroff.com} ${work_dir}/iso/${install_dir}/boot/syslinux/
         : > ${work_dir}/build.${FUNCNAME}
     fi
 }
