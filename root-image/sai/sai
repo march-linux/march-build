@@ -37,7 +37,7 @@ sai_install() {
 		sed -i -e "s|^#en_US\.UTF-8|en_US.UTF-8|" /mnt/etc/locale.gen
 		chroot /mnt locale-gen
 		# setup mirrorlist
-		sed -i -e "s|^#\(.*http://mirror\.rit\.edu.*\)|\1|g" /mnt/etc/pacman.d/mirrorlist
+		sed -i -e "s|^#\(.*http://.*\.kernel\.org.*\)|\1|g" /mnt/etc/pacman.d/mirrorlist
 		: > /tmp/$FUNCNAME
 	fi
 }
