@@ -54,7 +54,7 @@ make_customize_root_image() {
 	sed -i -e "s|^de_DE\.UTF-8|#de_DE.UTF-8|" ${work_dir}/root-image/etc/locale.gen
 	chroot ${work_dir}/root-image locale-gen
 	# setup mirrorlist
-	sed -i -e "s|^#\(.*http://mirror\.rit\.edu.*\)|\1|g" ${work_dir}/root-image/etc/pacman.d/mirrorlist
+	sed -i -e "s|^#\(.*http://.*\.kernel\.org.*\)|\1|g" ${work_dir}/root-image/etc/pacman.d/mirrorlist
 	# setup mirrorlist
 	echo "SigLevel = Never" >> ${work_dir}/root-image/etc/pacman.conf
 	# adduser
