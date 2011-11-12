@@ -56,7 +56,7 @@ make_customize_root_image() {
 	# setup mirrorlist
 	sed -i -e "s|^#\(.*http://.*\.kernel\.org.*\)|\1|g" ${work_dir}/root-image/etc/pacman.d/mirrorlist
 	# disable pacman pkg signing
-	echo "SigLevel = Never" >> ${work_dir}/root-image/etc/pacman.conf
+	sed -i -e "/# PGP signature checking/ a\SigLevel = Never" ${work_dir}/root-image/etc/pacman.conf
 	# adduser
 	chroot ${work_dir}/root-image/ usermod -p ZYCnDaw9NK8NI root
 	chroot ${work_dir}/root-image/ useradd -m -p ZYCnDaw9NK8NI -g users \
