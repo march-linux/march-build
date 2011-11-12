@@ -4,6 +4,7 @@ pacman
 initscripts
 sudo
 syslinux
+which
 # DE
 i3
 rxvt-unicode
