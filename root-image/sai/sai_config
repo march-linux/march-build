@@ -7,7 +7,7 @@ sai_config() {
 		cp -r /sai/etc/ /mnt/
 		# setup rc.conf
 		sed -i -e 's|^HARDWARECLOCK=.*|HARDWARECLOCK="localtime"|' \
-		-e 's|^HOSTNAME=.*|HOSTNAME=localhost|' \
+		-e 's|^HOSTNAME=.*|HOSTNAME="localhost"|' \
 		-e 's|^DAEMONS=.*|DAEMONS=(dbus @alsa @wicd @cupsd)|' /mnt/etc/rc.conf
 		# mirror & locale set in sai
 		# adduser
