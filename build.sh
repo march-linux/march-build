@@ -29,7 +29,9 @@ make_customize_root_image() {
 	chmod 440 ${work_dir}/root-image/etc/sudoers
 	chmod 755 ${work_dir}/root-image/install
 	# setup rc.conf
-	sed -i -e "s|^HOSTNAME=.*|HOSTNAME=localhost|" -e "s|^DAEMONS=.*|DAEMONS=(dbus @alsa @wicd @cupsd)|" ${work_dir}/root-image/etc/rc.conf
+	sed -i -e 's|^HARDWARECLOCK=.*|HARDWARECLOCK="localtime"|' \
+	-e 's|^HOSTNAME=.*|HOSTNAME=localhost|' \
+	-e 's|^DAEMONS=.*|DAEMONS=(dbus @alsa @wicd @cupsd)|' ${work_dir}/root-image/etc/rc.conf
 	# remove unused manual and locale
 	find ${work_dir}/root-image/usr/share/locale/* ! -name locale.alias | xargs rm -rf
 	find ${work_dir}/root-image/usr/share/i18n/locales/* \
@@ -51,12 +53,12 @@ make_customize_root_image() {
 	rm -rf ${work_dir}/root-image/usr/share/gtk-3.0/
 	# setup locale
 	# devtools enables de_DE.UTF-8 and en_US.UTF-8
-	sed -i -e "s|^de_DE\.UTF-8|#de_DE.UTF-8|" ${work_dir}/root-image/etc/locale.gen
+	sed -i -e 's|^de_DE\.UTF-8|#de_DE.UTF-8|' ${work_dir}/root-image/etc/locale.gen
 	chroot ${work_dir}/root-image locale-gen
 	# setup mirrorlist
-	sed -i -e "s|^#\(.*http://.*\.kernel\.org.*\)|\1|g" ${work_dir}/root-image/etc/pacman.d/mirrorlist
+	sed -i -e 's|^#\(.*http://.*\.kernel\.org.*\)|\1|g' ${work_dir}/root-image/etc/pacman.d/mirrorlist
 	# disable pacman pkg signing
-	sed -i -e "/# PGP signature checking/ a\SigLevel = Never" ${work_dir}/root-image/etc/pacman.conf
+	sed -i -e '/# PGP signature checking/ a\SigLevel = Never' ${work_dir}/root-image/etc/pacman.conf
 	# adduser
 	chroot ${work_dir}/root-image/ usermod -p ZYCnDaw9NK8NI root
 	chroot ${work_dir}/root-image/ useradd -m -p ZYCnDaw9NK8NI -g users \
