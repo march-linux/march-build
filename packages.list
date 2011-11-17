@@ -19,7 +19,8 @@ tar
 zip
 unzip
 # zh-TW support
-ttf-droid
+wqy-zenhei
+scim-chewing
 # extra apps
 rtorrent
 zathura
@@ -48,5 +49,3 @@ cups
 ghostscript
 gsfonts
 gutenprint
-# IM
-scim-chewing
