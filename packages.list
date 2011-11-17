@@ -7,7 +7,8 @@ syslinux
 which
 # DE
 i3
-rxvt-unicode
+xterm
+less
 dmenu
 # media player
 mplayer2
@@ -23,7 +24,7 @@ wqy-zenhei
 scim-chewing
 # extra apps
 rtorrent
-zathura
+xpdf
 feh
 wicd
 xfe
