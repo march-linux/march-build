@@ -19,15 +19,16 @@ flashplugin
 tar
 zip
 unzip
+unrar
 # zh-TW support
-wqy-zenhei
+ttf-droid
 scim-chewing
 # extra apps
 rtorrent
 xpdf
 feh
 wicd
-xfe
+ranger
 vim
 alsa-utils
 htop
