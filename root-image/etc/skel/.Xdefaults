@@ -1,5 +1,4 @@
 ! Urxvt
-URxvt.buffered: true
 URxvt.background: #1A1A1A
 URxvt.foreground: #999999
 URxvt.cursorBlink: true
