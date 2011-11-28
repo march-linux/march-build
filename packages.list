@@ -7,7 +7,7 @@ syslinux
 which
 # DE
 i3
-urxvt-unicode
+rxvt-unicode
 less
 dmenu
 # media player
