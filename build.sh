@@ -18,6 +18,53 @@ make_basefs() {
     mkarchiso ${verbose} -w "${work_dir}" -D "${install_dir}" -p "device-mapper $(grep -v ^# ${script_path}/packages.list)" create
 }
 
+# Copy mkinitcpio archiso hooks (root-image)
+make_setup_mkinitcpio() {
+   if [[ ! -e ${work_dir}/build.${FUNCNAME} ]]; then
+        cp /lib/initcpio/hooks/archiso ${work_dir}/root-image/lib/initcpio/hooks
+        cp /lib/initcpio/install/archiso ${work_dir}/root-image/lib/initcpio/install
+	cp ${script_path}/mkinitcpio.conf ${work_dir}/root-image/etc/mkinitcpio-archiso.conf
+        : > ${work_dir}/build.${FUNCNAME}
+   fi
+}
+
+# Prepare ${install_dir}/boot/
+make_boot() {
+    if [[ ! -e ${work_dir}/build.${FUNCNAME} ]]; then
+        mkdir -p ${work_dir}/iso/${install_dir}/boot/${arch}
+	mkarchroot -n -r "mkinitcpio -c /etc/mkinitcpio-archiso.conf -k /boot/vmlinuz-linux -g /boot/archiso.img" ${work_dir}/root-image
+	mv ${work_dir}/root-image/boot/archiso.img ${work_dir}/iso/${install_dir}/boot/${arch}/archiso.img
+        mv ${work_dir}/root-image/boot/vmlinuz-linux ${work_dir}/iso/${install_dir}/boot/${arch}/vmlinuz
+        : > ${work_dir}/build.${FUNCNAME}
+    fi
+}
+
+# Prepare /${install_dir}/boot/syslinux
+make_syslinux() {
+    if [[ ! -e ${work_dir}/build.${FUNCNAME} ]]; then
+        mkdir -p ${work_dir}/iso/${install_dir}/boot/syslinux
+        sed "s|%ARCHISO_LABEL%|${iso_label}|g;
+            s|%INSTALL_DIR%|${install_dir}|g;
+            s|%ARCH%|${arch}|g" ${script_path}/syslinux/syslinux.cfg > ${work_dir}/iso/${install_dir}/boot/syslinux/syslinux.cfg
+	convert ${work_dir}/root-image/etc/skel/.i3/wallpaper.jpg -resize 640x480^ -gravity center -extent 640x480 \
+		-fill white -pointsize 12 -draw "text 250,220 '${iso_version}-${arch}'" \
+		${work_dir}/iso/${install_dir}/boot/syslinux/splash.jpg
+        cp ${work_dir}/root-image/usr/lib/syslinux/{vesamenu.c32,chain.c32,reboot.c32,poweroff.com} ${work_dir}/iso/${install_dir}/boot/syslinux/
+        : > ${work_dir}/build.${FUNCNAME}
+    fi
+}
+
+# Prepare /isolinux
+make_isolinux() {
+    if [[ ! -e ${work_dir}/build.${FUNCNAME} ]]; then
+        mkdir -p ${work_dir}/iso/isolinux
+        sed "s|%INSTALL_DIR%|${install_dir}|g" ${script_path}/isolinux/isolinux.cfg > ${work_dir}/iso/isolinux/isolinux.cfg
+        cp ${work_dir}/root-image/usr/lib/syslinux/isolinux.bin ${work_dir}/iso/isolinux/
+        cp ${work_dir}/root-image/usr/lib/syslinux/isohdpfx.bin ${work_dir}/iso/isolinux/
+        : > ${work_dir}/build.${FUNCNAME}
+    fi
+}
+
 # Customize installation (root-image)
 make_customize_root_image() {
     if [[ ! -e ${work_dir}/build.${FUNCNAME} ]]; then
@@ -67,55 +114,6 @@ make_customize_root_image() {
     fi
 }
 
-# Copy mkinitcpio archiso hooks (root-image)
-make_setup_mkinitcpio() {
-   if [[ ! -e ${work_dir}/build.${FUNCNAME} ]]; then
-        cp /lib/initcpio/hooks/archiso ${work_dir}/root-image/lib/initcpio/hooks
-        cp /lib/initcpio/install/archiso ${work_dir}/root-image/lib/initcpio/install
-        : > ${work_dir}/build.${FUNCNAME}
-   fi
-}
-
-# Prepare ${install_dir}/boot/
-make_boot() {
-    if [[ ! -e ${work_dir}/build.${FUNCNAME} ]]; then
-        mkdir -p ${work_dir}/iso/${install_dir}/boot/${arch}
-        mkinitcpio \
-            -c ${script_path}/mkinitcpio.conf \
-            -b ${work_dir}/root-image \
-            -k /boot/vmlinuz-linux \
-            -g ${work_dir}/iso/${install_dir}/boot/${arch}/archiso.img
-        cp ${work_dir}/root-image/boot/vmlinuz-linux ${work_dir}/iso/${install_dir}/boot/${arch}/vmlinuz
-        : > ${work_dir}/build.${FUNCNAME}
-    fi
-}
-
-# Prepare /${install_dir}/boot/syslinux
-make_syslinux() {
-    if [[ ! -e ${work_dir}/build.${FUNCNAME} ]]; then
-        mkdir -p ${work_dir}/iso/${install_dir}/boot/syslinux
-        sed "s|%ARCHISO_LABEL%|${iso_label}|g;
-            s|%INSTALL_DIR%|${install_dir}|g;
-            s|%ARCH%|${arch}|g" ${script_path}/syslinux/syslinux.cfg > ${work_dir}/iso/${install_dir}/boot/syslinux/syslinux.cfg
-	convert ${work_dir}/root-image/etc/skel/.i3/wallpaper.jpg -resize 640x480^ -gravity center -extent 640x480 \
-		-fill white -pointsize 12 -draw "text 250,220 '${iso_version}-${arch}'" \
-		${work_dir}/iso/${install_dir}/boot/syslinux/splash.jpg
-        cp ${work_dir}/root-image/usr/lib/syslinux/{vesamenu.c32,chain.c32,reboot.c32,poweroff.com} ${work_dir}/iso/${install_dir}/boot/syslinux/
-        : > ${work_dir}/build.${FUNCNAME}
-    fi
-}
-
-# Prepare /isolinux
-make_isolinux() {
-    if [[ ! -e ${work_dir}/build.${FUNCNAME} ]]; then
-        mkdir -p ${work_dir}/iso/isolinux
-        sed "s|%INSTALL_DIR%|${install_dir}|g" ${script_path}/isolinux/isolinux.cfg > ${work_dir}/iso/isolinux/isolinux.cfg
-        cp ${work_dir}/root-image/usr/lib/syslinux/isolinux.bin ${work_dir}/iso/isolinux/
-        cp ${work_dir}/root-image/usr/lib/syslinux/isohdpfx.bin ${work_dir}/iso/isolinux/
-        : > ${work_dir}/build.${FUNCNAME}
-    fi
-}
-
 # Process aitab
 make_aitab() {
     if [[ ! -e ${work_dir}/build.${FUNCNAME} ]]; then
@@ -142,11 +140,11 @@ else
 fi
 
 make_basefs
-make_customize_root_image
 make_setup_mkinitcpio
 make_boot
 make_syslinux
 make_isolinux
+make_customize_root_image
 make_aitab
 make_prepare
 make_iso
