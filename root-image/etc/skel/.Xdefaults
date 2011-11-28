@@ -1,33 +1,41 @@
 ! Urxvt
-URxvt.background: #1A1A1A
-URxvt.foreground: #999999
 URxvt.cursorBlink: true
 URxvt.transparent: true
-URxvt.title: Urxvt
 URxvt.scrollBar: false
 URxvt.shading: 40
 
-! Black
-*color0:      #131212
-*color8:      #474747
-! Red 
-*color1:      #472323
-*color9:      #5c2929
-! Green
-*color2:      #299E1B
-*color10:     #77E768
-! Yellow
-*color3:      #96833F
-*color11:     #D0B249
-! Blue
-*color4:      #2467AD
-*color12:     #6B90EE
-! Purple
-*color5:      #655272
-*color13:     #9F75BA
-! Cyan
-*color6:      #92B19E
-*color14:     #A1CDCD
-! White
-*color7:      #FFFFFF
-*color15:     #97927C
+!black
+*color0: #222222
+*color8: #454545
+
+!red
+*color1: #9E5641
+*color9: #CC896D
+
+!green
+*color2: #6C7E55
+*color10: #C4DF90
+
+!yellow
+*color3: #CAAF2B
+*color11: #FFE080
+
+!blue
+*color4: #7FB8D8
+*color12: #B8DDEA
+
+!magenta
+*color5: #956D9D
+*color13: #C18FCB
+
+!cyan
+*color6: #4c8ea1
+*color14: #6bc1d0
+
+!white
+*color7: #808080
+*color15: #cdcdcd
+
+*borderColor: #343434
+*background: #343434
+*foreground: #cdcdcd
