@@ -21,7 +21,7 @@ zip
 unzip
 unrar
 # zh-TW support
-ttf-droid
+wqy-bitmapfont
 scim-chewing
 # extra apps
 rtorrent
