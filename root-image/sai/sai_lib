@@ -1,13 +1,13 @@
 #!/bin/bash
 
 say() {
-	tput setaf 4
+	tput setaf 5
 	echo ":: $1"
 	tput sgr0
 }
 
 ask() {
-	tput setaf 6
+	tput setaf 4
 	echo -n "=> $1  "
 	tput sgr0
 	read ans
