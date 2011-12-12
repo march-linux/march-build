@@ -86,7 +86,7 @@ ask_mkfs() {
 
 	ask "select a partition for '/'?"
 	echo "/dev/$ans:/" >> $FS
-	for mp in /boot swap; do
+	for mp in /boot swap /home; do
 		ask "select a partition for '$mp'? (type 'no' if you don't need it)"
 		if [[ $ans != no ]]; then
 			echo "/dev/$ans:$mp" >> $FS
