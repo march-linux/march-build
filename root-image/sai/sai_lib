@@ -120,8 +120,7 @@ pacman_install() {
 		if [[ $? == 0 ]]; then
 			break
 		else
-			yell "pacman has some problems"
-			ask "try again? (type 'no' to skip)"
+			ask "pacman has some problems. try again? (type 'no' to skip)"
 			if [[ $ans == no ]]; then
 				break
 			fi
