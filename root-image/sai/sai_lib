@@ -114,8 +114,19 @@ chroot_umount() {
 pacman_install() {
 	mkdir -p /mnt/var/lib/pacman /mnt/var/cache/pacman/pkg
 	chroot_mount
-	pacman --root /mnt --cachedir /mnt/var/cache/pacman/pkg --noconfirm --needed \
-		-Sy $(grep -v ^# /sai/packages.list) || yell "pacman has some problems"
+	while true; do
+		pacman --root /mnt --cachedir /mnt/var/cache/pacman/pkg --noconfirm --needed \
+		-Sy $(grep -v ^# /sai/packages.list)
+		if [[ $? == 0 ]]; then
+			break
+		else
+			yell "pacman has some problems"
+			ask "try again? (type 'no' to skip)"
+			if [[ $ans == no ]]; then
+				break
+			fi
+		fi
+	done
 	chroot_umount
 }
 
