@@ -17,6 +17,14 @@ font -wenquanyi-wenquanyi bitmap song-medium-r-normal--12-120-75-75-p-119-iso106
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
+# march config
+workspace_layout tabbed
+bindsym $mod+F1 exec chromium
+bindsym $mod+F2 exec urxvt -e ranger
+bindsym $mod+F3 exec urxvt -e vim
+bindsym $mod+F11 exec sudo reboot
+bindsym $mod+F12 exec sudo poweroff
+
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
 
@@ -152,5 +160,3 @@ bindsym $mod+r mode "resize"
 bar {
 	status_command i3status
 }
-
-workspace_layout tabbed
