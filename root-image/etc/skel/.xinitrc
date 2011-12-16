@@ -1,7 +1,7 @@
 # wallpaper
 feh --bg-fill ~/.i3/wallpaper.jpg
 # IM
-export GTK_IM_MODULE=fcitx
+export GTK_IM_MODULE=xim
 export XMODIFIERS=@im=fcitx
 fcitx &
 # font
