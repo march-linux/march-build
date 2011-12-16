@@ -23,7 +23,7 @@ unrar
 # zh-TW support
 ttf-droid
 wqy-bitmapfont
-gcin
+fcitx-gtk2
 # extra apps
 rtorrent
 mupdf
