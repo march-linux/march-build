@@ -6,7 +6,8 @@ sudo
 syslinux
 which
 # DE
-i3
+i3-wm
+i3status
 rxvt-unicode
 less
 dmenu
