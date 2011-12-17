@@ -1,1 +1,1 @@
-exec startx
+exec xinit
