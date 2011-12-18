@@ -1,7 +1,8 @@
 ! Urxvt
 URxvt.cursorBlink: true
 URxvt.transparent: true
-URxvt.scrollBar: false
+URxvt.scrollBar_right: true
+URxvt.scrollstyle: plain
 URxvt.shading: 40
 
 !black
