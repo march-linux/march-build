@@ -52,7 +52,7 @@ find_disks() {
 }
 
 find_parts() {
-	find /dev/ -name sd[a-z][1-15] | cut -d / -f 3
+	find /dev/ -name sd[a-z][1-9] | cut -d / -f 3
 }
 
 get_size() {
