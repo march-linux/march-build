@@ -32,26 +32,27 @@ prepare_disks() {
 
 			echo "/dev/disk/by-label/swap swap swap defaults 0 0" >> $FSTAB
 		else
+			mkfs.ext4 -L $lbl $part || yell "sai can't format '$part' as ext4"
 			if [[ $lbl == root ]]; then
-				mp=/
+				mount -t ext4 $part /mnt || yell "sai can't mount $part as 'root'"
+	
+				echo "/dev/disk/by-label/root / ext4 defaults 0 1" >> $FSTAB
 			else
-				mp=/$lbl
-			fi
-			mkfs.ext4 -L $lbl $part || yell "sai can't format $part as ext4"
-			mkdir -p /mnt$mp
-			mount -t ext4 $part /mnt$mp || yell "sai can't mount $part as $mp"
+				mkdir -p /mnt/$lbl
+				mount -t ext4 $part /mnt/$lbl || yell "sai can't mount $part as '$lbl'"
 
-			echo "/dev/disk/by-label/$lbl $mp ext4 defaults 0 1" >> $FSTAB
+				echo "/dev/disk/by-label/$lbl /$lbl ext4 defaults 0 2" >> $FSTAB
+			fi
 		fi
 	done
 }
 
 find_disks() {
-	find /dev/ -name [hs]d[a-z] | cut -d / -f 3
+	find /dev/ -name sd[a-z] | cut -d / -f 3
 }
 
 find_parts() {
-	find /dev/ -name [hs]d[a-z][0-9] | cut -d / -f 3
+	find /dev/ -name sd[a-z][1-15] | cut -d / -f 3
 }
 
 get_size() {
@@ -92,10 +93,10 @@ ask_mkfs() {
 
 	ask "select a partition for 'root'?"
 	echo "/dev/$ans:root" >> $FS
-	for mp in boot swap home; do
-		ask "select a partition for '$mp'? (type 'no' if you don't need it)"
+	for lbl in boot swap home; do
+		ask "select a partition for '$lbl'? (type 'no' if you don't need it)"
 		if [[ $ans != no ]]; then
-			echo "/dev/$ans:$mp" >> $FS
+			echo "/dev/$ans:$lbl" >> $FS
 		fi
 	done
 }
