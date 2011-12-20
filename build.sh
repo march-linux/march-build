@@ -1,6 +1,7 @@
 #!/bin/bash
 
 set -e -u
+# dep: make imagemagick devtools squashfs-tools libisoburn
 
 iso_name=march
 iso_label="MARCH_$(date +%Y%m)"
