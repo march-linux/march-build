@@ -30,7 +30,7 @@ wqy-bitmapfont
 fcitx-gtk2
 # extra apps
 rtorrent
-mupdf
+zathura
 feh
 wicd
 vim
