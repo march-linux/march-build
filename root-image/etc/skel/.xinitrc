@@ -1,4 +1,6 @@
 dbus-launch --sh-syntax --exit-with-session
+# ENV
+export EDITOR="urxvt -e vim"
 # wallpaper
 feh --bg-fill ~/.i3/wallpaper.jpg
 # IM
