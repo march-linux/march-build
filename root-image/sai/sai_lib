@@ -23,23 +23,23 @@ yell() {
 prepare_disks() {
 	: > $FSTAB
 	for line in $(cat $FS); do
-		part=$(echo $line | cut -d : -f 1)
-		lbl=$(echo $line | cut -d : -f 2)
+		part=$(echo "$line" | cut -d : -f 1)
+		lbl=$(echo "$line" | cut -d : -f 2)
 
-		if [[ $lbl == swap ]]; then
-			mkswap -L swap $part || yell "sai can't format $part as swap"
-			swapon $part
+		if [[ "$lbl" == swap ]]; then
+			mkswap -L swap "$part" || yell "sai can't format $part as swap"
+			swapon "$part"
 
 			echo "/dev/disk/by-label/swap swap swap defaults 0 0" >> $FSTAB
 		else
-			mkfs.ext4 -L $lbl $part || yell "sai can't format '$part' as ext4"
-			if [[ $lbl == root ]]; then
-				mount -t ext4 $part /mnt || yell "sai can't mount $part as 'root'"
+			mkfs.ext4 -L "$lbl" "$part" || yell "sai can't format '$part' as ext4"
+			if [[ "$lbl" == root ]]; then
+				mount -t ext4 "$part" /mnt || yell "sai can't mount $part as 'root'"
 	
 				echo "/dev/disk/by-label/root / ext4 defaults 0 1" >> $FSTAB
 			else
-				mkdir -p /mnt/$lbl
-				mount -t ext4 $part /mnt/$lbl || yell "sai can't mount $part as '$lbl'"
+				mkdir -p "/mnt/$lbl"
+				mount -t ext4 "$part" "/mnt/$lbl" || yell "sai can't mount $part as '$lbl'"
 
 				echo "/dev/disk/by-label/$lbl /$lbl ext4 defaults 0 2" >> $FSTAB
 			fi
@@ -78,10 +78,14 @@ ask_cfdisk() {
 		tput sgr0
 
 		ask "select a disk to partition? (type 'no' to skip)"
-		if [[ $ans == no ]]; then
+		if [[ "$ans" == no ]]; then
 			break
 		fi
-		cfdisk "/dev/$ans" || yell "sai can't find that device"
+		if [[ -b "/dev/$ans" ]]; then
+			cfdisk "/dev/$ans"
+		else
+			say "sai can't find that device"
+		fi
 	done
 }
 
@@ -95,7 +99,7 @@ ask_mkfs() {
 	echo "/dev/$ans:root" >> $FS
 	for lbl in boot swap home; do
 		ask "select a partition for '$lbl'? (type 'no' if you don't need it)"
-		if [[ $ans != no ]]; then
+		if [[ "$ans" != no ]]; then
 			echo "/dev/$ans:$lbl" >> $FS
 		fi
 	done
@@ -124,11 +128,11 @@ pacman_install() {
 	while true; do
 		pacman --root /mnt --cachedir /mnt/var/cache/pacman/pkg --noconfirm --needed \
 		-Sy $(grep -v ^# /sai/packages.list)
-		if [[ $? == 0 ]]; then
+		if [[ "$?" == 0 ]]; then
 			break
 		else
 			ask "pacman has some problems. try again? (type 'no' to skip)"
-			if [[ $ans == no ]]; then
+			if [[ "$ans" == no ]]; then
 				break
 			fi
 		fi
