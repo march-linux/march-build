@@ -84,7 +84,7 @@ ask_cfdisk() {
 		if [[ -b "/dev/$ans" ]]; then
 			cfdisk "/dev/$ans"
 		else
-			say "sai can't find that device"
+			say "sai can't find device: '/dev/$ans'"
 		fi
 	done
 }
