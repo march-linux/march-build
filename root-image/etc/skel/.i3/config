@@ -19,7 +19,7 @@ floating_modifier $mod
 
 # march config
 workspace_layout tabbed
-bindsym $mod+F1 exec chromium
+bindsym $mod+F1 exec firefox
 bindsym $mod+F2 exec urxvt -e ranger
 bindsym $mod+F3 exec urxvt -e sudo vim
 bindsym $mod+F4 exec urxvt -e alsamixer
