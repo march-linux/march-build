@@ -5,6 +5,7 @@ initscripts
 sudo
 syslinux
 which
+wget
 # DE
 i3-wm
 i3status
