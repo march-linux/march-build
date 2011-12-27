@@ -10,7 +10,7 @@ workspace_layout tabbed
 focus_follows_mouse no
 bindsym $mod+F1 exec firefox
 bindsym $mod+F2 exec urxvt -e ranger
-bindsym $mod+F3 exec urxvt -e sudo vim
+bindsym $mod+F3 exec geany
 bindsym $mod+F4 exec urxvt -e alsamixer
 bindsym $mod+F5 exec urxvt -e sudo pacman -Syu
 bindsym $mod+F6 exec urxvt -e wicd-curses
