@@ -41,7 +41,6 @@ geany
 # libreoffice
 libreoffice-writer
 libreoffice-calc
-libreoffice-impress
 libreoffice-en-US
 # xorg
 xf86-input-synaptics
