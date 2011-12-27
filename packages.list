@@ -25,6 +25,7 @@ unzip
 unrar
 # zh-TW support
 ttf-droid
+xorg-xset
 wqy-bitmapfont
 fcitx-gtk2
 # extra apps
