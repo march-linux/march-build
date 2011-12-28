@@ -36,12 +36,12 @@ prepare_disks() {
 			if [[ "$lbl" == root ]]; then
 				mount -t ext4 "$part" /mnt || yell "sai can't mount $part as 'root'"
 	
-				echo "/dev/disk/by-label/root / ext4 defaults 0 1" >> $FSTAB
+				echo "/dev/disk/by-label/root / ext4 defaults,noatime 0 1" >> $FSTAB
 			else
 				mkdir -p "/mnt/$lbl"
 				mount -t ext4 "$part" "/mnt/$lbl" || yell "sai can't mount $part as '$lbl'"
 
-				echo "/dev/disk/by-label/$lbl /$lbl ext4 defaults 0 2" >> $FSTAB
+				echo "/dev/disk/by-label/$lbl /$lbl ext4 defaults,noatime 0 2" >> $FSTAB
 			fi
 		fi
 	done
