@@ -9,7 +9,6 @@ sai_config() {
 		sed -i -e 's|^HARDWARECLOCK=.*|HARDWARECLOCK="localtime"|' \
 		-e 's|^HOSTNAME=.*|HOSTNAME="localhost"|' \
 		-e 's|^DAEMONS=.*|DAEMONS=(dbus @alsa @wicd @cupsd)|' /mnt/etc/rc.conf
-		# mirror & locale set in sai
 		# adduser
 		chroot /mnt usermod -p ZYCnDaw9NK8NI root
 		chroot /mnt useradd -m -p ZYCnDaw9NK8NI -g users \
