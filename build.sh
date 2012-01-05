@@ -12,7 +12,7 @@ work_dir=work
 out_dir=out
 verbose="y"
 
-script_path=$(readlink -f ${0%/*})
+script_path=$(pwd)
 
 # Base installation (root-image)
 make_basefs() {
