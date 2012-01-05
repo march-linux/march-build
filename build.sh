@@ -33,7 +33,8 @@ make_customize_root_image() {
 	sed -i -e 's|^HARDWARECLOCK=.*|HARDWARECLOCK="localtime"|' \
 	-e 's|^HOSTNAME=.*|HOSTNAME="localhost"|' \
 	-e 's|^DAEMONS=.*|DAEMONS=(dbus @alsa @wicd @cupsd)|' ${work_dir}/root-image/etc/rc.conf
-	# remove unused manual
+	# remove unused manual and locale
+	rm -rf ${work_dir}/root-image/usr/share/locale/
 	rm -rf ${work_dir}/root-image/usr/share/man/
 	rm -rf ${work_dir}/root-image/usr/share/doc/
 	rm -rf ${work_dir}/root-image/usr/share/gtk-doc/
