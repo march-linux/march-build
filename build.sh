@@ -12,7 +12,7 @@ work_dir=work
 out_dir=out
 verbose="y"
 
-script_path=$(pwd)
+script_path=$(cd dirname $0 && pwd)
 
 # Base installation (root-image)
 make_basefs() {
