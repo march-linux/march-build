@@ -30,7 +30,7 @@ make_customize_root_image() {
 	chmod 440 ${work_dir}/root-image/etc/sudoers
 	chmod 755 ${work_dir}/root-image/install
 	# setup rc.conf
-	sed -i -e 's|^LOCALE=.*|LOCALE="en_US.utf8"|' \
+	sed -i -e 's|^LOCALE=.*|LOCALE="en_US.UTF-8"|' \
 	-e 's|^HARDWARECLOCK=.*|HARDWARECLOCK="localtime"|' \
 	-e 's|^HOSTNAME=.*|HOSTNAME="localhost"|' \
 	-e 's|^DAEMONS=.*|DAEMONS=(dbus @alsa @wicd @cupsd)|' ${work_dir}/root-image/etc/rc.conf
