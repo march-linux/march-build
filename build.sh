@@ -30,12 +30,11 @@ make_customize_root_image() {
 	chmod 440 ${work_dir}/root-image/etc/sudoers
 	chmod 755 ${work_dir}/root-image/install
 	# setup rc.conf
-	sed -i -e 's|^HARDWARECLOCK=.*|HARDWARECLOCK="localtime"|' \
+	sed -i -e 's|^LOCALE=.*|LOCALE="en_US.utf8"|' \
+	-e 's|^HARDWARECLOCK=.*|HARDWARECLOCK="localtime"|' \
 	-e 's|^HOSTNAME=.*|HOSTNAME="localhost"|' \
 	-e 's|^DAEMONS=.*|DAEMONS=(dbus @alsa @wicd @cupsd)|' ${work_dir}/root-image/etc/rc.conf
-	# remove unused manual and locale
-	find ${work_dir}/root-image/usr/share/locale/* ! -name locale.alias | xargs rm -rf
-	rm -rf ${work_dir}/root-image/usr/share/X11/locale/
+	# remove unused manual
 	rm -rf ${work_dir}/root-image/usr/share/man/
 	rm -rf ${work_dir}/root-image/usr/share/doc/
 	rm -rf ${work_dir}/root-image/usr/share/gtk-doc/
@@ -45,7 +44,7 @@ make_customize_root_image() {
 	rm -rf ${work_dir}/root-image/usr/share/gtk-3.0/
 	# setup locale
 	# devtools enables de_DE.UTF-8 and en_US.UTF-8
-	sed -i -e 's|^\(de_DE\.UTF-8\)|#\1|' -e 's|^\(en_US\.UTF-8\)|#\1|' ${work_dir}/root-image/etc/locale.gen
+	sed -i -e 's|^\(de_DE\.UTF-8\)|#\1|' ${work_dir}/root-image/etc/locale.gen
 	chroot ${work_dir}/root-image locale-gen
 	# setup mirrorlist
 	sed -i -e 's|^#\(.*http://.*\.kernel\.org.*\)|\1|g' ${work_dir}/root-image/etc/pacman.d/mirrorlist
