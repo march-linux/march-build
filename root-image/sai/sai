@@ -33,6 +33,10 @@ sai_install() {
 
 		# setup fstab asap
 		cat $FSTAB >> /mnt/etc/fstab
+		# setup locale to en_US.utf8
+		sed -i -e 's|^LOCALE=.*|LOCALE="en_US.UTF-8"|' /mnt/etc/rc.conf
+		sed -i -e 's|^#\(en_US\.UTF-8\)|\1|' /mnt/etc/locale.gen
+		chroot /mnt locale-gen
 		# setup mirrorlist
 		sed -i -e "s|^#\(.*http://.*\.kernel\.org.*\)|\1|g" /mnt/etc/pacman.d/mirrorlist
 		: > /tmp/$FUNCNAME
