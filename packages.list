@@ -13,7 +13,7 @@ rxvt-unicode
 less
 dmenu
 # media player
-mplayer
+xine-ui
 # browser
 chromium
 flashplugin
