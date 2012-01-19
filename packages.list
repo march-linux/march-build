@@ -27,6 +27,8 @@ unrar
 ttf-droid
 xorg-xset
 wqy-bitmapfont
+fcitx-git
+fcitx-chewing-git
 fcitx-gtk2
 # extra apps
 rtorrent
