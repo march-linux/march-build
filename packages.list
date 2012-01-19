@@ -7,8 +7,8 @@ syslinux
 which
 wget
 # DE
-i3-wm
-i3status
+i3-git
+i3status-git
 rxvt-unicode
 less
 dmenu
@@ -27,14 +27,13 @@ unrar
 ttf-droid
 xorg-xset
 wqy-bitmapfont
-fcitx-git
 fcitx-chewing-git
-fcitx-gtk2
+fcitx-gtk2-git
 # extra apps
 rtorrent
 zathura
 feh
-wicd
+wicd-bzr
 vim
 alsa-utils
 htop
