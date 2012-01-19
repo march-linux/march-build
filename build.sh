@@ -52,6 +52,9 @@ make_customize_root_image() {
 	chroot ${work_dir}/root-image/ usermod -p ZYCnDaw9NK8NI root
 	chroot ${work_dir}/root-image/ useradd -m -p ZYCnDaw9NK8NI -g users \
 		-G audio,lp,network,optical,power,storage,video,wheel march
+	# add march repo
+	echo "[march]" >> ${work_dir}/root-image/etc/pacman.conf
+	echo "Server = http://dl.dropbox.com/u/10527821/repo/i686/" >> ${work_dir}/root-image/etc/pacman.conf
         : > ${work_dir}/build.${FUNCNAME}
     fi
 }
