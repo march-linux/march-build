@@ -30,6 +30,7 @@ wqy-bitmapfont
 fcitx-chewing-git
 fcitx-gtk2-git
 # extra apps
+pacaur
 rtorrent
 zathura
 feh
