@@ -38,7 +38,7 @@ wicd
 vim
 alsa-utils
 htop
-ranger
+ranger-python2-git
 geany
 # libreoffice
 hunspell-en
