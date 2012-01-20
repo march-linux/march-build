@@ -133,7 +133,7 @@ pacman_install() {
 		else
 			ask "pacman has some problems. try again? (type 'no' to skip)"
 			if [[ "$ans" == no ]]; then
-				break
+				yell "sai stopped pacman"
 			fi
 		fi
 	done
