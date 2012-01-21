@@ -6,7 +6,6 @@ sudo
 syslinux
 which
 wget
-cpupower
 # DE
 i3-wm
 i3status
@@ -56,9 +55,12 @@ xf86-video-nouveau
 xf86-video-vesa
 xorg-server
 xorg-xinit
-xorg-xbacklight
 # printing
 cups
 ghostscript
 gsfonts
 gutenprint
+# powersave
+xorg-xbacklight
+hdparm
+cpupower

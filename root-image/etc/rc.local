@@ -4,11 +4,16 @@ echo 5 > /proc/sys/vm/laptop_mode
 # aspm
 echo powersave > /sys/module/pcie_aspm/parameters/policy
 
-# Disk
-echo 90 > /proc/sys/vm/dirty_ratio
-echo 1 > /proc/sys/vm/dirty_background_ratio
+# Disk dirty ratio
+echo 60 > /proc/sys/vm/dirty_ratio
+echo 40 > /proc/sys/vm/dirty_background_ratio
 echo 60000 > /proc/sys/vm/dirty_writeback_centisecs
 mount -o remount,noatime,commit=600 /
+
+# BUS powersave
+for i in /sys/bus/{pci,spi,i2c}/devices/*/power/control; do
+	echo auto > $i
+done
 
 # USB powersave
 for i in /sys/bus/usb/devices/*/power/autosuspend; do
@@ -20,8 +25,21 @@ for i in /sys/class/scsi_host/host*/link_power_management_policy; do
 	echo min_power > $i
 done
 
-# Set sound card & webcam
+# readahead
+for dev in /dev/sd[a-z]; do
+	blockdev --setfra 3072 "$dev"
+done
+
+# Disk
+for dev in /dev/sd[a-z]; do
+	hdparm -S 6 -B 1 $dev
+done
+
+# Sound card powersave
 echo 10 > /sys/module/snd_hda_intel/parameters/power_save
+echo Y > /sys/module/snd_hda_intel/parameters/power_save_controller
+
+# Disable webcam
 modprobe -r uvcvideo
 
 # set the wifi to power savings.
