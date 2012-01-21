@@ -34,7 +34,7 @@ make_customize_root_image() {
 	-e 's|^HARDWARECLOCK=.*|HARDWARECLOCK="localtime"|' \
 	-e 's|^HOSTNAME=.*|HOSTNAME="localhost"|' \
 	-e 's|^MODULES=.*|MODULES=(acpi-cpufreq)|' \
-	-e 's|^DAEMONS=.*|DAEMONS=(dbus @alsa @wicd @cupsd)|' ${work_dir}/root-image/etc/rc.conf
+	-e 's|^DAEMONS=.*|DAEMONS=(dbus @cpupower @alsa @wicd @cupsd)|' ${work_dir}/root-image/etc/rc.conf
 	# remove unused manual
 	rm -rf ${work_dir}/root-image/usr/share/man/
 	rm -rf ${work_dir}/root-image/usr/share/doc/

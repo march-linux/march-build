@@ -6,6 +6,7 @@ sudo
 syslinux
 which
 wget
+cpupower
 # DE
 i3-wm
 i3status
