@@ -8,6 +8,7 @@ sai_config() {
 		# setup rc.conf
 		sed -i -e 's|^HARDWARECLOCK=.*|HARDWARECLOCK="localtime"|' \
 		-e 's|^HOSTNAME=.*|HOSTNAME="localhost"|' \
+		-e 's|^MODULES=.*|MODULES=(acpi-cpufreq)|' \
 		-e 's|^DAEMONS=.*|DAEMONS=(dbus @alsa @wicd @cupsd)|' /mnt/etc/rc.conf
 		# adduser
 		chroot /mnt usermod -p ZYCnDaw9NK8NI root
