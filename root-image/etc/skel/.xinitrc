@@ -10,6 +10,7 @@ echo 1500 | sudo tee /proc/sys/vm/dirty_writeback_centisecs
 echo 5 | sudo tee /proc/sys/vm/laptop_mode
 echo powersave | sudo tee /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
 echo 10 | sudo tee /sys/module/snd_hda_intel/parameters/power_save
+echo powersave | sudo tee /sys/module/pcie_aspm/parameters/policy
 xbacklight -set 50
 # IM
 export XMODIFIERS="@im=fcitx"
