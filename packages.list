@@ -55,6 +55,7 @@ xf86-video-nouveau
 xf86-video-vesa
 xorg-server
 xorg-xinit
+xorg-xbacklight
 # printing
 cups
 ghostscript
