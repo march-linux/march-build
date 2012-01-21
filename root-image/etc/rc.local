@@ -1,13 +1,31 @@
-# general powersave
+# Set laptop disk write mode
 echo 5 > /proc/sys/vm/laptop_mode
-echo 1500 > /proc/sys/vm/dirty_writeback_centisecs
+
+# aspm
 echo powersave > /sys/module/pcie_aspm/parameters/policy
-# USB powersaving
+
+# Disk
+echo 90 > /proc/sys/vm/dirty_ratio
+echo 1 > /proc/sys/vm/dirty_background_ratio
+echo 60000 > /proc/sys/vm/dirty_writeback_centisecs
+mount -o remount,noatime,commit=600 /
+
+# USB powersave
 for i in /sys/bus/usb/devices/*/power/autosuspend; do
 	echo 1 > $i
 done
-# SATA power saving
+
+# SATA powersave
 for i in /sys/class/scsi_host/host*/link_power_management_policy; do
 	echo min_power > $i
 done
+
+# Set sound card & webcam
+echo 10 > /sys/module/snd_hda_intel/parameters/power_save
+modprobe -r uvcvideo
+
+# set the wifi to power savings.
+iwconfig wlan0 power on
+
+# login
 exec login -f march
