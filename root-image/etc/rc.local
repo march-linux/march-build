@@ -5,8 +5,8 @@ echo 5 > /proc/sys/vm/laptop_mode
 echo powersave > /sys/module/pcie_aspm/parameters/policy
 
 # Disk dirty ratio
-echo 60 > /proc/sys/vm/dirty_ratio
-echo 40 > /proc/sys/vm/dirty_background_ratio
+echo 90 > /proc/sys/vm/dirty_ratio
+echo 1 > /proc/sys/vm/dirty_background_ratio
 echo 60000 > /proc/sys/vm/dirty_writeback_centisecs
 mount -o remount,noatime,commit=600 /
 
@@ -27,7 +27,7 @@ done
 
 # readahead
 for dev in /dev/sd[a-z]; do
-	blockdev --setfra 3072 "$dev"
+	blockdev --setra 3072 "$dev"
 done
 
 # Disk
