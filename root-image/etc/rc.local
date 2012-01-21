@@ -1,1 +1,13 @@
+# general powersave
+echo 5 > /proc/sys/vm/laptop_mode
+echo 1500 > /proc/sys/vm/dirty_writeback_centisecs
+echo powersave > /sys/module/pcie_aspm/parameters/policy
+# USB powersaving
+for i in /sys/bus/usb/devices/*/power/autosuspend; do
+	echo 1 > $i
+done
+# SATA power saving
+for i in /sys/class/scsi_host/host*/link_power_management_policy; do
+	echo min_power > $i
+done
 exec login -f march
