@@ -9,7 +9,7 @@ echo 60000 > /proc/sys/vm/dirty_writeback_centisecs
 mount -o remount,noatime,commit=600 /
 
 # BUS powersave
-for i in /sys/bus/{pci,spi,i2c}/devices/*/power/control; do echo auto > $i; done
+for i in /sys/bus/{pci,i2c}/devices/*/power/control; do echo auto > $i; done
 
 # USB powersave
 for i in /sys/bus/usb/devices/*/power/autosuspend; do echo 1 > $i; done
@@ -30,6 +30,10 @@ echo Y > /sys/module/snd_hda_intel/parameters/power_save_controller
 
 # Disable webcam
 modprobe -r uvcvideo
+
+# Disable bluetooth
+modprobe -r btusb
+modprobe -r bluetooth
 
 # wlan0/eth0 powersave
 iwconfig wlan0 power on
