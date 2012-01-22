@@ -20,6 +20,10 @@ for i in /sys/bus/usb/devices/*/power/autosuspend; do
 	echo 1 > $i
 done
 
+for i in /sys/bus/usb/devices/*/power/level; do
+	echo auto > $i
+done
+
 # SATA powersave
 for i in /sys/class/scsi_host/host*/link_power_management_policy; do
 	echo min_power > $i
@@ -27,7 +31,7 @@ done
 
 # readahead
 for dev in /dev/sd[a-z]; do
-	blockdev --setra 3072 "$dev"
+	blockdev --setra 3072 $dev
 done
 
 # Disk
