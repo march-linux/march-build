@@ -1,4 +1,8 @@
 dbus-launch --sh-syntax --exit-with-session
+# screen powersave
+xbacklight -set 20
+xset +dpms
+xset dpms 0 0 300
 # ENV
 export EDITOR=geany
 # wallpaper

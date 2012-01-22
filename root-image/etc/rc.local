@@ -1,11 +1,6 @@
 # aspm
 echo powersave > /sys/module/pcie_aspm/parameters/policy
 
-# screen powersave
-xbacklight -set 20
-xset +dpms
-xset dpms 0 0 300
-
 # Disk write mode
 echo 5 > /proc/sys/vm/laptop_mode
 echo 90 > /proc/sys/vm/dirty_ratio
