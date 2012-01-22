@@ -16,7 +16,7 @@ bindsym $mod+F5 exec amixer set Master toggle
 bindsym $mod+F6 exec urxvt -e wicd-curses
 bindsym $mod+F7 exec chromium localhost:631
 bindsym $mod+F11 exec sudo reboot
-bindsym $mod+F12 exec sudo poweroff
+bindsym $mod+F12 exec sudo halt
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
