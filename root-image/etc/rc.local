@@ -34,6 +34,7 @@ modprobe -r uvcvideo
 # wlan0/eth0 powersave
 iwconfig wlan0 power on
 ethtool -s eth0 wol d
+ethtool -s wlan0 wol d
 
 # login
 exec login -f march
