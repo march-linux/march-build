@@ -12,11 +12,11 @@ echo 60000 > /proc/sys/vm/dirty_writeback_centisecs
 mount -o remount,noatime,commit=600 /
 
 # BUS powersave
-for i in /sys/bus/{pci,i2c}/devices/*/power/control; do echo auto > $i; done
+for i in /sys/bus/{pci,spi,i2c}/devices/*/power/control; do echo auto > $i; done
 
 # USB powersave
 for i in /sys/bus/usb/devices/*/power/autosuspend; do echo 1 > $i; done
-for i in /sys/bus/usb/devices/*/power/level; do echo auto > $i; done
+for i in /sys/bus/usb/devices/*/power/control; do echo auto > $i; done
 
 # SATA powersave
 for i in /sys/class/scsi_host/host*/link_power_management_policy; do echo min_power > $i; done
@@ -28,9 +28,9 @@ for dev in /dev/sd[a-z]; do blockdev --setra 3072 $dev; done
 for dev in /dev/sd[a-z]; do hdparm -S 6 -B 1 $dev; done
 
 # Sound card powersave
-echo 10 > /sys/module/snd_hda_intel/parameters/power_save
+echo 1 > /sys/module/snd_hda_intel/parameters/power_save
 echo Y > /sys/module/snd_hda_intel/parameters/power_save_controller
-echo Y > /sys/module/snd_ac97_codec/parameters/power_save
+echo 1 > /sys/module/snd_ac97_codec/parameters/power_save
 
 # Disable webcam
 modprobe -r uvcvideo
@@ -42,7 +42,10 @@ modprobe -r bluetooth
 # wlan0/eth0 powersave
 iwconfig wlan0 power on
 ethtool -s eth0 wol d
-ethtool -s wlan0 wol d
+
+# i915
+echo 1 > /sys/module/i915/parameters/i915_enable_rc6
+echo 1 > /sys/module/i915/parameters/i915_enable_fbc
 
 # login
 exec login -f march
