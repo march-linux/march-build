@@ -41,7 +41,11 @@ modprobe -r bluetooth
 
 # wlan0/eth0 powersave
 iwconfig wlan0 power on
+ethtool -s wlan0 wol d
 ethtool -s eth0 wol d
+
+# Screen powersave
+for i in /sys/class/backlight/acpi_video*/brightness; do echo 2 > $i; done
 
 # i915
 echo 1 > /sys/module/i915/parameters/i915_enable_rc6

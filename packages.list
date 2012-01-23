@@ -61,6 +61,5 @@ ghostscript
 gsfonts
 gutenprint
 # powersave
-xorg-xbacklight
 hdparm
 cpupower
