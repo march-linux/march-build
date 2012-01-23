@@ -1,6 +1,9 @@
 # aspm
 echo powersave > /sys/module/pcie_aspm/parameters/policy
 
+# Disable nmi watchdog
+echo 0 > /proc/sys/kernel/nmi_watchdog
+
 # Disk write mode
 echo 5 > /proc/sys/vm/laptop_mode
 echo 90 > /proc/sys/vm/dirty_ratio
@@ -27,6 +30,7 @@ for dev in /dev/sd[a-z]; do hdparm -S 6 -B 1 $dev; done
 # Sound card powersave
 echo 10 > /sys/module/snd_hda_intel/parameters/power_save
 echo Y > /sys/module/snd_hda_intel/parameters/power_save_controller
+echo Y > /sys/module/snd_ac97_codec/parameters/power_save
 
 # Disable webcam
 modprobe -r uvcvideo
