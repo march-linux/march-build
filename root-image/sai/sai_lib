@@ -106,7 +106,7 @@ ask_mkfs() {
 	for lbl in boot swap home; do
 		ask "select a partition for '$lbl'? (type 'no' if you don't need it; format/mount)" dev
 		if [[ "$dev" != no ]]; then
-			ask "format or mount $dev? ('f' to format, 'm' to mount)" f_or_m
+			ask "format or mount $dev? ('f': format, 'm': mount)" f_or_m
 			if [[ "$f_or_m" == m ]]; then
 				action=mount
 			else
