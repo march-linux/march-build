@@ -60,6 +60,7 @@ sai_bootloader() {
 }
 
 sai_end() {
+	sai_clean
 	say "sai did its job! you may 'reboot'"
 }
 

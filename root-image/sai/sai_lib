@@ -156,3 +156,11 @@ pacman_install() {
 generate_syslinux_menu() {
 	sed -i -e "s|root=/dev/sda3|root=/dev/disk/by-label/root|g" $syslinuxmenu || yell "sai can't find the bootloader menu"
 }
+
+sai_clean() {
+	for line in $(cat $FS); do
+		part=$(echo "$line" | cut -d : -f 1)
+		umount -l $part
+	done
+	rm /tmp/sai_*
+}
