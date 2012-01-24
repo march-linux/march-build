@@ -5,12 +5,12 @@ echo powersave > /sys/module/pcie_aspm/parameters/policy
 echo 0 > /proc/sys/kernel/nmi_watchdog
 
 # Disk write mode
-echo 5 > /proc/sys/vm/laptop_mode
+echo 2 > /proc/sys/vm/laptop_mode
 echo 60 > /proc/sys/vm/dirty_ratio
 echo 20 > /proc/sys/vm/dirty_background_ratio
-echo 1500 > /proc/sys/vm/dirty_expire_centisecs
-echo 1500 > /proc/sys/vm/dirty_writeback_centisecs
-mount -o remount,noatime,commit=600 /
+echo 6000 > /proc/sys/vm/dirty_expire_centisecs
+echo 6000 > /proc/sys/vm/dirty_writeback_centisecs
+mount -o remount,noatime /
 
 # BUS (usb + other) powersave
 for i in /sys/bus/*/devices/*/power/control; do echo auto > $i; done
@@ -22,7 +22,7 @@ for i in /sys/bus/usb/devices/*/power/autosuspend; do echo 1 > $i; done
 for i in /sys/class/scsi_host/host*/link_power_management_policy; do echo min_power > $i; done
 
 # readahead
-for dev in /dev/sd[a-z]; do blockdev --setra 3072 $dev; done
+for dev in /dev/sd[a-z]; do blockdev --setra 4096 $dev; done
 
 # Disk spindown
 for dev in /dev/sd[a-z]; do hdparm -S 6 -B 1 $dev; done
