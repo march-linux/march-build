@@ -5,12 +5,14 @@ echo powersave > /sys/module/pcie_aspm/parameters/policy
 echo 0 > /proc/sys/kernel/nmi_watchdog
 
 # Disk write mode
-echo 2 > /proc/sys/vm/laptop_mode
+echo 5 > /proc/sys/vm/laptop_mode
 echo 60 > /proc/sys/vm/dirty_ratio
-echo 20 > /proc/sys/vm/dirty_background_ratio
-echo 6000 > /proc/sys/vm/dirty_expire_centisecs
-echo 6000 > /proc/sys/vm/dirty_writeback_centisecs
-mount -o remount,noatime /
+echo 40 > /proc/sys/vm/dirty_background_ratio
+echo 60000 > /proc/sys/vm/dirty_expire_centisecs
+echo 60000 > /proc/sys/vm/dirty_writeback_centisecs
+
+# remount noatime
+for dev in $(awk '/^\/dev\/sd/ {print $1}' /etc/mtab); do mount -o remount,noatime,commit=600 $dev; done
 
 # BUS (usb + other) powersave
 for i in /sys/bus/*/devices/*/power/control; do echo auto > $i; done
@@ -21,11 +23,8 @@ for i in /sys/bus/usb/devices/*/power/autosuspend; do echo 1 > $i; done
 # SATA powersave
 for i in /sys/class/scsi_host/host*/link_power_management_policy; do echo min_power > $i; done
 
-# readahead
-for dev in /dev/sd[a-z]; do blockdev --setra 4096 $dev; done
-
-# Disk spindown
-for dev in /dev/sd[a-z]; do hdparm -S 6 -B 1 $dev; done
+# Disk powersave
+for dev in $(awk '/^\/dev\/sd/ {print $1}' /etc/mtab); do hdparm -a 2048 -S 6 -B 1 -M 128 -W 1 $dev; done
 
 # Sound card powersave
 echo 1 > /sys/module/snd_hda_intel/parameters/power_save
