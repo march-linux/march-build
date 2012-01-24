@@ -15,7 +15,7 @@ sai_prepare() {
 	if [[ ! -f /tmp/$FUNCNAME ]]; then
 		ask_cfdisk
 		ask_mkfs
-		ask "sai will double-check the partitions. Hit 'enter' to continue."
+		ask "sai will double-check the partitions. Hit 'enter' to continue." none
 		vim $FS
 		: > /tmp/$FUNCNAME
 
@@ -27,7 +27,7 @@ sai_prepare() {
 sai_install() {
 	say $FUNCNAME
 	if [[ ! -f /tmp/$FUNCNAME ]]; then
-		ask "sai will edit the packages you want to install. Hit 'enter' to continue."
+		ask "sai will edit the packages you want to install. Hit 'enter' to continue." none
 		vim /sai/packages.list
 		pacman_install
 
@@ -54,7 +54,7 @@ sai_bootloader() {
 		generate_syslinux_menu
 		
 		: > /tmp/$FUNCNAME
-		ask "sai will edit the bootloader menu. Hit 'enter' to continue."
+		ask "sai will edit the bootloader menu. Hit 'enter' to continue." none
 		vim $syslinuxmenu
 	fi
 }
@@ -66,6 +66,6 @@ sai_end() {
 sai_start
 sai_prepare
 sai_install
-sai_bootloader
 sai_config
+sai_bootloader
 sai_end

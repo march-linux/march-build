@@ -6,11 +6,12 @@ say() {
 	tput sgr0
 }
 
+# save ans to $2
 ask() {
 	tput setaf 4
 	echo -n "=> $1  "
 	tput sgr0
-	read ans
+	read $2
 }
 
 yell() {
@@ -25,14 +26,19 @@ prepare_disks() {
 	for line in $(cat $FS); do
 		part=$(echo "$line" | cut -d : -f 1)
 		lbl=$(echo "$line" | cut -d : -f 2)
+		action=$(echo "$line" | cut -d : -f 3)
 
 		if [[ "$lbl" == swap ]]; then
-			mkswap -L swap "$part" || yell "sai can't format $part as swap"
+			if [[ "$action" == format ]]; then
+				mkswap -L swap "$part" || yell "sai can't format $part as swap"
+			fi
 			swapon "$part"
 
 			echo "/dev/disk/by-label/swap swap swap defaults 0 0" >> $FSTAB
 		else
-			mkfs.ext4 -L "$lbl" "$part" || yell "sai can't format '$part' as ext4"
+			if [[ "$action" == format ]]; then
+				mkfs.ext4 -L "$lbl" "$part" || yell "sai can't format '$part' as ext4"
+			fi
 			if [[ "$lbl" == root ]]; then
 				mount -t ext4 "$part" /mnt || yell "sai can't mount $part as 'root'"
 	
@@ -77,14 +83,14 @@ ask_cfdisk() {
 		avail_disks
 		tput sgr0
 
-		ask "select a disk to partition? (type 'no' to skip)"
-		if [[ "$ans" == no ]]; then
+		ask "select a disk to partition? (type 'no' to skip)" disk
+		if [[ "$disk" == no ]]; then
 			break
 		fi
-		if [[ -b "/dev/$ans" ]]; then
-			cfdisk "/dev/$ans"
+		if [[ -b "/dev/$disk" ]]; then
+			cfdisk "/dev/$disk"
 		else
-			say "sai can't find device: '/dev/$ans'"
+			say "sai can't find device: '/dev/$disk'"
 		fi
 	done
 }
@@ -95,12 +101,18 @@ ask_mkfs() {
 	avail_parts
 	tput sgr0
 
-	ask "select a partition for 'root'?"
-	echo "/dev/$ans:root" >> $FS
+	ask "select a partition for 'root'? (format)" dev
+	echo "/dev/$dev:root" >> $FS
 	for lbl in boot swap home; do
-		ask "select a partition for '$lbl'? (type 'no' if you don't need it)"
-		if [[ "$ans" != no ]]; then
-			echo "/dev/$ans:$lbl" >> $FS
+		ask "select a partition for '$lbl'? (type 'no' if you don't need it; format/mount)" dev
+		if [[ "$dev" != no ]]; then
+			ask "format or mount $dev? ('f' to format, 'm' to mount)" f_or_m
+			if [[ "$f_or_m" == m ]]; then
+				action=mount
+			else
+				action=format
+			fi
+			echo "/dev/$dev:$lbl:$action" >> $FS
 		fi
 	done
 }
@@ -124,20 +136,21 @@ chroot_umount() {
 
 pacman_install() {
 	mkdir -p /mnt/var/lib/pacman /mnt/var/cache/pacman/pkg
-	chroot_mount
 	while true; do
+		chroot_mount
 		pacman --root /mnt --cachedir /mnt/var/cache/pacman/pkg --noconfirm --needed \
 		-Sy $(grep -v ^# /sai/packages.list)
-		if [[ "$?" == 0 ]]; then
+		pacman_success=$?
+		chroot_umount
+		if [[ $pacman_success == 0 ]]; then
 			break
 		else
-			ask "pacman has some problems. try again? (type 'no' to skip)"
-			if [[ "$ans" == no ]]; then
+			ask "pacman has some problems. try again? (type 'no' to skip)" retry
+			if [[ "$retry" == no ]]; then
 				yell "sai stopped pacman"
 			fi
 		fi
 	done
-	chroot_umount
 }
 
 generate_syslinux_menu() {
