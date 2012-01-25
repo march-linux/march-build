@@ -41,7 +41,7 @@ htop
 ranger-python2-git
 geany
 # network
-netcfg
+wifi-select
 wpa_actiond
 ifplugd
 # libreoffice
