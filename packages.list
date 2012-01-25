@@ -33,14 +33,17 @@ fcitx-gtk2-git
 # extra apps
 pacaur
 rtorrent
-zathura
+mupdf
 feh
-wicd
 vim
 alsa-utils
 htop
 ranger-python2-git
 geany
+# network
+netcfg
+wpa_actiond
+ifplugd
 # libreoffice
 hunspell-en
 hyphen-en

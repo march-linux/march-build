@@ -5,11 +5,6 @@ sai_config() {
 	if [[ ! -f /tmp/$FUNCNAME ]]; then
 		# copy march config
 		cp -r /sai/etc/ /mnt/
-		# setup rc.conf
-		sed -i -e 's|^HARDWARECLOCK=.*|HARDWARECLOCK="localtime"|' \
-		-e 's|^HOSTNAME=.*|HOSTNAME="localhost"|' \
-		-e 's|^MODULES=.*|MODULES=(acpi-cpufreq)|' \
-		-e 's|^DAEMONS=.*|DAEMONS=(dbus @cpupower @alsa @wicd @cupsd)|' /mnt/etc/rc.conf
 		# aspm
 		sed -i -e 's|\(APPEND root=/dev/disk/by-label/root ro\)|\1 pcie_aspm=force|' /mnt/boot/syslinux/syslinux.cfg
 		# adduser
