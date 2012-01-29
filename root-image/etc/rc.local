@@ -6,7 +6,7 @@ echo 0 > /proc/sys/kernel/nmi_watchdog
 
 # Disk write mode
 echo 5 > /proc/sys/vm/laptop_mode
-echo 60 > /proc/sys/vm/dirty_ratio
+echo 80 > /proc/sys/vm/dirty_ratio
 echo 40 > /proc/sys/vm/dirty_background_ratio
 echo 60000 > /proc/sys/vm/dirty_expire_centisecs
 echo 60000 > /proc/sys/vm/dirty_writeback_centisecs
@@ -24,7 +24,7 @@ for i in /sys/bus/usb/devices/*/power/autosuspend; do echo 1 > $i; done
 for i in /sys/class/scsi_host/host*/link_power_management_policy; do echo min_power > $i; done
 
 # Disk powersave
-for dev in $(awk '/^\/dev\/sd/ {print $1}' /etc/mtab); do hdparm -a 2048 -S 6 -B 1 -M 128 -W 1 $dev; done
+for dev in /dev/sd[a-z]; do blockdev --setra 4096 $dev; done
 
 # Sound card powersave
 echo 1 > /sys/module/snd_hda_intel/parameters/power_save

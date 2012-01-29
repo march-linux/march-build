@@ -64,5 +64,4 @@ ghostscript
 gsfonts
 gutenprint
 # powersave
-hdparm
 cpupower
