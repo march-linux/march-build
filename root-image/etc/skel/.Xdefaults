@@ -2,6 +2,7 @@
 URxvt.cursorBlink: true
 URxvt.scrollBar_right: true
 URxvt.scrollstyle: plain
+URxvt.geometry: 150x45
 
 !black
 *color0: #222222

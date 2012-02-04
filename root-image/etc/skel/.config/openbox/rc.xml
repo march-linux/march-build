@@ -234,7 +234,7 @@
   </keybind>
 
   <!-- Keybindings for windows -->
-  <keybind key="A-F4">
+  <keybind key="A-q">
     <action name="Close"/>
   </keybind>
   <keybind key="A-Escape">
