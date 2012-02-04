@@ -82,7 +82,7 @@ make_syslinux() {
         sed "s|%ARCHISO_LABEL%|${iso_label}|g;
             s|%INSTALL_DIR%|${install_dir}|g;
             s|%ARCH%|${arch}|g" ${script_path}/syslinux/syslinux.cfg > ${work_dir}/iso/${install_dir}/boot/syslinux/syslinux.cfg
-	convert ${work_dir}/root-image/etc/skel/.i3/wallpaper.jpg -resize 640x480^ -gravity center -extent 640x480 \
+	convert ${work_dir}/root-image/etc/skel/.wallpaper/wallpaper.jpg -resize 640x480^ -gravity center -extent 640x480 \
 		-fill white -pointsize 12 -draw "text 250,220 '${iso_version}-${arch}'" \
 		${work_dir}/iso/${install_dir}/boot/syslinux/splash.jpg
         cp ${work_dir}/root-image/usr/lib/syslinux/{vesamenu.c32,chain.c32,reboot.c32,poweroff.com} ${work_dir}/iso/${install_dir}/boot/syslinux/
