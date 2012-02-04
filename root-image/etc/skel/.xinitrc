@@ -7,9 +7,9 @@ export EDITOR=geany
 # wallpaper
 feh --bg-fill ~/.wallpaper/wallpaper.jpg
 # IM
-export XMODIFIERS="@im=fcitx"
-export GTK_IM_MODULE=fcitx
-fcitx &
+export XMODIFIERS="@im=hime"
+export GTK_IM_MODULE=hime
+hime &
 # DE
 tint2 &
 exec openbox-session

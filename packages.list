@@ -26,8 +26,7 @@ unrar
 rar
 # zh-TW support
 ttf-droid
-fcitx-gtk2
-fcitx-chewing-git
+hime-git
 # extra apps
 packer
 rtorrent
