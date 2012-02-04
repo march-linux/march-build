@@ -5,12 +5,11 @@ xset dpms 0 0 300
 # ENV
 export EDITOR=geany
 # wallpaper
-feh --bg-fill ~/.i3/wallpaper.jpg
+feh --bg-fill ~/.wallpaper/wallpaper.jpg
 # IM
-export XMODIFIERS="@im=fcitx"
-export GTK_IM_MODULE=fcitx
-fcitx &
-# font
-xset +fp /usr/share/fonts/wenquanyi
-# i3
-exec i3
+export XMODIFIERS="@im=hime"
+export GTK_IM_MODULE=hime
+hime &
+# DE
+tint2 &
+exec openbox-session

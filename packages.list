@@ -7,13 +7,13 @@ syslinux
 which
 wget
 # DE
-i3-wm
-i3status
+openbox
+tint2
 rxvt-unicode
 less
 dmenu
 # media player
-mplayer2-git
+vlc-ncurses
 # browser
 chromium
 flashplugin
@@ -26,12 +26,9 @@ unrar
 rar
 # zh-TW support
 ttf-droid
-xorg-xset
-wqy-bitmapfont
-fcitx-chewing-git
-fcitx-gtk2-git
+hime-git
 # extra apps
-pacaur
+packer
 rtorrent
 mupdf
 feh
@@ -41,9 +38,7 @@ htop
 ranger-python2-git
 geany
 # network
-wifi-select
-wpa_actiond
-ifplugd
+wicd
 # libreoffice
 hunspell-en
 hyphen-en
@@ -58,6 +53,7 @@ xf86-video-nouveau
 xf86-video-vesa
 xorg-server
 xorg-xinit
+xorg-xset
 # printing
 cups
 ghostscript

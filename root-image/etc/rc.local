@@ -6,8 +6,8 @@ echo 0 > /proc/sys/kernel/nmi_watchdog
 
 # Disk write mode
 echo 5 > /proc/sys/vm/laptop_mode
-echo 80 > /proc/sys/vm/dirty_ratio
-echo 40 > /proc/sys/vm/dirty_background_ratio
+echo 90 > /proc/sys/vm/dirty_ratio
+echo 1 > /proc/sys/vm/dirty_background_ratio
 echo 60000 > /proc/sys/vm/dirty_expire_centisecs
 echo 60000 > /proc/sys/vm/dirty_writeback_centisecs
 
