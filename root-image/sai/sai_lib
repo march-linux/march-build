@@ -152,8 +152,22 @@ pacman_install() {
 	done
 }
 
-generate_syslinux_menu() {
+gen_syslinux_menu() {
 	sed -i -e "s|root=/dev/sda3|root=/dev/disk/by-label/root|g" $syslinuxmenu || yell "sai can't find the bootloader menu"
+}
+
+gen_locale() {
+	sed -i -e 's|^LOCALE=.*|LOCALE="en_US.UTF-8"|' /mnt/etc/rc.conf
+	sed -i -e 's|^#\(en_US\.UTF-8\)|\1|' /mnt/etc/locale.gen
+	chroot /mnt locale-gen
+}
+
+gen_pacman_mirror() {
+	sed -i -e "s|^#\(.*http://.*\.kernel\.org.*\)|\1|g" /mnt/etc/pacman.d/mirrorlist
+}
+
+gen_fstab() {
+	cat $FSTAB >> /mnt/etc/fstab
 }
 
 sai_clean() {
