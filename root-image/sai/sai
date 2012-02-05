@@ -39,9 +39,6 @@ sai_install() {
 		chroot /mnt locale-gen
 		# setup mirrorlist
 		sed -i -e "s|^#\(.*http://.*\.kernel\.org.*\)|\1|g" /mnt/etc/pacman.d/mirrorlist
-		# add march repo
-		echo "[march]" >> /mnt/etc/pacman.conf
-		echo "Server = http://dl.dropbox.com/u/10527821/repo/i686/" >> /mnt/etc/pacman.conf
 		: > /tmp/$FUNCNAME
 	fi
 }
