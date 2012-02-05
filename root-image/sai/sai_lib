@@ -159,7 +159,7 @@ generate_syslinux_menu() {
 sai_clean() {
 	for line in $(cat $FS); do
 		part=$(echo "$line" | cut -d : -f 1)
-		umount -l $part
+		umount -l "$part"
 	done
 	rm /tmp/sai_*
 }
