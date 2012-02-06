@@ -62,6 +62,6 @@ sai_end() {
 sai_start
 sai_prepare
 sai_install
-sai_config
 sai_bootloader
+sai_config
 sai_end
