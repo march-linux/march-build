@@ -102,7 +102,7 @@ ask_mkfs() {
 	tput sgr0
 
 	ask "select a partition for 'root'? (format)" dev
-	echo "/dev/$dev:root" >> $FS
+	echo "/dev/$dev:root:format" >> $FS
 	for lbl in boot swap home; do
 		ask "select a partition for '$lbl'? (type 'no' if you don't need it; format/mount)" dev
 		if [[ "$dev" != no ]]; then
