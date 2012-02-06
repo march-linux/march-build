@@ -42,7 +42,7 @@ make_customize_root_image() {
 	sed -i -e 's|^\(de_DE\.UTF-8\)|#\1|' ${work_dir}/root-image/etc/locale.gen
 	chroot ${work_dir}/root-image locale-gen
 	# setup mirrorlist
-	sed -i -e 's|^#\(.*http://.*\.kernel\.org.*\)|\1|g' ${work_dir}/root-image/etc/pacman.d/mirrorlist
+	sed -i -e 's|^#\(.*http://.*\.kernel\.org.*\)|\1|' ${work_dir}/root-image/etc/pacman.d/mirrorlist
 	# adduser
 	chroot ${work_dir}/root-image/ usermod -p ZYCnDaw9NK8NI root
 	chroot ${work_dir}/root-image/ useradd -m -p ZYCnDaw9NK8NI -g users \

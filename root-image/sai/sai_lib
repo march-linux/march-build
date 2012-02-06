@@ -153,7 +153,7 @@ pacman_install() {
 }
 
 gen_syslinux_menu() {
-	sed -i -e "s|root=/dev/sda3|root=/dev/disk/by-label/root|g" $syslinuxmenu || yell "sai can't find the bootloader menu"
+	sed -i -e "s|root=/dev/sda3|root=/dev/disk/by-label/root|" $syslinuxmenu || yell "sai can't find the bootloader menu"
 }
 
 gen_locale() {
@@ -163,7 +163,7 @@ gen_locale() {
 }
 
 gen_pacman_mirror() {
-	sed -i -e "s|^#\(.*http://.*\.kernel\.org.*\)|\1|g" /mnt/etc/pacman.d/mirrorlist
+	sed -i -e "s|^#\(.*http://.*\.kernel\.org.*\)|\1|" /mnt/etc/pacman.d/mirrorlist
 }
 
 gen_fstab() {
