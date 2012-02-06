@@ -29,16 +29,15 @@ prepare_disks() {
 		action=$(echo "$line" | cut -d : -f 3)
 
 		if [[ "$lbl" == swap ]]; then
-			if [[ "$action" == format ]]; then
-				mkswap -L swap "$part" || yell "sai can't format $part as swap"
-			fi
+			mkswap -L swap "$part" || yell "sai can't format $part as swap"
 			swapon "$part"
 
 			echo "/dev/disk/by-label/swap swap swap defaults 0 0" >> $FSTAB
 		else
 			if [[ "$action" == format ]]; then
-				mkfs.ext4 -L "$lbl" "$part" || yell "sai can't format '$part' as ext4"
+				mkfs.ext4 "$part" || yell "sai can't format '$part' as ext4"
 			fi
+			e2label "$part" "$lbl"
 			if [[ "$lbl" == root ]]; then
 				mount -t ext4 "$part" /mnt || yell "sai can't mount $part as 'root'"
 	
