@@ -14,6 +14,8 @@ less
 dmenu
 # media player
 vlc-ncurses
+libva-driver-intel
+vdpau-video
 # browser
 chromium
 mimi
