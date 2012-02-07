@@ -1,4 +1,4 @@
-dbus-launch --sh-syntax --exit-with-session
+source /etc/X11/xinit/xinitrc.d/30-dbus
 # screen powersave
 xset +dpms
 xset dpms 0 0 300
