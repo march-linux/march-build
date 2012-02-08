@@ -15,6 +15,7 @@ echo 60000 > /proc/sys/vm/dirty_writeback_centisecs
 for dev in $(awk '/^\/dev\/sd/ {print $1}' /etc/mtab); do mount -o remount,noatime,commit=600 $dev; done
 
 # USB autosuspend
+for i in /sys/bus/usb/devices/*/power/control; do echo auto > $i; done
 for i in /sys/bus/usb/devices/*/power/autosuspend; do echo 1 > $i; done
 
 # Disk powersave
