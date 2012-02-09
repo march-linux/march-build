@@ -59,8 +59,6 @@ xorg-xinit
 xorg-xset
 # printing
 cups
-ghostscript
-gsfonts
 gutenprint
 # powersave
 cpupower

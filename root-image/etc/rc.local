@@ -19,7 +19,7 @@ for i in /sys/bus/usb/devices/*/power/control; do echo auto > $i; done
 for i in /sys/bus/usb/devices/*/power/autosuspend; do echo 1 > $i; done
 
 # Disk powersave
-for dev in /dev/sd[a-z]; do hdparm -S 6 -B 1 -a 2048 $dev; done
+for dev in $(awk '/^\/dev\/sd/ {print $1}' /etc/mtab); do hdparm -S 6 -B 1 -a 2048 $dev; done
 for i in /sys/class/scsi_host/host*/link_power_management_policy; do echo min_power > $i; done
 
 # Sound card powersave
