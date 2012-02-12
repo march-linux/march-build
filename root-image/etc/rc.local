@@ -36,8 +36,7 @@ modprobe -r bluetooth
 
 # wlan0/eth0 powersave
 iwconfig wlan0 power on
-ethtool -s wlan0 wol d
-ethtool -s eth0 wol d
+ifconfig eth0 down
 
 # Screen powersave
 for i in /sys/class/backlight/acpi_video*/brightness; do echo 0 > $i; done
