@@ -1,6 +1,4 @@
 source /etc/X11/xinit/xinitrc.d/30-dbus
-# x resl
-xrandr -s 1440x900 --output VGA2 --auto
 # screen powersave
 xset +dpms
 xset dpms 0 0 300
