@@ -12,6 +12,7 @@ tint2
 rxvt-unicode
 less
 dmenu
+xcompmgr
 # media player
 vlc-ncurses
 libva-driver-intel
