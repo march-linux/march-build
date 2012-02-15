@@ -11,5 +11,5 @@ export XMODIFIERS="@im=hime"
 export GTK_IM_MODULE=hime
 hime &
 # DE
-tint2 &
+(xcompmgr -cf && tint2) &
 exec openbox-session
