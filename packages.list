@@ -20,7 +20,7 @@ vdpau-video
 # browser
 chromium
 mimi
-flashplugin
+flashplugin-beta
 # archiver
 atool
 tar
