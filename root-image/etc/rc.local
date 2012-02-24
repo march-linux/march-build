@@ -1,22 +1,19 @@
 # aspm
 echo powersave > /sys/module/pcie_aspm/parameters/policy
 
-# Disable nmi watchdog
-echo 0 > /proc/sys/kernel/nmi_watchdog
-
 # kernel write mode
 echo 2 > /proc/sys/vm/laptop_mode
-echo 60 > /proc/sys/vm/dirty_ratio
-echo 40 > /proc/sys/vm/dirty_background_ratio
+echo 90 > /proc/sys/vm/dirty_ratio
+echo 1 > /proc/sys/vm/dirty_background_ratio
 echo 60000 > /proc/sys/vm/dirty_expire_centisecs
 echo 60000 > /proc/sys/vm/dirty_writeback_centisecs
 
 # remount noatime
 for dev in $(awk '/^\/dev\/sd/ {print $1}' /etc/mtab); do mount -o remount,noatime,commit=600 $dev; done
 
-# USB autosuspend
-for i in /sys/bus/usb/devices/*/power/control; do echo auto > $i; done
-for i in /sys/bus/usb/devices/*/power/autosuspend; do echo 1 > $i; done
+# Device powersave
+for i in /sys/devices/*/*/power/control; do echo auto > $i; done
+for i in /sys/devices/*/*/power/autosuspend_delay_ms; do echo 2000 > $i; done
 
 # Disk powersave
 for dev in $(awk '/^\/dev\/sd/ {print $1}' /etc/mtab); do hdparm -S 6 -B 1 -a 2048 $dev; done
@@ -25,7 +22,7 @@ for i in /sys/class/scsi_host/host*/link_power_management_policy; do echo min_po
 # Sound card powersave
 echo 1 > /sys/module/snd_hda_intel/parameters/power_save
 echo Y > /sys/module/snd_hda_intel/parameters/power_save_controller
-echo 1 > /sys/module/snd_ac97_codec/parameters/power_save
+[[ -e /sys/module/snd_ac97_codec/parameters/power_save ]] && echo 1 > /sys/module/snd_ac97_codec/parameters/power_save
 
 # Disable webcam
 modprobe -r uvcvideo
@@ -36,7 +33,6 @@ modprobe -r bluetooth
 
 # wlan0/eth0 powersave
 iwconfig wlan0 power on
-ifconfig eth0 down
 
 # Screen powersave
 for i in /sys/class/backlight/acpi_video*/brightness; do echo 0 > $i; done
