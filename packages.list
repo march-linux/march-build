@@ -7,11 +7,12 @@ syslinux
 which
 wget
 # DE
-openbox
-tint2
+i3-wm
+i3status
 rxvt-unicode
 less
 dmenu
+wqy-bitmapfont
 # media player
 vlc-ncurses
 libva-driver-intel
