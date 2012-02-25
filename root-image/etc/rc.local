@@ -2,7 +2,7 @@
 echo powersave > /sys/module/pcie_aspm/parameters/policy
 
 # kernel write mode
-echo 2 > /proc/sys/vm/laptop_mode
+echo 5 > /proc/sys/vm/laptop_mode
 echo 90 > /proc/sys/vm/dirty_ratio
 echo 1 > /proc/sys/vm/dirty_background_ratio
 echo 60000 > /proc/sys/vm/dirty_expire_centisecs
@@ -14,6 +14,7 @@ for dev in $(awk '/^\/dev\/sd/ {print $1}' /etc/mtab); do mount -o remount,noati
 # Device powersave
 for i in /sys/bus/*/devices/*/power/control; do echo auto > $i; done
 for i in /sys/bus/*/devices/*/power/autosuspend; do echo 2 > $i; done
+for i in /sys/bus/*/devices/*/power/wakeup; do echo enabled > $i; done
 
 # Disk powersave
 for dev in $(awk '/^\/dev\/sd/ {print $1}' /etc/mtab); do hdparm -S 6 -B 1 -a 2048 $dev; done
@@ -28,7 +29,7 @@ echo Y > /sys/module/snd_hda_intel/parameters/power_save_controller
 modprobe -r uvcvideo
 
 # Disable bluetooth
-modprobe -r bluetooth
+modprobe -r btusb
 
 # wlan0/eth0 powersave
 iwconfig wlan0 power on
