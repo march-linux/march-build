@@ -28,7 +28,6 @@ echo Y > /sys/module/snd_hda_intel/parameters/power_save_controller
 modprobe -r uvcvideo
 
 # Disable bluetooth
-modprobe -r btusb
 modprobe -r bluetooth
 
 # wlan0/eth0 powersave
