@@ -13,10 +13,7 @@ rxvt-unicode
 less
 dmenu
 wqy-bitmapfont
-# media player
-vlc-ncurses
-libva-driver-intel
-vdpau-video
+ttf-droid
 # browser
 chromium
 mimi
@@ -29,7 +26,6 @@ unzip
 unrar
 rar
 # zh-TW support
-ttf-droid
 hime-git
 # extra apps
 packer
