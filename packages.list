@@ -60,3 +60,4 @@ gutenprint
 # powersave
 cpupower
 hdparm
+irqbalance
