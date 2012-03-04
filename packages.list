@@ -28,6 +28,7 @@ rar
 # zh-TW support
 hime-git
 # extra apps
+vlc-ncurses
 packer
 rtorrent
 mupdf
