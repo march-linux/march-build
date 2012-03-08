@@ -32,10 +32,9 @@ vlc-ncurses
 packer
 rtorrent
 mupdf
-feh
+sxiv
 vim
 alsa-utils
-htop
 ranger-python2-git
 geany
 # network
@@ -61,4 +60,3 @@ gutenprint
 # powersave
 cpupower
 hdparm
-irqbalance
