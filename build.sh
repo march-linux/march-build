@@ -57,8 +57,8 @@ make_customize_root_image() {
 # Copy mkinitcpio archiso hooks (root-image)
 make_setup_mkinitcpio() {
    if [[ ! -e ${work_dir}/build.${FUNCNAME} ]]; then
-        cp /lib/initcpio/hooks/archiso ${work_dir}/root-image/lib/initcpio/hooks
-        cp /lib/initcpio/install/archiso ${work_dir}/root-image/lib/initcpio/install
+        cp /usr/lib/initcpio/hooks/archiso ${work_dir}/root-image/usr/lib/initcpio/hooks
+        cp /usr/lib/initcpio/install/archiso ${work_dir}/root-image/usr/lib/initcpio/install
         cp ${script_path}/mkinitcpio.conf ${work_dir}/root-image/etc/mkinitcpio-archiso.conf
         : > ${work_dir}/build.${FUNCNAME}
    fi
