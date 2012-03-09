@@ -16,7 +16,7 @@ script_path=$(cd $(dirname "$0"); pwd)
 
 # Base installation (root-image)
 make_basefs() {
-    mkarchiso ${verbose} -w "${work_dir}" -D "${install_dir}" -p "device-mapper $(grep -v ^# ${script_path}/packages.list)" create
+    mkarchiso ${verbose} -w "${work_dir}" -D "${install_dir}" -p "device-mapper sai $(grep -v ^# ${script_path}/packages.list)" create
 }
 
 # Customize installation (root-image)
