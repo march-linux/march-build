@@ -58,5 +58,5 @@ xorg-xset
 cups
 gutenprint
 # powersave
-cpupower
+powerdown
 hdparm
