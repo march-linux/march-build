@@ -15,9 +15,8 @@ dmenu
 wqy-bitmapfont
 ttf-droid
 # browser
-chromium
+google-chrome-mini
 mimi
-flashplugin-beta
 # archiver
 atool
 tar
@@ -28,10 +27,8 @@ rar
 # zh-TW support
 hime-git
 # extra apps
-vlc-ncurses
 packer
 rtorrent
-mupdf
 feh
 vim
 alsa-utils
