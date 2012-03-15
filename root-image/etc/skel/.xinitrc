@@ -7,9 +7,9 @@ export EDITOR="urxvt -e vim"
 # wallpaper
 feh --bg-fill ~/.wallpaper/wallpaper.jpg
 # IM
-export XMODIFIERS="@im=hime"
-export GTK_IM_MODULE=hime
-hime &
+export XMODIFIERS="@im=fcitx"
+export GTK_IM_MODULE=fcitx
+fcitx &
 # DE
 xset +fp /usr/share/fonts/wenquanyi
 exec i3

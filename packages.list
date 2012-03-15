@@ -25,7 +25,8 @@ unzip
 unrar
 rar
 # zh-TW support
-hime-git
+fcitx-mini
+fcitx-chewing-git
 # extra apps
 packer
 rtorrent
