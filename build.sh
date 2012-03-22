@@ -16,7 +16,8 @@ script_path=$(cd $(dirname "$0"); pwd)
 
 # Base installation (root-image)
 make_basefs() {
-    mkarchiso ${verbose} -w "${work_dir}" -D "${install_dir}" -p "device-mapper sai $(grep -v ^# ${script_path}/packages.list)" create
+    mkarchiso ${verbose} -w "${work_dir}" -D "${install_dir}" init
+    mkarchiso ${verbose} -w "${work_dir}" -D "${install_dir}" -p "device-mapper sai $(grep -v ^# ${script_path}/packages.list)" install
 }
 
 # Customize installation (root-image)
@@ -68,7 +69,9 @@ make_setup_mkinitcpio() {
 make_boot() {
     if [[ ! -e ${work_dir}/build.${FUNCNAME} ]]; then
         mkdir -p ${work_dir}/iso/${install_dir}/boot/${arch}
-        mkarchroot -n -r "mkinitcpio -c /etc/mkinitcpio-archiso.conf -k /boot/vmlinuz-linux -g /boot/archiso.img" ${work_dir}/root-image
+        mkarchiso ${verbose} -w "${work_dir}" -D "${install_dir}" \
+            -r 'mkinitcpio -c /etc/mkinitcpio-archiso.conf -k /boot/vmlinuz-linux -g /boot/archiso.img' \
+            run
         mv ${work_dir}/root-image/boot/archiso.img ${work_dir}/iso/${install_dir}/boot/${arch}/archiso.img
         mv ${work_dir}/root-image/boot/vmlinuz-linux ${work_dir}/iso/${install_dir}/boot/${arch}/vmlinuz
         : > ${work_dir}/build.${FUNCNAME}

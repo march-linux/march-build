@@ -29,7 +29,7 @@ fcitx-mini
 fcitx-chewing-git
 # extra apps
 packer
-rtorrent
+rtorrent-git
 feh
 vim
 alsa-utils
