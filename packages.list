@@ -36,6 +36,7 @@ alsa-utils
 ranger-python2-git
 geany
 vlc-ncurses
+qmount
 # network
 wicd
 # libreoffice
