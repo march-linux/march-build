@@ -15,7 +15,7 @@ dmenu
 wqy-bitmapfont
 ttf-droid
 # browser
-google-chrome-mini
+google-chrome-no-gconf
 mimi
 # archiver
 atool
@@ -35,6 +35,7 @@ vim
 alsa-utils
 ranger-python2-git
 geany
+vlc-ncurses
 # network
 wicd
 # libreoffice
