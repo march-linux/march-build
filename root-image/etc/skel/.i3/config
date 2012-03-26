@@ -8,13 +8,13 @@ set $mod Mod1
 font -wenquanyi-wenquanyi bitmap song-medium-r-normal--16-160-75-75-p-80-iso10646-1
 workspace_layout tabbed
 focus_follows_mouse no
-bindsym $mod+F1 exec google-chrome
+bindsym $mod+F1 exec chromium
 bindsym $mod+F2 exec urxvt -e ranger
 bindsym $mod+F3 exec geany
 bindsym $mod+F4 exec urxvt -e alsamixer
 bindsym $mod+F5 exec amixer set Master toggle
 bindsym $mod+F6 exec urxvt -e wicd-curses
-bindsym $mod+F7 exec google-chrome --new-window localhost:631
+bindsym $mod+F7 exec chromium --new-window localhost:631
 bindsym $mod+F11 exec sudo reboot
 bindsym $mod+F12 exec sudo poweroff
 
