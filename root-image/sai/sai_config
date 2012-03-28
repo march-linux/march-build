@@ -13,7 +13,7 @@ sai_config() {
 			-G audio,lp,network,optical,power,storage,video,wheel march
 		# add march repo
 		echo "[march]" >> /mnt/etc/pacman.conf
-		echo "Server = http://dl.dropbox.com/u/10527821/repo/i686/" >> /mnt/etc/pacman.conf
+		echo "Server = http://dl.dropbox.com/u/10527821/repo/x86_64/" >> /mnt/etc/pacman.conf
 		: > /tmp/$FUNCNAME
 	fi
 }
