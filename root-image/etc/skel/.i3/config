@@ -5,7 +5,7 @@
 set $mod Mod1
 
 # march config
-font -wenquanyi-wenquanyi bitmap song-medium-r-normal--16-160-75-75-p-80-iso10646-1
+font -wenquanyi-wenquanyi bitmap song-medium-r-normal--12-120-75-75-p-119-iso10646-1
 workspace_layout tabbed
 focus_follows_mouse no
 bindsym $mod+F1 exec chromium

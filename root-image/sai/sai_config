@@ -5,6 +5,8 @@ sai_config() {
 	if [[ ! -f /tmp/$FUNCNAME ]]; then
 		# copy march config
 		cp -r /sai/etc/ /mnt/
+        # mkinitcpio
+        chroot /mnt mkinitcpio -p linux
 		# aspm
 		sed -i -e 's|\(APPEND root=/dev/disk/by-label/root ro\)|\1 pcie_aspm=force|' /mnt/boot/syslinux/syslinux.cfg
 		# adduser
