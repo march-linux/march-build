@@ -31,8 +31,8 @@ imap <F1> :tabprevious<CR>
 map <F2> :tabnext<CR>
 imap <F2> :tabnext<CR>
 
-map <F5> :tabnew<CR>
-imap <F5> :tabnew<CR>
+map <F3> :tabnew<CR>
+imap <F3> :tabnew<CR>
 
-map <F6> :tabclose<CR>
-imap <F6> :tabclose<CR>
+map <F4> :tabclose<CR>
+imap <F4> :tabclose<CR>
