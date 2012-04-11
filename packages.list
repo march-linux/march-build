@@ -39,6 +39,7 @@ geany
 vlc-ncurses
 ldm-git
 mupdf
+procps
 # network
 wicd
 # libreoffice
