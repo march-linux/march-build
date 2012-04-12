@@ -39,6 +39,7 @@ vlc-ncurses
 ldm-git
 mupdf
 procps
+openssl
 # network
 wicd
 # libreoffice
