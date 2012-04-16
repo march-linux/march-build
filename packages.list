@@ -42,12 +42,6 @@ procps
 openssh
 # network
 wicd
-# libreoffice
-hunspell-en
-hyphen-en
-libreoffice-writer
-libreoffice-calc
-libreoffice-en-US
 # xorg
 xf86-input-synaptics
 xf86-video-ati

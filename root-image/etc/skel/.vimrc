@@ -2,7 +2,6 @@
 set nocompatible
 set mouse=a
 set encoding=utf-8
-set fileencoding=utf-8
 set nobackup
 filetype on
 
@@ -23,8 +22,6 @@ set smarttab
 set shiftwidth=2
 
 " map
-map ; :
-
 map <F1> :tabprevious<CR>
 imap <F1> :tabprevious<CR>
 
