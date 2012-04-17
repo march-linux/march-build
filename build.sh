@@ -1,7 +1,7 @@
 #!/bin/bash
 
 set -e -u
-# dep: make rsync imagemagick ttf-droid squashfs-tools libisoburn
+sudo pacman -S --needed make rsync imagemagick ttf-droid squashfs-tools libisoburn
 
 iso_name=march
 iso_label="MARCH_$(date +%Y%m)"
