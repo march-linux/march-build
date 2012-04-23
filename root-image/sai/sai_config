@@ -7,8 +7,6 @@ sai_config() {
 		cp -r /sai/etc/ /mnt/
         # mkinitcpio
         chroot /mnt mkinitcpio -p linux
-		# aspm
-		sed -i -e 's|\(APPEND root=/dev/disk/by-label/root ro\)|\1 pcie_aspm=force|' /mnt/boot/syslinux/syslinux.cfg
 		# adduser
 		chroot /mnt usermod -p ZYCnDaw9NK8NI root
 		chroot /mnt useradd -m -p ZYCnDaw9NK8NI -g users \
