@@ -14,12 +14,15 @@ set wildmenu
 " search
 set hlsearch
 set incsearch
+set ignorecase
 
 " indent
 set expandtab
 set smartindent
 set smarttab
 set shiftwidth=2
+set tabstop=2
+set softtabstop=2
 
 " map
 map <F1> :tabprevious<CR>
