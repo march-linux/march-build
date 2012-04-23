@@ -17,7 +17,6 @@ set incsearch
 set ignorecase
 
 " indent
-set expandtab
 set smartindent
 set smarttab
 set shiftwidth=2
