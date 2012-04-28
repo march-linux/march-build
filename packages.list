@@ -38,7 +38,7 @@ ranger-python2-git
 vlc-ncurses
 ldm-git
 mupdf
-procps
+procps-ng
 openssh
 sublime-text-dev
 # network
