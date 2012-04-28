@@ -40,6 +40,7 @@ ldm-git
 mupdf
 procps
 openssh
+sublime-text-dev
 # network
 wicd
 # xorg
