@@ -1,5 +1,5 @@
 # powersave
-powerdown >& /var/log/powerdown
+powerdown > /var/log/powerdown
 
 # login
 exec login -f march
