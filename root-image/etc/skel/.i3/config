@@ -25,6 +25,7 @@ bindsym $mod+F7 exec chromium --new-window localhost:631
 bindsym $mod+F10 exec sudo ps2mem
 bindsym $mod+F11 exec sudo reboot
 bindsym $mod+F12 exec sudo ppoweroff
+client.unfocused        #666666 #222222 #888888 #292d2e
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
