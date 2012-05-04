@@ -42,6 +42,7 @@ procps-ng
 openssh
 sublime-text-dev
 scrot
+git
 # network
 wicd
 # xorg
