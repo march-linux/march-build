@@ -10,6 +10,8 @@ feh --bg-fill ~/.wallpaper/wallpaper.jpg
 export XMODIFIERS="@im=fcitx"
 export GTK_IM_MODULE=fcitx
 fcitx &
+# other apps
+dropboxd &
 # DE
 xset +fp /usr/share/fonts/wenquanyi
 exec i3
