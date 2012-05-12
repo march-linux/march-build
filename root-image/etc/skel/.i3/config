@@ -17,7 +17,7 @@ workspace_layout tabbed
 focus_follows_mouse no
 bindsym $mod+F1 exec chromium
 bindsym $mod+F2 exec urxvt -e ranger
-bindsym $mod+F3 exec subl
+bindsym $mod+F3 exec geany
 bindsym $mod+F4 exec amixer set Master 5+
 bindsym $mod+F5 exec amixer set Master 5-
 bindsym $mod+F6 exec amixer set Master toggle
@@ -27,6 +27,8 @@ bindsym $mod+F10 exec sudo ps2mem
 bindsym $mod+F11 exec sudo reboot
 bindsym $mod+F12 exec sudo ppoweroff
 client.unfocused        #888888 #222222 #888888 #292d2e
+force_xinerama yes
+
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
