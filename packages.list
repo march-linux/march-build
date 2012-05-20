@@ -26,7 +26,8 @@ unzip
 unrar
 rar
 # zh-TW support
-fcitx-gtk2
+fcitx-mini
+fcitx-en-git
 fcitx-chewing-git
 # extra apps
 packer
