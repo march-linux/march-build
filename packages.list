@@ -46,7 +46,8 @@ scrot
 git
 dropbox
 # network
-wicd
+connman
+oonn
 # xorg
 xf86-input-synaptics
 xf86-video-ati

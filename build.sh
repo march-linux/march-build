@@ -1,7 +1,7 @@
 #!/bin/bash
 
 set -e -u
-sudo pacman -S --needed make rsync imagemagick ttf-droid squashfs-tools libisoburn
+sudo pacman -S --needed make rsync ttf-droid squashfs-tools libisoburn
 
 iso_name=march
 iso_label="MARCH_$(date +%Y%m)"
@@ -85,9 +85,7 @@ make_syslinux() {
             s|%INSTALL_DIR%|${install_dir}|g;
             s|%ARCH%|${arch}|g" ${script_path}/syslinux/syslinux.cfg > ${work_dir}/iso/${install_dir}/boot/syslinux/syslinux.cfg
 
-		# add version to boot background
-		convert -gravity center -font Droid-Sans-Mono-Regular -fill white -pointsize 12 -draw "text 250,220 '${iso_version}-${arch}'" \
-		${work_dir}/root-image/sai/splash.jpg ${work_dir}/iso/${install_dir}/boot/syslinux/splash.jpg 
+				cp ${work_dir}/root-image/sai/splash.jpg ${work_dir}/iso/${install_dir}/boot/syslinux/splash.jpg 
         
 				cp ${work_dir}/root-image/usr/lib/syslinux/{vesamenu.c32,chain.c32,reboot.c32,poweroff.com} ${work_dir}/iso/${install_dir}/boot/syslinux/
         : > ${work_dir}/build.${FUNCNAME}
