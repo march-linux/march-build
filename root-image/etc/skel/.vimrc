@@ -3,13 +3,15 @@ set nocompatible
 set mouse=a
 set encoding=utf-8
 set nobackup
-filetype on
+set noswapfile
+filetype plugin indent on
 
 " look
 syntax on
 colorscheme ron
 set number
 set wildmenu
+set wrap
 
 " search
 set hlsearch
@@ -19,9 +21,9 @@ set ignorecase
 " indent
 set smartindent
 set smarttab
-set shiftwidth=2
-set tabstop=2
-set softtabstop=2
+set shiftwidth=4
+set tabstop=4
+set softtabstop=4
 
 " map
 map <F1> :tabprevious<CR>

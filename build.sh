@@ -47,9 +47,6 @@ make_customize_root_image() {
 	# setup locale
     	sed -i -e 's|^#\(en_US\.UTF-8\)|\1|'  ${work_dir}/root-image/etc/locale.gen
 	chroot ${work_dir}/root-image locale-gen
-    	# add march repo
-	echo "[march]" >> ${work_dir}/root-image/etc/pacman.conf
-	echo "Server = http://dl.dropbox.com/u/10527821/repo/x86_64/" >> ${work_dir}/root-image/etc/pacman.conf
         : > ${work_dir}/build.${FUNCNAME}
     fi
 }

@@ -7,19 +7,17 @@ syslinux
 which
 wget
 # DE
-i3-wm
-i3status
-rxvt-unicode
+kde-wallpapers 
+kdebase-dolphin
+kdebase-kfind
+kdebase-konsole
+kdebase-plasma
 less
-dmenu
-wqy-bitmapfont
 ttf-droid
 # browser
 chromium
 flashplugin
-mimi
 # archiver
-2a
 tar
 zip
 unzip
@@ -31,23 +29,18 @@ fcitx-en-git
 fcitx-chewing-git
 # extra apps
 packer
-rtorrent
-feh
 vim
-alsa-utils
-ranger-python2-git
-vlc-ncurses
-ldm-git
-mupdf
-procps-ng
+vlc
 openssh
-geany
-scrot
+kdeutils-ark
 git
-dropbox
+kdesdk-kate
+kdegraphics-okular
+kdenetwork-kget
+kdegraphics-gwenview
 # network
-connman
-oonn
+networkmanager
+kdeplasma-applets-networkmanagement
 # xorg
 xf86-input-synaptics
 xf86-video-ati
