@@ -9,9 +9,9 @@ wget
 # DE
 kde-wallpapers 
 kdebase-dolphin
-kdebase-kfind
 kdebase-konsole
 kdebase-plasma
+kdemultimedia-kmix
 less
 ttf-droid
 # browser
@@ -28,16 +28,18 @@ fcitx-mini
 fcitx-en-git
 fcitx-chewing-git
 # extra apps
-packer
+package-query
+yaourt
 vim
 vlc
 openssh
 kdeutils-ark
 git
-kdesdk-kate
+qtcreator
 kdegraphics-okular
 kdenetwork-kget
 kdegraphics-gwenview
+phonon-vlc
 # network
 networkmanager
 kdeplasma-applets-networkmanagement
