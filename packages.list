@@ -12,6 +12,7 @@ kdebase-dolphin
 kdebase-konsole
 kdebase-plasma
 kdemultimedia-kmix
+phonon-vlc
 less
 ttf-droid
 # browser
@@ -28,9 +29,8 @@ fcitx-mini
 fcitx-en-git
 fcitx-chewing-git
 # extra apps
-package-query
-yaourt
 vim
+packer
 vlc
 openssh
 kdeutils-ark
@@ -38,8 +38,8 @@ git
 qtcreator
 kdegraphics-okular
 kdenetwork-kget
+kdegraphics-ksnapshot
 kdegraphics-gwenview
-phonon-vlc
 # network
 networkmanager
 kdeplasma-applets-networkmanagement
