@@ -1,0 +1,16 @@
+[Screen_0]
+OutputsUnified=false
+UnifiedRect=0,0,0,0
+UnifiedRotation=1
+
+[Screen_0_Output_LVDS1]
+Active=true
+Rect=0,0,1366,768
+RefreshRate=60.0159034729004
+Rotation=1
+
+[Screen_0_Output_VGA1]
+Active=true
+Rect=0,0,1680,1050
+RefreshRate=59.8832511901855
+Rotation=1

@@ -1,0 +1,40 @@
+[Devices][/org/freedesktop/UDisks/devices/loop0]
+EverMounted=true
+Icon=drive-harddisk
+LastNameSeen=4.2 GiB Hard Drive
+LastSeenMounted=false
+
+[Devices][/org/freedesktop/UDisks/devices/sda1]
+EverMounted=true
+Icon=drive-harddisk
+LastNameSeen=System Reserved
+LastSeenMounted=false
+
+[Devices][/org/freedesktop/UDisks/devices/sda2]
+EverMounted=true
+Icon=drive-harddisk
+LastNameSeen=244.1 GiB Hard Drive
+LastSeenMounted=false
+
+[Devices][/org/freedesktop/UDisks/devices/sda3]
+EverMounted=true
+Icon=drive-harddisk
+LastNameSeen=home
+LastSeenMounted=true
+
+[Devices][/org/freedesktop/UDisks/devices/sda4]
+EverMounted=true
+Icon=drive-harddisk
+LastNameSeen=root
+LastSeenMounted=true
+
+[Devices][/org/freedesktop/UDisks/devices/sdb]
+EverMounted=true
+Icon=drive-removable-media-usb
+LastNameSeen=Kingston DataTraveler 2.0
+LastSeenMounted=false
+
+[Devices][/org/freedesktop/UDisks/devices/sdb1]
+Icon=drive-removable-media-usb
+LastNameSeen=MARCH_201205
+LastSeenMounted=false

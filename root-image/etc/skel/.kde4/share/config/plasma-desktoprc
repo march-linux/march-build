@@ -1,0 +1,87 @@
+[ActivityManager HiddenTemplates]
+plasma-layout-org.kde.plasma-desktop.desktopIcons.desktop=true
+
+[BackgroundConfigDialog]
+Height 768=459
+Width 1366=906
+
+[DownloadDialog Settings]
+Height 768=400
+Width 1366=700
+
+[General]
+perVirtualDesktopViews=true
+
+[KFileDialog Settings]
+Height 768=420
+Recent Files[$e]=/usr/bin/powerdown,$HOME/Downloads/1339968491101.jpg,$HOME/Downloads/2416595842_3feeef5a0e_o.jpg,$HOME/Downloads/wall.jpg
+Width 1366=683
+
+[PlasmaViews][1]
+panelVisibility=0
+
+[PlasmaViews][1][Horizontal1366]
+offset=0
+
+[PlasmaViews][1][Sizes]
+lastsize=1366
+
+[PlasmaViews][1][Sizes][Horizontal1366]
+max=1366,27
+min=1366,27
+offset=0
+size=1366,27
+
+[PlasmaViews][1][Sizes][Horizontal1680]
+max=-1,-1
+min=-1,-1
+offset=0
+size=1366,27
+
+[Updates]
+performed=/usr/share/apps/plasma-desktop/updates/addShowActivitiesManagerPlasmoid.js,/usr/share/apps/plasma-desktop/updates/systray-to-notifications-widget.js
+
+[ViewIds]
+1=1
+63=3
+
+[beginSuppressingScreenPowerManagement]
+__file=
+reason=The battery applet has enabled system-wide inhibition
+
+[beginSuppressingSleep]
+__file=
+reason=The battery applet has enabled system-wide inhibition
+
+[invokeAction]
+__file=
+predicate=test-predicate-openinwindow.desktop
+
+[setBrightness]
+__file=
+brightness=100
+
+[setCurrent]
+__file=
+
+[setIcon]
+Icon=
+__file=
+
+[setName]
+Name=Desktop Icons
+__file=
+
+[stop]
+__file=
+
+[stopSuppressingScreenPowerManagement]
+__file=
+cookie=1
+
+[stopSuppressingSleep]
+__file=
+cookie=1
+
+[toggleActivityManager]
+__file=

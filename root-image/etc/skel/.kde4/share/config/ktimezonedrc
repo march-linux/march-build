@@ -1,0 +1,5 @@
+[TimeZones]
+LocalZone=America/Los_Angeles
+ZoneinfoDir=/usr/share/zoneinfo
+Zonetab=/usr/share/zoneinfo/zone.tab
+ZonetabCache=

@@ -1,0 +1,21 @@
+[$Version]
+update_info=kget.upd:2.8.0,kget.upd:2.8.0/sensitive,kget.upd:2.8.0/limitdownloads
+
+[Advanced]
+KonquerorIntegration=true
+
+[Appearance]
+HeaderState=AAAA/wAAAAAAAAABAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAtoAAAAGAQEAAQAAAAAAAAAAAAAAAGQAAABQAAAAhAAAAAAAAAADAAAA5gAAAAEAAAAAAAABkAAAAAQAAAAAAAAAZAAAAAEAAAAA
+
+[Internal]
+DropPosition=0,0
+FirstRun=false
+LastDirectory[$e]=$HOME
+LastGroup=My Downloads
+MainPosition=455,276
+
+[MainWindow]
+Height 768=380
+State=AAAA/wAAAAD9AAAAAAAAAuIAAAFKAAAABAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAEAAAAYAGsAZwBlAHQAXwB0AG8AbwBsAGIAYQByAQAAAAD/////AAAAAAAAAAA=
+ToolBarsMovable=Disabled
+Width 1366=738
