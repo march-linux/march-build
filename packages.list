@@ -7,7 +7,7 @@ syslinux
 which
 wget
 # DE
-kde-wallpapers 
+kde-wallpapers
 kdebase-dolphin
 kdebase-konsole
 kdebase-plasma
@@ -35,11 +35,10 @@ vlc
 openssh
 kdeutils-ark
 git
-qtcreator
+kdesdk-kate
 kdegraphics-okular
-kdenetwork-kget
 kdegraphics-ksnapshot
-kdegraphics-gwenview
+ktorrent
 # network
 networkmanager
 kdeplasma-applets-networkmanagement
