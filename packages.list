@@ -23,7 +23,6 @@ tar
 zip
 unzip
 unrar
-rar
 # zh-TW support
 fcitx-mini
 fcitx-en-git
@@ -31,7 +30,7 @@ fcitx-chewing-git
 # extra apps
 vim
 packer
-vlc
+vlc-ncurses
 openssh
 kdeutils-ark
 git
@@ -45,7 +44,7 @@ kdeplasma-applets-networkmanagement
 # xorg
 xf86-input-synaptics
 xf86-video-ati
-xf86-video-intel
+xf86-video-intel-sna
 xf86-video-nouveau
 xf86-video-vesa
 xorg-server

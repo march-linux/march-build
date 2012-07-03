@@ -1,8 +1,0 @@
-[BatteryManagement]
-BatteryCriticalAction=0
-BatteryCriticalLevel=0
-BatteryLowLevel=0
-
-[General]
-configLockScreen=false
-doNotInhibitOnLidClose=false
