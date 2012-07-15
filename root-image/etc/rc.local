@@ -1,5 +1,2 @@
 # powersave
-powerdown > /var/log/powerdown
-
-# login
-exec login -f march
+powerdown

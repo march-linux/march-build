@@ -13,6 +13,8 @@ kdebase-konsole
 kdebase-plasma
 kdemultimedia-kmix
 phonon-vlc
+kdebase-kdialog
+kdebase-kdepasswd
 less
 ttf-droid
 # browser
@@ -25,7 +27,6 @@ unzip
 unrar
 # zh-TW support
 fcitx-mini
-fcitx-en-git
 fcitx-chewing-git
 # extra apps
 vim

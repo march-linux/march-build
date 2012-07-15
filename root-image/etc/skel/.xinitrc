@@ -4,6 +4,3 @@ xset +dpms
 xset dpms 0 0 300
 # IM
 export XMODIFIERS="@im=fcitx"
-fcitx &
-# DE
-exec ck-launch-session startkde
