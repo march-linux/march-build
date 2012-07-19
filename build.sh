@@ -39,7 +39,9 @@ make_customize_root_image() {
 	rm -rf ${work_dir}/root-image/usr/share/gtk-2.0/
 	rm -rf ${work_dir}/root-image/usr/share/gtk-3.0/
 	# setup mirrorlist
-	sed -i -e 's|^#\(.*http://.*\.kernel\.org.*\)|\1|' ${work_dir}/root-image/etc/pacman.d/mirrorlist
+	mirrorlist=${work_dir}/root-image/etc/pacman.d/mirrorlist
+	wget -O $mirrorlist 'https://www.archlinux.org/mirrorlist/?country=all&protocol=http&use_mirror_status=on'
+	sed -i "s/#Server/Server/g" $mirrorlist
 	# adduser
 	chroot ${work_dir}/root-image/ usermod -p ZYCnDaw9NK8NI root
 	chroot ${work_dir}/root-image/ useradd -m -p ZYCnDaw9NK8NI -g users \
