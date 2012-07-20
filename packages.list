@@ -12,9 +12,8 @@ kdebase-dolphin
 kdebase-konsole
 kdebase-plasma
 kdemultimedia-kmix
-phonon-vlc
 kdebase-kdialog
-kdebase-kdepasswd
+phonon-vlc
 less
 ttf-droid
 # browser
@@ -45,7 +44,7 @@ kdeplasma-applets-networkmanagement
 # xorg
 xf86-input-synaptics
 xf86-video-ati
-xf86-video-intel-sna
+xf86-video-intel
 xf86-video-nouveau
 xf86-video-vesa
 xorg-server
