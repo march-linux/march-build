@@ -37,7 +37,7 @@ git
 kdesdk-kate
 kdegraphics-okular
 kdegraphics-ksnapshot
-ktorrent
+transmission-qt
 # network
 networkmanager
 kdeplasma-applets-networkmanagement
