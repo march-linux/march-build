@@ -6,13 +6,15 @@ sudo
 syslinux
 which
 wget
+psmisc
+procps-ng
 # DE
-kde-wallpapers
 kdebase-dolphin
 kdebase-konsole
 kdebase-plasma
 kdemultimedia-kmix
 kdebase-kdialog
+kdebase-kdepasswd
 phonon-vlc
 less
 ttf-droid
@@ -39,8 +41,11 @@ kdegraphics-okular
 kdegraphics-ksnapshot
 transmission-qt
 # network
-networkmanager
-kdeplasma-applets-networkmanagement
+netcfg
+dialog
+ifplugd
+wpa_actiond
+wpa_supplicant
 # xorg
 xf86-input-synaptics
 xf86-video-ati
