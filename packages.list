@@ -39,7 +39,7 @@ git
 kdesdk-kate
 kdegraphics-okular
 kdegraphics-ksnapshot
-transmission-qt
+ktorrent
 # network
 netcfg
 dialog
