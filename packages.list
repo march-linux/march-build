@@ -1,31 +1,34 @@
 # base
 linux
 pacman
-initscripts
+systemd
+systemd-sysvcompat
 sudo
 syslinux
 which
 wget
 psmisc
 procps-ng
+man
 # DE
+kde-wallpapers
 kdebase-dolphin
 kdebase-konsole
 kdebase-plasma
 kdemultimedia-kmix
 kdebase-kdialog
-kdebase-kdepasswd
 phonon-vlc
 less
 ttf-droid
 # browser
 chromium
-flashplugin
+chromium-pepper-flash
 # archiver
 tar
 zip
 unzip
 unrar
+rar
 # zh-TW support
 fcitx-mini
 fcitx-chewing-git
@@ -40,6 +43,12 @@ kdesdk-kate
 kdegraphics-okular
 kdegraphics-ksnapshot
 ktorrent
+# libreoffice
+libreoffice-en-US
+libreoffice-kde4
+libreoffice-writer
+libreoffice-calc
+libreoffice-impress
 # network
 netcfg
 dialog

@@ -16,5 +16,10 @@ sai_config() {
 		source /usr/lib/powerdown-functions
 		sed -i "s|dummy|resume=/dev/disk/by-label/root resume_offset=$(hibernate_offset)|g" /mnt/boot/syslinux/syslinux.cfg
 		: > /tmp/$FUNCNAME
+		# systemd service
+		chroot /mnt systemctl enable kdm.service
+		chroot /mnt systemctl enable cups.service
+		chroot /mnt systemctl enable net-auto-wireless.service
+		chroot /mnt systemctl enable net-auto-wired.service
 	fi
 }
