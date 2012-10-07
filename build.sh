@@ -50,6 +50,11 @@ make_customize_root_image() {
     	sed -i -e 's|^#\(en_US\.UTF-8\)|\1|'  ${work_dir}/root-image/etc/locale.gen
 	chroot ${work_dir}/root-image locale-gen
         : > ${work_dir}/build.${FUNCNAME}
+        # systemd service
+        chroot ${work_dir}/root-image systemctl enable kdm.service
+        chroot ${work_dir}/root-image systemctl enable cups.service
+        chroot ${work_dir}/root-image systemctl enable net-auto-wireless.service
+        chroot ${work_dir}/root-image systemctl enable net-auto-wired.service
     fi
 }
 
@@ -84,8 +89,8 @@ make_syslinux() {
             s|%INSTALL_DIR%|${install_dir}|g;
             s|%ARCH%|${arch}|g" ${script_path}/syslinux/syslinux.cfg > ${work_dir}/iso/${install_dir}/boot/syslinux/syslinux.cfg
 
-				cp ${work_dir}/root-image/sai/splash.jpg ${work_dir}/iso/${install_dir}/boot/syslinux/splash.jpg 
-        
+				cp ${work_dir}/root-image/sai/splash.jpg ${work_dir}/iso/${install_dir}/boot/syslinux/splash.jpg
+
 				cp ${work_dir}/root-image/usr/lib/syslinux/{vesamenu.c32,chain.c32,reboot.c32,poweroff.com} ${work_dir}/iso/${install_dir}/boot/syslinux/
         : > ${work_dir}/build.${FUNCNAME}
     fi
