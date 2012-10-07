@@ -51,10 +51,10 @@ make_customize_root_image() {
 	chroot ${work_dir}/root-image locale-gen
         : > ${work_dir}/build.${FUNCNAME}
         # systemd service
-        chroot ${work_dir}/root-image systemctl enable kdm.service
-        chroot ${work_dir}/root-image systemctl enable cups.service
-        chroot ${work_dir}/root-image systemctl enable net-auto-wireless.service
-        chroot ${work_dir}/root-image systemctl enable net-auto-wired.service
+        chroot ${work_dir}/root-image systemctl enable kdm.service || true
+        chroot ${work_dir}/root-image systemctl enable cups.service || true
+        chroot ${work_dir}/root-image systemctl enable net-auto-wireless.service || true
+        chroot ${work_dir}/root-image systemctl enable net-auto-wired.service || true
     fi
 }
 
