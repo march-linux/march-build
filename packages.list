@@ -49,6 +49,7 @@ libreoffice-kde4
 libreoffice-writer
 libreoffice-calc
 libreoffice-impress
+hunspell-en
 # network
 netcfg
 dialog
