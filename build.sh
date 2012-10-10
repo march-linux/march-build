@@ -43,18 +43,38 @@ make_customize_root_image() {
 	wget -O $mirrorlist 'https://www.archlinux.org/mirrorlist/?country=all&protocol=http&use_mirror_status=on'
 	sed -i "s/#Server/Server/g" $mirrorlist
 	# adduser
-	chroot ${work_dir}/root-image/ usermod -p ZYCnDaw9NK8NI root
-	chroot ${work_dir}/root-image/ useradd -m -p ZYCnDaw9NK8NI -g users \
-		-G audio,lp,network,optical,power,storage,video,wheel march
+
+        mkarchiso ${verbose} -w "${work_dir}" -C "${pacman_conf}" -D "${install_dir}" \
+            -r 'usermod -p ZYCnDaw9NK8NI root' \
+            run
+
+        mkarchiso ${verbose} -w "${work_dir}" -C "${pacman_conf}" -D "${install_dir}" \
+            -r 'useradd -m -p ZYCnDaw9NK8NI -a -G audio,lp,network,optical,power,storage,video,wheel march' \
+            run
+
 	# setup locale
     	sed -i -e 's|^#\(en_US\.UTF-8\)|\1|'  ${work_dir}/root-image/etc/locale.gen
-	chroot ${work_dir}/root-image locale-gen
-        : > ${work_dir}/build.${FUNCNAME}
+        mkarchiso ${verbose} -w "${work_dir}" -C "${pacman_conf}" -D "${install_dir}" \
+            -r 'locale-gen' \
+            run
+
         # systemd service
-        chroot ${work_dir}/root-image systemctl enable kdm.service || true
-        chroot ${work_dir}/root-image systemctl enable cups.service || true
-        chroot ${work_dir}/root-image systemctl enable net-auto-wireless.service || true
-        chroot ${work_dir}/root-image systemctl enable net-auto-wired.service || true
+        mkarchiso ${verbose} -w "${work_dir}" -C "${pacman_conf}" -D "${install_dir}" \
+            -r 'systemctl enable kdm.service' \
+            run
+
+        mkarchiso ${verbose} -w "${work_dir}" -C "${pacman_conf}" -D "${install_dir}" \
+            -r 'systemctl enable cups.service' \
+            run
+
+        mkarchiso ${verbose} -w "${work_dir}" -C "${pacman_conf}" -D "${install_dir}" \
+            -r 'systemctl enable net-auto-wireless.service' \
+            run
+
+        mkarchiso ${verbose} -w "${work_dir}" -C "${pacman_conf}" -D "${install_dir}" \
+            -r 'systemctl enable net-auto-wired.service' \
+            run
+        : > ${work_dir}/build.${FUNCNAME}
     fi
 }
 
