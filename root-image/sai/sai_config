@@ -9,7 +9,7 @@ sai_config() {
 		chroot /mnt mkinitcpio -p linux
 		# adduser
 		chroot /mnt usermod -p ZYCnDaw9NK8NI root
-		chroot /mnt useradd -m -p ZYCnDaw9NK8NI -a -G audio,lp,network,optical,power,storage,video,wheel march
+		chroot /mnt useradd -m -p ZYCnDaw9NK8NI -g users -G audio,lp,network,optical,power,storage,video,wheel march
 		# setup resume
 		chroot /mnt suspend-to-disk
 		source /usr/lib/powerdown-functions

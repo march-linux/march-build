@@ -44,36 +44,19 @@ make_customize_root_image() {
 	sed -i "s/#Server/Server/g" $mirrorlist
 	# adduser
 
-        mkarchiso ${verbose} -w "${work_dir}" -C "${pacman_conf}" -D "${install_dir}" \
-            -r 'usermod -p ZYCnDaw9NK8NI root' \
-            run
+        chroot ${work_dir}/root-image usermod -p ZYCnDaw9NK8NI root
 
-        mkarchiso ${verbose} -w "${work_dir}" -C "${pacman_conf}" -D "${install_dir}" \
-            -r 'useradd -m -p ZYCnDaw9NK8NI -a -G audio,lp,network,optical,power,storage,video,wheel march' \
-            run
+        chroot ${work_dir}/root-image useradd -m -p ZYCnDaw9NK8NI -g users -G audio,lp,network,optical,power,storage,video,wheel march
 
 	# setup locale
     	sed -i -e 's|^#\(en_US\.UTF-8\)|\1|'  ${work_dir}/root-image/etc/locale.gen
-        mkarchiso ${verbose} -w "${work_dir}" -C "${pacman_conf}" -D "${install_dir}" \
-            -r 'locale-gen' \
-            run
+        chroot ${work_dir}/root-image locale-gen
 
         # systemd service
-        mkarchiso ${verbose} -w "${work_dir}" -C "${pacman_conf}" -D "${install_dir}" \
-            -r 'systemctl enable kdm.service' \
-            run
-
-        mkarchiso ${verbose} -w "${work_dir}" -C "${pacman_conf}" -D "${install_dir}" \
-            -r 'systemctl enable cups.service' \
-            run
-
-        mkarchiso ${verbose} -w "${work_dir}" -C "${pacman_conf}" -D "${install_dir}" \
-            -r 'systemctl enable net-auto-wireless.service' \
-            run
-
-        mkarchiso ${verbose} -w "${work_dir}" -C "${pacman_conf}" -D "${install_dir}" \
-            -r 'systemctl enable net-auto-wired.service' \
-            run
+        chroot ${work_dir}/root-image systemctl enable kdm.service || true
+        chroot ${work_dir}/root-image systemctl enable cups.service || true
+        chroot ${work_dir}/root-image systemctl enable net-auto-wireless.service || true
+        chroot ${work_dir}/root-image systemctl enable net-auto-wired.service || true
         : > ${work_dir}/build.${FUNCNAME}
     fi
 }
