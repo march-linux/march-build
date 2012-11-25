@@ -16,9 +16,7 @@ sai_config() {
 		sed -i "s|dummy|resume=/dev/disk/by-label/root resume_offset=$(hibernate_offset)|g" /mnt/boot/syslinux/syslinux.cfg
 		: > /tmp/$FUNCNAME
 		# systemd service
-		chroot /mnt systemctl enable kdm.service || true
-		chroot /mnt systemctl enable cups.service || true
-		chroot /mnt systemctl enable net-auto-wireless.service || true
-		chroot /mnt systemctl enable net-auto-wired.service || true
+		chroot /mnt systemctl enable cups || true
+		chroot /mnt systemctl enable connman || true
 	fi
 }

@@ -10,14 +10,9 @@ wget
 psmisc
 procps-ng
 man
+alsa-utils
 # DE
-kde-wallpapers
-kdebase-dolphin
-kdebase-konsole
-kdebase-plasma
-kdemultimedia-kmix
-kdebase-kdialog
-phonon-vlc
+i3
 less
 ttf-droid
 # browser
@@ -30,15 +25,17 @@ unzip
 unrar
 rar
 # zh-TW support
-fcitx-mini
+fcitx-qt
+fcitx-gtk2
 fcitx-chewing-git
 # extra apps
 vim
 packer
 vlc-ncurses
 openssh
-kdeutils-ark
 git
+kdebase-dolphin
+kdeutils-ark
 kdesdk-kate
 kdegraphics-okular
 kdegraphics-ksnapshot
@@ -46,16 +43,12 @@ ktorrent
 gistit
 # libreoffice
 libreoffice-en-US
-libreoffice-kde4
 libreoffice-writer
 libreoffice-calc
 libreoffice-impress
 hunspell-en
 # network
-netcfg
-dialog
-ifplugd
-wpa_actiond
+connman
 wpa_supplicant
 # xorg
 xf86-input-synaptics
