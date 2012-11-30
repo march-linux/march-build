@@ -8,22 +8,21 @@ filetype plugin indent on
 
 " look
 syntax on
-colorscheme ron
 set number
 set wildmenu
-set wrap
 
 " search
 set hlsearch
 set incsearch
 set ignorecase
+set smartcase
 
 " indent
 set smartindent
-set smarttab
 set shiftwidth=4
 set tabstop=4
 set softtabstop=4
+set expandtab
 
 " map
 map <F1> :tabprevious<CR>

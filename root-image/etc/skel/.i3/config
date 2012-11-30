@@ -9,7 +9,6 @@
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
-workspace_layout tabbed
 set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
@@ -145,3 +144,8 @@ bindsym $mod+r mode "resize"
 bar {
         status_command i3status
 }
+
+bindsym XF86AudioRaiseVolume exec "amixer sset Master 5.00dB+"
+bindsym XF86AudioLowerVolume exec "amixer sset Master 5.00dB-"
+workspace_layout stacking
+focus_follows_mouse no

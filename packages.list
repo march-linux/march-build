@@ -11,6 +11,8 @@ psmisc
 procps-ng
 man
 alsa-utils
+bash-completion
+mimi
 # DE
 i3
 less
@@ -27,7 +29,7 @@ rar
 # zh-TW support
 fcitx-qt
 fcitx-gtk2
-fcitx-chewing-git
+fcitx-chewing
 # extra apps
 vim
 packer
