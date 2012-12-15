@@ -23,37 +23,14 @@ make_basefs() {
 # Customize installation (root-image)
 make_customize_root_image() {
     if [[ ! -e ${work_dir}/build.${FUNCNAME} ]]; then
-	# copy march config
-	cp -r ${script_path}/root-image/ ${work_dir}
-	cp ${script_path}/packages.list ${work_dir}/root-image/sai/
-	cp -r ${script_path}/root-image/etc/ ${work_dir}/root-image/sai/
-	# change permission
-	chmod 440 ${work_dir}/root-image/etc/sudoers
-	chmod 755 ${work_dir}/root-image/install
-	# remove unused manual
-	rm -rf ${work_dir}/root-image/usr/share/man/
-	rm -rf ${work_dir}/root-image/usr/share/doc/
-	rm -rf ${work_dir}/root-image/usr/share/gtk-doc/
-	rm -rf ${work_dir}/root-image/usr/share/licenses/
-	rm -rf ${work_dir}/root-image/usr/share/info/
-	rm -rf ${work_dir}/root-image/usr/share/gtk-2.0/
-	rm -rf ${work_dir}/root-image/usr/share/gtk-3.0/
-	# setup mirrorlist
-	mirrorlist=${work_dir}/root-image/etc/pacman.d/mirrorlist
-	wget -O $mirrorlist 'https://www.archlinux.org/mirrorlist/?country=all&protocol=http&use_mirror_status=on'
-	sed -i "s/#Server/Server/g" $mirrorlist
-	# adduser
-	chroot ${work_dir}/root-image usermod -p ZYCnDaw9NK8NI root
-	chroot ${work_dir}/root-image useradd -m -p ZYCnDaw9NK8NI -g users -G audio,lp,network,optical,power,storage,video,wheel march
+		# copy march config
+		cp -r ${script_path}/root-image/ ${work_dir}
+		cp ${script_path}/packages.list ${work_dir}/root-image/sai/
+		cp -r ${script_path}/root-image/etc/ ${work_dir}/root-image/sai/
+		
+		mkarchiso ${verbose} -w "${work_dir}" -C "${pacman_conf}" -D "${install_dir}" -r '/customize_image' run
+		rm ${work_dir}/root-image/customize_image
 
-	# setup locale
-	sed -i -e 's|^#\(en_US\.UTF-8\)|\1|'  ${work_dir}/root-image/etc/locale.gen
-	chroot ${work_dir}/root-image locale-gen
-
-	# systemd service
-	chroot ${work_dir}/root-image systemctl enable cups || true
-	chroot ${work_dir}/root-image systemctl enable NetworkManager || true
-	chroot ${work_dir}/root-image systemctl enable gdm || true
         : > ${work_dir}/build.${FUNCNAME}
     fi
 }
@@ -89,7 +66,7 @@ make_syslinux() {
             s|%INSTALL_DIR%|${install_dir}|g;
             s|%ARCH%|${arch}|g" ${script_path}/syslinux/syslinux.cfg > ${work_dir}/iso/${install_dir}/boot/syslinux/syslinux.cfg
 
-		cp ${work_dir}/root-image/sai/splash.jpg ${work_dir}/iso/${install_dir}/boot/syslinux/splash.jpg
+		cp ${work_dir}/root-image/sai/splash.png ${work_dir}/iso/${install_dir}/boot/syslinux/splash.png
 		cp ${work_dir}/root-image/usr/lib/syslinux/{vesamenu.c32,chain.c32,reboot.c32,poweroff.com} ${work_dir}/iso/${install_dir}/boot/syslinux/
         : > ${work_dir}/build.${FUNCNAME}
     fi
