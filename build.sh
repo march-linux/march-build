@@ -12,7 +12,7 @@ work_dir=work
 out_dir=out
 verbose="y"
 
-script_path=$(cd $(dirname "$0"); pwd)
+script_path=$(readlink -f ${0%/*})
 
 # Base installation (root-image)
 make_basefs() {
@@ -53,6 +53,7 @@ make_customize_root_image() {
 	# systemd service
 	chroot ${work_dir}/root-image systemctl enable cups || true
 	chroot ${work_dir}/root-image systemctl enable NetworkManager || true
+	chroot ${work_dir}/root-image systemctl enable gdm || true
         : > ${work_dir}/build.${FUNCNAME}
     fi
 }
@@ -88,9 +89,8 @@ make_syslinux() {
             s|%INSTALL_DIR%|${install_dir}|g;
             s|%ARCH%|${arch}|g" ${script_path}/syslinux/syslinux.cfg > ${work_dir}/iso/${install_dir}/boot/syslinux/syslinux.cfg
 
-				cp ${work_dir}/root-image/sai/splash.jpg ${work_dir}/iso/${install_dir}/boot/syslinux/splash.jpg
-
-				cp ${work_dir}/root-image/usr/lib/syslinux/{vesamenu.c32,chain.c32,reboot.c32,poweroff.com} ${work_dir}/iso/${install_dir}/boot/syslinux/
+		cp ${work_dir}/root-image/sai/splash.jpg ${work_dir}/iso/${install_dir}/boot/syslinux/splash.jpg
+		cp ${work_dir}/root-image/usr/lib/syslinux/{vesamenu.c32,chain.c32,reboot.c32,poweroff.com} ${work_dir}/iso/${install_dir}/boot/syslinux/
         : > ${work_dir}/build.${FUNCNAME}
     fi
 }

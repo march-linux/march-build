@@ -18,5 +18,6 @@ sai_config() {
 		# systemd service
 		chroot /mnt systemctl enable cups || true
 		chroot /mnt systemctl enable NetworkManager || true
+		chroot /mnt systemctl enable gdm || true
 	fi
 }
