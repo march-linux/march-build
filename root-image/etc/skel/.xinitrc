@@ -1,2 +1,2 @@
 [[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
-i3
+gnome-session
