@@ -43,18 +43,16 @@ make_customize_root_image() {
 	wget -O $mirrorlist 'https://www.archlinux.org/mirrorlist/?country=all&protocol=http&use_mirror_status=on'
 	sed -i "s/#Server/Server/g" $mirrorlist
 	# adduser
-
-        chroot ${work_dir}/root-image usermod -p ZYCnDaw9NK8NI root
-
-        chroot ${work_dir}/root-image useradd -m -p ZYCnDaw9NK8NI -g users -G audio,lp,network,optical,power,storage,video,wheel march
+	chroot ${work_dir}/root-image usermod -p ZYCnDaw9NK8NI root
+	chroot ${work_dir}/root-image useradd -m -p ZYCnDaw9NK8NI -g users -G audio,lp,network,optical,power,storage,video,wheel march
 
 	# setup locale
-    	sed -i -e 's|^#\(en_US\.UTF-8\)|\1|'  ${work_dir}/root-image/etc/locale.gen
-        chroot ${work_dir}/root-image locale-gen
+	sed -i -e 's|^#\(en_US\.UTF-8\)|\1|'  ${work_dir}/root-image/etc/locale.gen
+	chroot ${work_dir}/root-image locale-gen
 
-        # systemd service
+	# systemd service
 	chroot ${work_dir}/root-image systemctl enable cups || true
-	chroot ${work_dir}/root-image systemctl enable connman || true
+	chroot ${work_dir}/root-image systemctl enable NetworkManager || true
         : > ${work_dir}/build.${FUNCNAME}
     fi
 }

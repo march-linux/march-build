@@ -17,6 +17,6 @@ sai_config() {
 		: > /tmp/$FUNCNAME
 		# systemd service
 		chroot /mnt systemctl enable cups || true
-		chroot /mnt systemctl enable connman || true
+		chroot /mnt systemctl enable NetworkManager || true
 	fi
 }

@@ -11,15 +11,28 @@ psmisc
 procps-ng
 man
 alsa-utils
-bash-completion
-mimi
+rfkill
+xterm
 # DE
-i3
-less
+mimi
 ttf-droid
+gnome-control-center
+gnome-desktop
+gnome-icon-theme
+gnome-icon-theme-extras
+gnome-panel
+gnome-screensaver
+gnome-backgrounds
+gnome-shell
+gnome-themes-standard
+gnome-session
+xdg-user-dirs-gtk
+mutter
+nautilus
+notification-daemon
 # browser
-chromium
 chromium-pepper-flash
+chromium
 # archiver
 tar
 zip
@@ -27,21 +40,21 @@ unzip
 unrar
 rar
 # zh-TW support
-fcitx-qt
+fcitx-gtk3
 fcitx-gtk2
 fcitx-chewing
 # extra apps
 vim
 packer
-vlc-ncurses
+totem
+gst-ffmpeg
 openssh
 git
-kdebase-dolphin
-kdeutils-ark
-kdesdk-kate
-kdegraphics-okular
-kdegraphics-ksnapshot
-ktorrent
+file-roller
+geany
+evince
+gnome-screenshot
+transmission-gtk
 gistit
 # libreoffice
 libreoffice-en-US
@@ -49,9 +62,6 @@ libreoffice-writer
 libreoffice-calc
 libreoffice-impress
 hunspell-en
-# network
-connman
-wpa_supplicant
 # xorg
 xf86-input-synaptics
 xf86-video-ati

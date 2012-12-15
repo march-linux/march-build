@@ -9,7 +9,7 @@
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
-set $mod Mod4
+set $mod Mod1
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below. ISO 10646 = Unicode
@@ -17,8 +17,8 @@ set $mod Mod4
 # The font above is very space-efficient, that is, it looks good, sharp and
 # clear in small sizes. However, if you need a lot of unicode glyphs or
 # right-to-left text rendering, you should instead use pango for rendering and
-# chose an xft font, such as:
-font xft:DejaVu Sans Mono 10
+# chose a FreeType font, such as:
+font pango:DejaVu Sans Mono 10
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -31,6 +31,10 @@ bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec dmenu_run
+# There also is the (new) i3-dmenu-desktop which only displays applications
+# shipping a .desktop file. It is a wrapper around dmenu, so you need that
+# installed.
+# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # change focus
 bindsym $mod+j focus left
@@ -80,7 +84,7 @@ bindsym $mod+space focus mode_toggle
 bindsym $mod+a focus parent
 
 # focus the child container
-#bindcode $mod+d focus child
+#bindsym $mod+d focus child
 
 # switch to workspace
 bindsym $mod+1 workspace 1
@@ -145,7 +149,8 @@ bar {
         status_command i3status
 }
 
-bindsym XF86AudioRaiseVolume exec "amixer sset Master 5.00dB+"
-bindsym XF86AudioLowerVolume exec "amixer sset Master 5.00dB-"
+bindsym F12 exec "amixer sset Master 5.00dB+"
+bindsym F11 exec "amixer sset Master 5.00dB-"
+bindsym F1 exec "sudo suspend-to-mem"
 workspace_layout stacking
 focus_follows_mouse no
