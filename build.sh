@@ -28,7 +28,7 @@ make_customize_root_image() {
 		cp ${script_path}/packages.list ${work_dir}/root-image/sai/
 		cp -r ${script_path}/root-image/etc/ ${work_dir}/root-image/sai/
 		
-	    chmod 755 ${work_dir}/root-image/customize_image
+		chmod 755 ${work_dir}/root-image/customize_image
 		mkarchiso ${verbose} -w "${work_dir}" -D "${install_dir}" -r '/customize_image' run
 		rm ${work_dir}/root-image/customize_image
 

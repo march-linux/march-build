@@ -13,6 +13,7 @@ man
 alsa-utils
 rfkill
 xterm
+bash-completion
 # DE
 mimi
 ttf-droid
