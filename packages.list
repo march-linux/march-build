@@ -17,20 +17,8 @@ bash-completion
 # DE
 mimi
 ttf-droid
-gnome-control-center
-gnome-desktop
-gnome-icon-theme
-gnome-icon-theme-extras
-gnome-panel
-gnome-screensaver
-gnome-backgrounds
-gnome-shell
-gnome-themes-standard
-gnome-session
-xdg-user-dirs-gtk
-mutter
-nautilus
-notification-daemon
+i3
+less
 # browser
 chromium-pepper-flash
 chromium
@@ -41,22 +29,19 @@ unzip
 unrar
 rar
 # zh-TW support
-fcitx-gtk3
 fcitx-gtk2
 fcitx-chewing
 # extra apps
 vim
 packer
-totem
-gst-ffmpeg
+vlc-ncurses
 openssh
 git
-eog
-file-roller
+feh
 geany
-evince
-gnome-screenshot
-transmission-gtk
+zathura-pdf-mupdf
+scrot
+ranger
 gistit
 # libreoffice
 libreoffice-en-US
@@ -73,6 +58,9 @@ xf86-video-vesa
 xorg-server
 xorg-xinit
 xorg-xset
+# network
+netcfg
+wpa_supplicant
 # printing
 cups
 gutenprint
