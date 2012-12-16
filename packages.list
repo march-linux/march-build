@@ -13,12 +13,14 @@ man
 alsa-utils
 rfkill
 xterm
+less
 bash-completion
 # DE
 mimi
+dmenu
 ttf-droid
-i3
-less
+i3-wm
+i3status
 # browser
 chromium-pepper-flash
 chromium
@@ -38,11 +40,12 @@ vlc-ncurses
 openssh
 git
 feh
-geany
+sublime-text-dev
 zathura-pdf-mupdf
 scrot
 ranger
 gistit
+rtorrent
 # libreoffice
 libreoffice-en-US
 libreoffice-writer
@@ -57,7 +60,7 @@ xf86-video-nouveau
 xf86-video-vesa
 xorg-server
 xorg-xinit
-xorg-xset
+xorg-xrdb
 # network
 netcfg
 wpa_supplicant
