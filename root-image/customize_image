@@ -12,17 +12,14 @@ rm -rf /usr/share/info/
 rm -rf /usr/share/gtk-2.0/
 rm -rf /usr/share/gtk-3.0/
 # setup mirrorlist
-wget -O /etc/pacman.d/mirrorlist 'https://www.archlinux.org/mirrorlist/?country=all&protocol=http&use_mirror_status=on'
 sed -i "s/#Server/Server/g" /etc/pacman.d/mirrorlist
 # adduser
 usermod -p ZYCnDaw9NK8NI root
 useradd -m -p ZYCnDaw9NK8NI -g users -G audio,lp,network,optical,power,storage,video,wheel march
 
 # setup locale
-sed -i -e 's|^#\(en_US\.UTF-8\)|\1|'  /etc/locale.gen
+sed -i -e 's|^#\(en_US\.UTF-8\)|\1|' /etc/locale.gen
 locale-gen
 
 # systemd service
-systemctl enable cups
-systemctl enable NetworkManager
-systemctl enable gdm
+systemctl enable multi-user.target cups.service NetworkManager.service gdm.service
