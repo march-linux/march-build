@@ -24,15 +24,3 @@ set tabstop=4
 set softtabstop=4
 set expandtab
 
-" map
-map <F1> :tabprevious<CR>
-imap <F1> :tabprevious<CR>
-
-map <F2> :tabnext<CR>
-imap <F2> :tabnext<CR>
-
-map <F3> :tabnew<CR>
-imap <F3> :tabnew<CR>
-
-map <F4> :tabclose<CR>
-imap <F4> :tabclose<CR>
