@@ -51,6 +51,7 @@ totem
 gst-ffmpeg
 openssh
 git
+eog
 file-roller
 geany
 evince
