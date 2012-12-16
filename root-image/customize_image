@@ -22,4 +22,4 @@ sed -i -e 's|^#\(en_US\.UTF-8\)|\1|' /etc/locale.gen
 locale-gen
 
 # systemd service
-systemctl enable multi-user.target cups.service NetworkManager.service gdm.service
+systemctl enable graphical.target cups.service NetworkManager.service gdm.service
