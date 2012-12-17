@@ -65,6 +65,9 @@ xorg-xrdb
 # network
 netcfg
 wpa_supplicant
+dialog
+wpa_actiond
+ifplugd
 # printing
 cups
 gutenprint
