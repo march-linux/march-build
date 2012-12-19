@@ -40,11 +40,10 @@ vlc-ncurses
 openssh
 git
 feh
-sublime-text-dev
+geany-git
 zathura-pdf-mupdf
 scrot
-ranger
-gistit
+ranger-python2-git
 rtorrent
 irssi
 # libreoffice
