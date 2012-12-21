@@ -149,13 +149,13 @@ bar {
         status_command i3status
 }
 
-bindsym F12 exec "amixer sset Master 5+"
-bindsym F11 exec "amixer sset Master 5-"
-bindsym F10 exec "amixer sset Master toggle"
-bindsym F1 exec "sudo suspend-to-mem"
-bindsym F2 exec "xterm -e sudo wifi-menu"
-bindsym F3 exec "xterm -e ranger"
-bindsym F4 exec "chromium"
-bindsym F8 exec "scrot -d 10"
+bindsym $mod+F12 exec "amixer sset Master 5+"
+bindsym $mod+F11 exec "amixer sset Master 5-"
+bindsym $mod+F10 exec "amixer sset Master toggle"
+bindsym $mod+F1 exec "sudo suspend-to-mem"
+bindsym $mod+F2 exec "xterm -e sudo wifi-menu"
+bindsym $mod+F3 exec "xterm -e ranger"
+bindsym $mod+F4 exec "chromium"
+bindsym $mod+F8 exec "scrot -d 10"
 workspace_layout stacking
 focus_follows_mouse no

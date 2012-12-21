@@ -30,6 +30,7 @@ zip
 unzip
 unrar
 rar
+zippy
 # zh-TW support
 fcitx-gtk2
 fcitx-chewing
