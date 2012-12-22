@@ -22,8 +22,8 @@ ttf-droid
 i3-wm
 i3status
 # browser
-chromium-pepper-flash
 chromium
+chromium-pepper-flash
 # archiver
 tar
 zip
