@@ -12,10 +12,6 @@ sai_config() {
 		# adduser
 		chroot /mnt usermod -p ZYCnDaw9NK8NI root
 		chroot /mnt useradd -m -p ZYCnDaw9NK8NI -g users -G audio,lp,network,optical,power,storage,video,wheel march
-		# setup resume
-		chroot /mnt suspend-to-disk
-		source /usr/lib/powerdown-functions
-		chroot /mnt sed -i "s|dummy|resume=/dev/disk/by-label/root resume_offset=$(hibernate_offset)|g" /boot/syslinux/syslinux.cfg
 		# setup locale
 		chroot /mnt sed -i -e 's|^#\(en_US\.UTF-8\)|\1|' /etc/locale.gen
 		chroot /mnt locale-gen
