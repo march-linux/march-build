@@ -80,3 +80,5 @@
 !! white dark/light
 *color7:                S_base2
 *color15:               S_base3
+
+XTerm*VT100.translations: #override <Btn1Up>: select-end(PRIMARY, CLIPBOARD, CUT_BUFFER0)

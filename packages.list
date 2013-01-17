@@ -23,17 +23,18 @@ i3-wm
 i3status
 # browser
 chromium
-chromium-pepper-flash
+chromium-pepper-flash-stable
 # archiver
 tar
 zip
 unzip
 unrar
 rar
-zippy
+atool
+2a
 # zh-TW support
-fcitx-gtk2
-fcitx-chewing
+fcitx-mini
+fcitx-chewing-git
 # extra apps
 vim
 packer
@@ -55,9 +56,7 @@ libreoffice-impress
 hunspell-en
 # xorg
 xf86-input-synaptics
-xf86-video-ati
 xf86-video-intel
-xf86-video-nouveau
 xf86-video-vesa
 xorg-server
 xorg-xinit
