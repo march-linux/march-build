@@ -155,7 +155,7 @@ bindsym $mod+F10 exec "amixer sset Master toggle"
 bindsym $mod+F1 exec "sudo suspend-to-mem"
 bindsym $mod+F2 exec "xterm -e sudo wifi-menu"
 bindsym $mod+F3 exec "xterm -e ranger"
-bindsym $mod+F4 exec "chromium"
+bindsym $mod+F4 exec "firefox"
 bindsym $mod+F8 exec "scrot"
 workspace_layout tabbed
 focus_follows_mouse no

@@ -22,8 +22,8 @@ ttf-droid
 i3-wm
 i3status
 # browser
-chromium
-chromium-pepper-flash-stable
+firefox
+flashplugin
 # archiver
 tar
 zip
@@ -62,11 +62,12 @@ xorg-server
 xorg-xinit
 xorg-xrdb
 # network
-netcfg
-wpa_supplicant
-dialog
-wpa_actiond
+netctl-git
+dhcpcd
 ifplugd
+wpa_actiond
+dialog
+wpa_supplicant
 # printing
 cups
 gutenprint
