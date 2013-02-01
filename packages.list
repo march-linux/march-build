@@ -22,8 +22,8 @@ ttf-droid
 i3-wm
 i3status
 # browser
-firefox
-flashplugin
+chromium
+chromium-pepper-flash
 # archiver
 tar
 zip
@@ -63,7 +63,6 @@ xorg-xinit
 xorg-xrdb
 # network
 netctl-git
-dhcpcd
 ifplugd
 wpa_actiond
 dialog
