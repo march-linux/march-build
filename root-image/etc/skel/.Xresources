@@ -49,5 +49,6 @@
 *.color7:       t_selection
 *.color15:      t_current_line
 
-XTerm*VT100.translations: #override <Btn1Up>: select-end(PRIMARY, CLIPBOARD, CUT_BUFFER0)
-xterm*faceName:           Droid Sans Mono:bold:pixelsize=14
+xterm*faceName: Droid Sans Mono:antialias=True:pixelsize=14:bold
+xterm*faceNameDoublesize: Droid Sans Fallback:antialias=True:pixelsize=14:bold
+xterm*savelines: 16384

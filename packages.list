@@ -61,6 +61,7 @@ xf86-video-vesa
 xorg-server
 xorg-xinit
 xorg-xrdb
+autocutsel
 # network
 netctl-git
 ifplugd
