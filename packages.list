@@ -63,10 +63,8 @@ xorg-xinit
 xorg-xrdb
 autocutsel
 # network
-netctl-git
-ifplugd
-wpa_actiond
-dialog
+connman
+connman_dmenu
 wpa_supplicant
 # printing
 cups
