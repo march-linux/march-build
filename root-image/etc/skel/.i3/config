@@ -168,5 +168,6 @@ bindsym $mod+F2 exec "connman_dmenu"
 bindsym $mod+F3 exec "xterm -e ranger"
 bindsym $mod+F4 exec "chromium"
 bindsym $mod+F8 exec "scrot"
+bindsym $mod+c exec "xsel --primary | xsel --clipboard"
 workspace_layout tabbed
 focus_follows_mouse no

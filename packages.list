@@ -23,7 +23,7 @@ i3-wm
 i3status
 # browser
 chromium
-chromium-pepper-flash
+chromium-pepper-flash-stable
 # archiver
 tar
 zip
@@ -61,7 +61,7 @@ xf86-video-vesa
 xorg-server
 xorg-xinit
 xorg-xrdb
-autocutsel
+xsel
 # network
 connman
 connman_dmenu

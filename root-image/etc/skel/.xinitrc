@@ -1,9 +1,5 @@
 [[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
 
-# keep clipboard in sync
-autocutsel -selection CLIPBOARD -fork
-autocutsel -selection PRIMARY -fork
-
 # IM
 export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
