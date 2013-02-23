@@ -31,7 +31,7 @@ unzip
 unrar
 rar
 atool
-2a
+atool-wrapper
 # zh-TW support
 fcitx-mini
 fcitx-chewing-git
