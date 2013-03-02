@@ -1,22 +1,22 @@
 #!/bin/bash
 
 sai_config() {
-	say "$FUNCNAME: March customized"
-	if [[ ! -f /tmp/$FUNCNAME ]]; then
-		# copy march config
-		cp -r /sai/etc/ /mnt/
-		# mkinitcpio
-		chroot /mnt mkinitcpio -p linux
-		# setup mirrorlist
-		chroot /mnt sed -i "s/#Server/Server/g" /etc/pacman.d/mirrorlist
-		# adduser
-		chroot /mnt usermod -p ZYCnDaw9NK8NI root
-		chroot /mnt useradd -m -p ZYCnDaw9NK8NI -g users -G audio,lp,network,optical,power,storage,video,wheel march
-		# setup locale
-		chroot /mnt sed -i -e 's|^#\(en_US\.UTF-8\)|\1|' /etc/locale.gen
-		chroot /mnt locale-gen
-		# systemd service
-		chroot /mnt systemctl enable multi-user.target cups.service connman.service
-		: > /tmp/$FUNCNAME
-	fi
+    say "$FUNCNAME: March customized"
+    if [[ ! -f /tmp/$FUNCNAME ]]; then
+        # copy march config
+        cp -r /sai/etc/ /mnt/
+        # mkinitcpio
+        chroot /mnt mkinitcpio -p linux
+        # setup mirrorlist
+        chroot /mnt sed -i "s/#Server/Server/g" /etc/pacman.d/mirrorlist
+        # adduser
+        chroot /mnt usermod -p ZYCnDaw9NK8NI root
+        chroot /mnt useradd -m -p ZYCnDaw9NK8NI -g users -G audio,lp,network,optical,power,storage,video,wheel march
+        # setup locale
+        chroot /mnt sed -i -e 's|^#\(en_US\.UTF-8\)|\1|' /etc/locale.gen
+        chroot /mnt locale-gen
+        # systemd service
+        chroot /mnt systemctl enable multi-user.target cups.service connman.service
+        : > /tmp/$FUNCNAME
+    fi
 }

@@ -29,14 +29,15 @@ make_basefs() {
 
 # Customize installation (root-image)
 make_customize_root_image() {
-	# copy march config
-	cp -r ${script_path}/root-image/ ${work_dir}
-	cp ${script_path}/packages.list ${work_dir}/root-image/sai/
-	cp -r ${script_path}/root-image/etc/ ${work_dir}/root-image/sai/
-	
-	chmod 755 ${work_dir}/root-image/customize_image
-	mkarchiso -v -w "${work_dir}" -D "${install_dir}" -r '/customize_image' run
-	rm ${work_dir}/root-image/customize_image
+    # copy march config
+    cp -r ${script_path}/root-image/ ${work_dir}
+    cp ${script_path}/packages.list ${work_dir}/root-image/sai/
+    cat ${script_path}/extra.list >> ${work_dir}/root-image/sai/packages.list
+    cp -r ${script_path}/root-image/etc/ ${work_dir}/root-image/sai/
+
+    chmod 755 ${work_dir}/root-image/customize_image
+    mkarchiso -v -w "${work_dir}" -D "${install_dir}" -r '/customize_image' run
+    rm ${work_dir}/root-image/customize_image
 }
 
 # Copy mkinitcpio archiso hooks and build initramfs (root-image)
@@ -58,12 +59,11 @@ make_boot() {
 make_syslinux() {
     mkdir -p ${work_dir}/iso/${install_dir}/boot/syslinux
     sed "s|%ARCHISO_LABEL%|${iso_label}|g;
-         s|%INSTALL_DIR%|${install_dir}|g;
-         s|%ARCH%|${arch}|g" ${script_path}/syslinux/syslinux.cfg > ${work_dir}/iso/${install_dir}/boot/syslinux/syslinux.cfg
+    s|%INSTALL_DIR%|${install_dir}|g;
+    s|%ARCH%|${arch}|g" ${script_path}/syslinux/syslinux.cfg > ${work_dir}/iso/${install_dir}/boot/syslinux/syslinux.cfg
 
-	
-	cp ${work_dir}/root-image/sai/splash.png ${work_dir}/iso/${install_dir}/boot/syslinux/splash.png
-	cp ${work_dir}/root-image/usr/lib/syslinux/{vesamenu.c32,chain.c32,reboot.c32,poweroff.com} ${work_dir}/iso/${install_dir}/boot/syslinux/
+    cp ${work_dir}/root-image/sai/splash.png ${work_dir}/iso/${install_dir}/boot/syslinux/splash.png
+    cp -r ${work_dir}/root-image/usr/lib/syslinux/* ${work_dir}/iso/${install_dir}/boot/syslinux/
 }
 
 # Prepare /isolinux

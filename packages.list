@@ -4,14 +4,12 @@ pacman
 systemd
 systemd-sysvcompat
 sudo
-syslinux
+core/syslinux
 which
 wget
 psmisc
 procps-ng
-man
 alsa-utils
-rfkill
 xterm
 less
 bash-completion
@@ -23,7 +21,7 @@ i3-wm
 i3status
 # browser
 chromium
-chromium-pepper-flash-stable
+flashplugin
 # archiver
 tar
 zip
@@ -38,22 +36,11 @@ fcitx-chewing-git
 # extra apps
 vim
 packer
-vlc-ncurses
-openssh
-git
 feh
 geany-git
 zathura-pdf-mupdf
 scrot
 ranger-python2-git
-transmission-qt
-irssi
-# libreoffice
-libreoffice-en-US
-libreoffice-writer
-libreoffice-calc
-libreoffice-impress
-hunspell-en
 # xorg
 xf86-input-synaptics
 xf86-video-intel
@@ -68,6 +55,5 @@ connman_dmenu
 wpa_supplicant
 # printing
 cups
-gutenprint
 # powersave
 powerdown
