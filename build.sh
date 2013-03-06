@@ -63,7 +63,7 @@ make_syslinux() {
     s|%ARCH%|${arch}|g" ${script_path}/syslinux/syslinux.cfg > ${work_dir}/iso/${install_dir}/boot/syslinux/syslinux.cfg
 
     cp ${work_dir}/root-image/sai/splash.png ${work_dir}/iso/${install_dir}/boot/syslinux/splash.png
-    cp -r ${work_dir}/root-image/usr/lib/syslinux/* ${work_dir}/iso/${install_dir}/boot/syslinux/
+    cp ${work_dir}/root-image/usr/lib/syslinux/*.c32 ${work_dir}/iso/${install_dir}/boot/syslinux/
 }
 
 # Prepare /isolinux

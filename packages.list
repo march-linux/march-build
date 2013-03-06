@@ -10,7 +10,7 @@ wget
 psmisc
 procps-ng
 alsa-utils
-xterm
+rxvt-unicode
 less
 bash-completion
 # DE

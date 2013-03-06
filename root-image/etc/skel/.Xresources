@@ -49,6 +49,8 @@
 *.color7:       t_selection
 *.color15:      t_current_line
 
-xterm*faceName: Droid Sans Mono:antialias=True:pixelsize=14:bold
-xterm*faceNameDoublesize: Droid Sans Fallback:antialias=True:pixelsize=14:bold
-xterm*savelines: 16384
+urxvt.scrollstyle: plain
+urxvt.scrollBar_right: true
+urxvt.saveLines: 16384
+urxvt.font:xft:Droid sans mono:antialias=true:pixelsize=14:bold
+urxvt.boldFont:xft:Droid sans mono:antialias=true:pixelsize=14:bold

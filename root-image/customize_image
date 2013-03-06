@@ -11,6 +11,10 @@ rm -rf /usr/share/licenses/
 rm -rf /usr/share/info/
 rm -rf /usr/share/gtk-2.0/
 rm -rf /usr/share/gtk-3.0/
+
+# remove static library
+find / -name "*.a" -exec rm -f {} +
+
 # setup mirrorlist
 sed -i "s/#Server/Server/g" /etc/pacman.d/mirrorlist
 # adduser

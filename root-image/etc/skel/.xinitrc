@@ -4,6 +4,8 @@
 export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
 export XMODIFIERS="@im=fcitx"
-export EDITOR="xterm -e vim"
+export EDITOR="urxvt -e vim"
 fcitx
+mimi ~/memo.txt
+feh --bg-scale ~/.wallpaper/wallpaper.jpg
 exec i3
