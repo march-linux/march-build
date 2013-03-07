@@ -50,9 +50,10 @@ xorg-xinit
 xorg-xrdb
 xsel
 # network
-connman
-connman_dmenu
+netctl
 wpa_supplicant
+dhcpcd
+dialog
 # printing
 cups
 # powersave

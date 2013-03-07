@@ -16,7 +16,7 @@ sai_config() {
         chroot /mnt sed -i -e 's|^#\(en_US\.UTF-8\)|\1|' /etc/locale.gen
         chroot /mnt locale-gen
         # systemd service
-        chroot /mnt systemctl enable multi-user.target cups.service connman.service
+        chroot /mnt systemctl enable multi-user.target cups.service
         : > /tmp/$FUNCNAME
     fi
 }
