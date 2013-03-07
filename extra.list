@@ -11,6 +11,5 @@ vlc-ncurses
 # torrent
 transmission-qt
 # dev
-git
 openssh
 man

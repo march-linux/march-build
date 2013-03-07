@@ -24,3 +24,16 @@ set tabstop=4
 set softtabstop=4
 set expandtab
 
+" bundle
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+" let Vundle manage Vundle
+" required! 
+Bundle 'gmarik/vundle'
+Bundle 'airblade/vim-gitgutter'
+Bundle 'ervandew/supertab'
+Bundle 'tpope/vim-fugitive'
+Bundle 'kien/ctrlp.vim'
+Bundle 'garbas/vim-snipmate'
+Bundle 'scrooloose/nerdcommenter'

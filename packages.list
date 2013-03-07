@@ -35,9 +35,9 @@ fcitx-mini
 fcitx-chewing-git
 # extra apps
 vim
+git
 packer
 feh
-geany-git
 zathura-pdf-mupdf
 scrot
 ranger-python2-git
