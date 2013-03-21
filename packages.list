@@ -34,7 +34,7 @@ atool-wrapper
 fcitx-mini
 fcitx-chewing-git
 # extra apps
-vim
+gvim
 git
 packer
 feh
@@ -43,6 +43,7 @@ scrot
 ranger-python2-git
 # xorg
 xf86-input-synaptics
+mesa-libgl
 xf86-video-intel
 xf86-video-vesa
 xorg-server
@@ -50,10 +51,9 @@ xorg-xinit
 xorg-xrdb
 xsel
 # network
-netctl
+connman_dmenu
 wpa_supplicant
 dhcpcd
-dialog
 # printing
 cups
 # powersave

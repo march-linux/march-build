@@ -35,6 +35,9 @@ make_customize_root_image() {
     cat ${script_path}/extra.list >> ${work_dir}/root-image/sai/packages.list
     cp -r ${script_path}/root-image/etc/ ${work_dir}/root-image/sai/
 
+    mkdir -p ${work_dir}/root-image/etc/skel/.vim
+    cp -r ~/.vim/bundle ${work_dir}/root-image/etc/skel/.vim
+
     chmod 755 ${work_dir}/root-image/customize_image
     mkarchiso -v -w "${work_dir}" -D "${install_dir}" -r '/customize_image' run
     rm ${work_dir}/root-image/customize_image
