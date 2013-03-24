@@ -34,9 +34,9 @@ make_customize_root_image() {
     cp ${script_path}/packages.list ${work_dir}/root-image/sai/
     cat ${script_path}/extra.list >> ${work_dir}/root-image/sai/packages.list
     cp -r ${script_path}/root-image/etc/ ${work_dir}/root-image/sai/
-
+    # copy vim bundle
     mkdir -p ${work_dir}/root-image/etc/skel/.vim
-    cp -r ~/.vim/bundle ${work_dir}/root-image/etc/skel/.vim
+    cp -r /home/march/.vim/bundle ${work_dir}/root-image/etc/skel/.vim
 
     chmod 755 ${work_dir}/root-image/customize_image
     mkarchiso -v -w "${work_dir}" -D "${install_dir}" -r '/customize_image' run
@@ -65,7 +65,7 @@ make_syslinux() {
     s|%INSTALL_DIR%|${install_dir}|g;
     s|%ARCH%|${arch}|g" ${script_path}/syslinux/syslinux.cfg > ${work_dir}/iso/${install_dir}/boot/syslinux/syslinux.cfg
 
-    cp ${work_dir}/root-image/sai/splash.png ${work_dir}/iso/${install_dir}/boot/syslinux/splash.png
+    cp ${work_dir}/root-image/sai/splash.jpg ${work_dir}/iso/${install_dir}/boot/syslinux/splash.jpg
     cp ${work_dir}/root-image/usr/lib/syslinux/*.c32 ${work_dir}/iso/${install_dir}/boot/syslinux/
 }
 
