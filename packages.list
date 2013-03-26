@@ -27,12 +27,8 @@ tar
 zip
 unzip
 unrar
-rar
 atool
 atool-wrapper
-# zh-TW support
-fcitx-mini
-fcitx-chewing-git
 # extra apps
 gvim
 git

@@ -7,7 +7,8 @@ iso_name=march
 iso_label="MARCH_$(date +%Y%m)"
 iso_version=$(date +%Y.%m.%d)
 install_dir=march
-arch=$(uname -m)
+#arch=$(uname -m)
+arch=i686
 work_dir=work
 out_dir=out
 
@@ -23,8 +24,9 @@ run_once() {
 
 # Base installation (root-image)
 make_basefs() {
-    mkarchiso -v -w "${work_dir}" -D "${install_dir}" init
-    mkarchiso -v -w "${work_dir}" -D "${install_dir}" -p "device-mapper sai $(grep -v ^# ${script_path}/packages.list)" install
+    setarch ${arch} mkarchiso -v -w "${work_dir}" -D "${install_dir}" init
+    setarch ${arch} mkarchiso -v -w "${work_dir}" -D "${install_dir}" -p "device-mapper sai $(grep -v ^# "${script_path}/packages.list")" install
+    setarch ${arch} mkarchiso -v -w "${work_dir}" -D "${install_dir}" -p "$(grep -v ^# "${script_path}/${arch}.list")" install
 }
 
 # Customize installation (root-image)
@@ -32,14 +34,16 @@ make_customize_root_image() {
     # copy march config
     cp -r ${script_path}/root-image/ ${work_dir}
     cp ${script_path}/packages.list ${work_dir}/root-image/sai/
+    cat ${script_path}/${arch}.list >> ${work_dir}/root-image/sai/packages.list
     cat ${script_path}/extra.list >> ${work_dir}/root-image/sai/packages.list
+    cat ${script_path}/${arch}-extra.list >> ${work_dir}/root-image/sai/packages.list
     cp -r ${script_path}/root-image/etc/ ${work_dir}/root-image/sai/
     # copy vim bundle
     mkdir -p ${work_dir}/root-image/etc/skel/.vim
     cp -r /home/march/.vim/bundle ${work_dir}/root-image/etc/skel/.vim
 
     chmod 755 ${work_dir}/root-image/customize_image
-    mkarchiso -v -w "${work_dir}" -D "${install_dir}" -r '/customize_image' run
+    setarch ${arch} mkarchiso -v -w "${work_dir}" -D "${install_dir}" -r '/customize_image' run
     rm ${work_dir}/root-image/customize_image
 }
 
@@ -48,7 +52,7 @@ make_setup_mkinitcpio() {
     cp /usr/lib/initcpio/hooks/archiso ${work_dir}/root-image/usr/lib/initcpio/hooks
     cp /usr/lib/initcpio/install/archiso ${work_dir}/root-image/usr/lib/initcpio/install
     cp ${script_path}/mkinitcpio.conf ${work_dir}/root-image/etc/mkinitcpio-archiso.conf
-    mkarchiso -v -w "${work_dir}" -D "${install_dir}" -r 'mkinitcpio -c /etc/mkinitcpio-archiso.conf -k /boot/vmlinuz-linux -g /boot/archiso.img' run
+    setarch ${arch} mkarchiso -v -w "${work_dir}" -D "${install_dir}" -r 'mkinitcpio -c /etc/mkinitcpio-archiso.conf -k /boot/vmlinuz-linux -g /boot/archiso.img' run
 }
 
 # Prepare ${install_dir}/boot/
@@ -84,13 +88,13 @@ make_aitab() {
 
 # Build all filesystem images specified in aitab (.fs.sfs .sfs)
 make_prepare() {
-    mkarchiso -v -w "${work_dir}" -D "${install_dir}" prepare
+    setarch ${arch} mkarchiso -v -w "${work_dir}" -D "${install_dir}" prepare
 }
 
 # Build ISO
 make_iso() {
-    mkarchiso -v -w "${work_dir}" -D "${install_dir}" checksum
-    mkarchiso -v -w "${work_dir}" -D "${install_dir}" -L "${iso_label}" -o "${out_dir}" iso "${iso_name}-${iso_version}-${arch}.iso"
+    setarch ${arch} mkarchiso -v -w "${work_dir}" -D "${install_dir}" checksum
+    setarch ${arch} mkarchiso -v -w "${work_dir}" -D "${install_dir}" -L "${iso_label}" -o "${out_dir}" iso "${iso_name}-${iso_version}-${arch}.iso"
 }
 
 run_once make_basefs

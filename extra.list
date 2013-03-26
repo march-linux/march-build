@@ -6,8 +6,6 @@ libreoffice-writer
 libreoffice-calc
 libreoffice-impress
 hunspell-en
-# multimedia
-vlc-ncurses
 # torrent
 transmission-qt
 # dev
