@@ -11,3 +11,7 @@ transmission-qt
 # dev
 openssh
 man
+# archive
+rar
+# media
+vlc-ncurses

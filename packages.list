@@ -21,7 +21,7 @@ i3-wm
 i3status
 # browser
 chromium
-flashplugin
+chromium-pepper-flash
 # archiver
 tar
 zip
@@ -54,3 +54,6 @@ dhcpcd
 cups
 # powersave
 powerdown
+# zh_TW
+fcitx-mini
+fcitx-chewing-git

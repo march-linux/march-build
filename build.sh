@@ -1,17 +1,18 @@
 #!/bin/bash
 
 set -e -u
-sudo pacman -S --needed make rsync ttf-droid squashfs-tools libisoburn
+sudo pacman -S --needed make rsync squashfs-tools libisoburn
 
 iso_name=march
 iso_label="MARCH_$(date +%Y%m)"
 iso_version=$(date +%Y.%m.%d)
-install_dir=march
-#arch=$(uname -m)
+install_dir=install_dir
+#arch=x86_64
 arch=i686
-work_dir=work
-out_dir=out
-
+work_dir="work-${arch}"
+out_dir="out-${arch}"
+# remove the old build
+rm -rf "${work_dir}"
 script_path=$(readlink -f ${0%/*})
 
 # Helper function to run make_*() only one time per architecture.
@@ -34,9 +35,7 @@ make_customize_root_image() {
     # copy march config
     cp -r ${script_path}/root-image/ ${work_dir}
     cp ${script_path}/packages.list ${work_dir}/root-image/sai/
-    cat ${script_path}/${arch}.list >> ${work_dir}/root-image/sai/packages.list
     cat ${script_path}/extra.list >> ${work_dir}/root-image/sai/packages.list
-    cat ${script_path}/${arch}-extra.list >> ${work_dir}/root-image/sai/packages.list
     cp -r ${script_path}/root-image/etc/ ${work_dir}/root-image/sai/
     # copy vim bundle
     mkdir -p ${work_dir}/root-image/etc/skel/.vim
