@@ -7,8 +7,6 @@ sai_config() {
         cp -r /sai/etc/ /mnt/
         # mkinitcpio
         chroot /mnt mkinitcpio -p linux
-        # setup mirrorlist
-        chroot /mnt sed -i "s/#Server/Server/g" /etc/pacman.d/mirrorlist
         # adduser
         chroot /mnt usermod -p ZYCnDaw9NK8NI root
         chroot /mnt useradd -m -p ZYCnDaw9NK8NI -g users -G audio,lp,network,optical,power,storage,video,wheel march

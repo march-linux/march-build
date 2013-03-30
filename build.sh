@@ -7,12 +7,12 @@ iso_name=march
 iso_label="MARCH_$(date +%Y%m)"
 iso_version=$(date +%Y.%m.%d)
 install_dir=install_dir
-#arch=x86_64
-arch=i686
+arch=x86_64
+#arch=i686
 work_dir="work-${arch}"
 out_dir="out-${arch}"
 # remove the old build
-rm -rf "${work_dir}"
+rm -rf "${work_dir}" "${out_dir}"
 script_path=$(readlink -f ${0%/*})
 
 # Helper function to run make_*() only one time per architecture.
@@ -27,7 +27,6 @@ run_once() {
 make_basefs() {
     setarch ${arch} mkarchiso -v -w "${work_dir}" -D "${install_dir}" init
     setarch ${arch} mkarchiso -v -w "${work_dir}" -D "${install_dir}" -p "device-mapper sai $(grep -v ^# "${script_path}/packages.list")" install
-    setarch ${arch} mkarchiso -v -w "${work_dir}" -D "${install_dir}" -p "$(grep -v ^# "${script_path}/${arch}.list")" install
 }
 
 # Customize installation (root-image)
@@ -38,8 +37,8 @@ make_customize_root_image() {
     cat ${script_path}/extra.list >> ${work_dir}/root-image/sai/packages.list
     cp -r ${script_path}/root-image/etc/ ${work_dir}/root-image/sai/
     # copy vim bundle
-    mkdir -p ${work_dir}/root-image/etc/skel/.vim
-    cp -r /home/march/.vim/bundle ${work_dir}/root-image/etc/skel/.vim
+    git clone https://github.com/gmarik/vundle.git ${work_dir}/root-image/etc/skel/.vim/bundle/vundle
+    git clone https://github.com/gmarik/vundle.git ${work_dir}/root-image/sai/etc/skel/.vim/bundle/vundle
 
     chmod 755 ${work_dir}/root-image/customize_image
     setarch ${arch} mkarchiso -v -w "${work_dir}" -D "${install_dir}" -r '/customize_image' run

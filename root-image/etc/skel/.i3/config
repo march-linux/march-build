@@ -167,6 +167,7 @@ bindsym $mod+F1 exec "sudo suspend-to-mem"
 bindsym $mod+F2 exec "sudo connman_dmenu"
 bindsym $mod+F3 exec "urxvt -e ranger"
 bindsym $mod+F4 exec "chromium"
+bindsym $mod+F5 exec "sudo umount_dmenu"
 bindsym $mod+F8 exec "scrot"
 bindsym $mod+c exec "xsel --primary | xsel --clipboard"
 workspace_layout tabbed

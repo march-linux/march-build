@@ -19,9 +19,10 @@ dmenu
 ttf-droid
 i3-wm
 i3status
+usb-automount
 # browser
 chromium
-chromium-pepper-flash
+flashplugin
 # archiver
 tar
 zip
