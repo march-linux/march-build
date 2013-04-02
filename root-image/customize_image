@@ -1,4 +1,6 @@
 #!/bin/bash
+# march overlay
+march-reset
 
 # change permission
 chmod 440 /etc/sudoers

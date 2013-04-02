@@ -4,7 +4,7 @@ sai_config() {
     say "$FUNCNAME: March customized"
     if [[ ! -f /tmp/$FUNCNAME ]]; then
         # copy march config
-        cp -r /sai/etc/ /mnt/
+        chroot /mnt march-reset
         # mkinitcpio
         chroot /mnt mkinitcpio -p linux
         # adduser

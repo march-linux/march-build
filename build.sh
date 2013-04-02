@@ -25,17 +25,16 @@ run_once() {
 
 # Base installation (root-image)
 make_basefs() {
+    git clone https://github.com/taylorchu/march-overlay.git ${work_dir}/march-overlay
     setarch ${arch} mkarchiso -v -w "${work_dir}" -D "${install_dir}" init
-    setarch ${arch} mkarchiso -v -w "${work_dir}" -D "${install_dir}" -p "device-mapper sai $(grep -v ^# "${script_path}/packages.list")" install
+    setarch ${arch} mkarchiso -v -w "${work_dir}" -D "${install_dir}" -p "device-mapper sai $(grep -v ^# "${work_dir}/march-overlay/march/packages.list")" install
 }
 
 # Customize installation (root-image)
 make_customize_root_image() {
     # copy march config
     cp -r ${script_path}/root-image/ ${work_dir}
-    cp ${script_path}/packages.list ${work_dir}/root-image/sai/
-    cat ${script_path}/extra.list >> ${work_dir}/root-image/sai/packages.list
-    cp -r ${script_path}/root-image/etc/ ${work_dir}/root-image/sai/
+    cat ${work_dir}/march-overlay/march/{packages,extra}.list > ${work_dir}/root-image/sai/packages.list
     # copy vim bundle
     git clone https://github.com/gmarik/vundle.git ${work_dir}/root-image/etc/skel/.vim/bundle/vundle
     git clone https://github.com/gmarik/vundle.git ${work_dir}/root-image/sai/etc/skel/.vim/bundle/vundle
