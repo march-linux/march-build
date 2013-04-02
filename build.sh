@@ -27,7 +27,9 @@ run_once() {
 make_basefs() {
     git clone https://github.com/taylorchu/march-overlay.git ${work_dir}/march-overlay
     setarch ${arch} mkarchiso -v -w "${work_dir}" -D "${install_dir}" init
+    set +e
     setarch ${arch} mkarchiso -v -w "${work_dir}" -D "${install_dir}" -p "device-mapper sai $(grep -v ^# "${work_dir}/march-overlay/march/packages.list")" install
+    set -e
 }
 
 # Customize installation (root-image)
