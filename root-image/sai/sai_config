@@ -5,6 +5,8 @@ sai_config() {
     if [[ ! -f /tmp/$FUNCNAME ]]; then
         # copy march config
         chroot /mnt march-reset
+        # copy vim bundle
+        git clone https://github.com/gmarik/vundle.git /mnt/etc/skel/.vim/bundle/vundle
         # mkinitcpio
         chroot /mnt mkinitcpio -p linux
         # adduser
