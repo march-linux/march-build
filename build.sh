@@ -26,9 +26,9 @@ run_once() {
 # Base installation (root-image)
 make_basefs() {
     git clone https://github.com/taylorchu/march-overlay.git ${work_dir}/march-overlay
-    setarch ${arch} mkarchiso -v -w "${work_dir}" -D "${install_dir}" init
+    mkarchiso -v -w "${work_dir}" -D "${install_dir}" init
     set +e
-    setarch ${arch} mkarchiso -v -w "${work_dir}" -D "${install_dir}" -p "device-mapper sai-git $(grep -v ^# "${work_dir}/march-overlay/march/packages.list")" install
+    mkarchiso -v -w "${work_dir}" -D "${install_dir}" -p "device-mapper sai-git $(grep -v ^# "${work_dir}/march-overlay/march/packages.list")" install
     set -e
 }
 
@@ -37,11 +37,9 @@ make_customize_root_image() {
     # copy march config
     cp -r ${script_path}/root-image/ ${work_dir}
     cat ${work_dir}/march-overlay/march/{packages,extra}.list > ${work_dir}/root-image/sai/packages.list
-    # copy vim bundle
-    git clone https://github.com/gmarik/vundle.git ${work_dir}/root-image/etc/skel/.vim/bundle/vundle
 
     chmod 755 ${work_dir}/root-image/customize_image
-    setarch ${arch} mkarchiso -v -w "${work_dir}" -D "${install_dir}" -r '/customize_image' run
+    mkarchiso -v -w "${work_dir}" -D "${install_dir}" -r '/customize_image' run
     rm ${work_dir}/root-image/customize_image
 }
 
@@ -50,7 +48,7 @@ make_setup_mkinitcpio() {
     cp /usr/lib/initcpio/hooks/archiso ${work_dir}/root-image/usr/lib/initcpio/hooks
     cp /usr/lib/initcpio/install/archiso ${work_dir}/root-image/usr/lib/initcpio/install
     cp ${script_path}/mkinitcpio.conf ${work_dir}/root-image/etc/mkinitcpio-archiso.conf
-    setarch ${arch} mkarchiso -v -w "${work_dir}" -D "${install_dir}" -r 'mkinitcpio -c /etc/mkinitcpio-archiso.conf -k /boot/vmlinuz-linux -g /boot/archiso.img' run
+    mkarchiso -v -w "${work_dir}" -D "${install_dir}" -r 'mkinitcpio -c /etc/mkinitcpio-archiso.conf -k /boot/vmlinuz-linux -g /boot/archiso.img' run
 }
 
 # Prepare ${install_dir}/boot/
@@ -86,13 +84,13 @@ make_aitab() {
 
 # Build all filesystem images specified in aitab (.fs.sfs .sfs)
 make_prepare() {
-    setarch ${arch} mkarchiso -v -w "${work_dir}" -D "${install_dir}" prepare
+    mkarchiso -v -w "${work_dir}" -D "${install_dir}" prepare
 }
 
 # Build ISO
 make_iso() {
-    setarch ${arch} mkarchiso -v -w "${work_dir}" -D "${install_dir}" checksum
-    setarch ${arch} mkarchiso -v -w "${work_dir}" -D "${install_dir}" -L "${iso_label}" -o "${out_dir}" iso "${iso_name}-${iso_version}-${arch}.iso"
+    mkarchiso -v -w "${work_dir}" -D "${install_dir}" checksum
+    mkarchiso -v -w "${work_dir}" -D "${install_dir}" -L "${iso_label}" -o "${out_dir}" iso "${iso_name}-${iso_version}-${arch}.iso"
 }
 
 run_once make_basefs
