@@ -7,10 +7,9 @@ iso_name=march
 iso_label="MARCH_$(date +%Y%m)"
 iso_version=$(date +%Y.%m.%d)
 install_dir=install_dir
-arch=x86_64
-#arch=i686
-work_dir="work-${arch}"
-out_dir="out-${arch}"
+arch=$(uname -m)
+work_dir=work
+out_dir=out
 # remove the old build
 rm -rf "${work_dir}" "${out_dir}"
 script_path=$(readlink -f ${0%/*})
@@ -62,19 +61,19 @@ make_boot() {
 make_syslinux() {
     mkdir -p ${work_dir}/iso/${install_dir}/boot/syslinux
     sed "s|%ARCHISO_LABEL%|${iso_label}|g;
-    s|%INSTALL_DIR%|${install_dir}|g;
-    s|%ARCH%|${arch}|g" ${script_path}/syslinux/syslinux.cfg > ${work_dir}/iso/${install_dir}/boot/syslinux/syslinux.cfg
-
+         s|%INSTALL_DIR%|${install_dir}|g;
+         s|%ARCH%|${arch}|g" ${script_path}/syslinux/syslinux.cfg > ${work_dir}/iso/${install_dir}/boot/syslinux/syslinux.cfg
     cp ${work_dir}/root-image/sai/splash.jpg ${work_dir}/iso/${install_dir}/boot/syslinux/splash.jpg
-    cp ${work_dir}/root-image/usr/lib/syslinux/*.c32 ${work_dir}/iso/${install_dir}/boot/syslinux/
+    cp ${work_dir}/root-image/usr/lib/syslinux/bios/*.c32 ${work_dir}/iso/${install_dir}/boot/syslinux/
 }
 
 # Prepare /isolinux
 make_isolinux() {
     mkdir -p ${work_dir}/iso/isolinux
     sed "s|%INSTALL_DIR%|${install_dir}|g" ${script_path}/isolinux/isolinux.cfg > ${work_dir}/iso/isolinux/isolinux.cfg
-    cp ${work_dir}/root-image/usr/lib/syslinux/isolinux.bin ${work_dir}/iso/isolinux/
-    cp ${work_dir}/root-image/usr/lib/syslinux/isohdpfx.bin ${work_dir}/iso/isolinux/
+    cp ${work_dir}/root-image/usr/lib/syslinux/bios/isolinux.bin ${work_dir}/iso/isolinux/
+    cp ${work_dir}/root-image/usr/lib/syslinux/bios/isohdpfx.bin ${work_dir}/iso/isolinux/
+    cp ${work_dir}/root-image/usr/lib/syslinux/bios/ldlinux.c32 ${work_dir}/iso/isolinux/
 }
 
 # Process aitab
