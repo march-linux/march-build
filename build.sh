@@ -1,7 +1,7 @@
 #!/bin/bash
 
 set -e -u
-sudo pacman -S --needed make rsync squashfs-tools libisoburn
+sudo pacman -S --needed git make arch-install-scripts squashfs-tools libisoburn rsync
 
 iso_name=march
 iso_label="MARCH_$(date +%Y%m)"
