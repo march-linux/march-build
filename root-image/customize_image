@@ -3,9 +3,6 @@
 # march overlay
 march-reset
 
-# copy vim bundle
-git clone https://github.com/gmarik/vundle.git /etc/skel/.vim/bundle/vundle
-
 # change permission
 chmod 440 /etc/sudoers
 chmod 755 /install
@@ -29,6 +26,10 @@ sed -i "s/#Server/Server/g" /etc/pacman.d/mirrorlist
 # adduser
 usermod -p ZYCnDaw9NK8NI root
 useradd -m -p ZYCnDaw9NK8NI -g users -G audio,lp,network,optical,power,storage,video,wheel march
+
+# copy vim bundle
+runuser -u march git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+runuser -u march vim +BundleInstall +qall
 
 # setup timezone
 ln -s /usr/share/zoneinfo/America/Los_Angeles /etc/localtime

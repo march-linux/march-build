@@ -1,32 +1,33 @@
 #!/bin/bash
 
 sai_config() {
-    say "$FUNCNAME: March customized"
-    if [[ ! -f /tmp/$FUNCNAME ]]; then
-        # march overlay
-        chroot /mnt march-reset
+	say "$FUNCNAME: March customized"
+	if [[ ! -f /tmp/$FUNCNAME ]]; then
+		# march overlay
+		chroot /mnt march-reset
 
-        # copy vim bundle
-        chroot /mnt git clone https://github.com/gmarik/vundle.git /etc/skel/.vim/bundle/vundle
+		# mirrorlist is updated by sai 
 
-        # mirrorlist is updated by sai 
+		# mkinitcpio
+		chroot /mnt mkinitcpio -p linux
 
-        # mkinitcpio
-        chroot /mnt mkinitcpio -p linux
+		# adduser
+		chroot /mnt usermod -p ZYCnDaw9NK8NI root
+		chroot /mnt useradd -m -p ZYCnDaw9NK8NI -g users -G audio,lp,network,optical,power,storage,video,wheel march
 
-        # adduser
-        chroot /mnt usermod -p ZYCnDaw9NK8NI root
-        chroot /mnt useradd -m -p ZYCnDaw9NK8NI -g users -G audio,lp,network,optical,power,storage,video,wheel march
+		# copy vim bundle
+		chroot /mnt runuser -u march git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+		chroot /mnt runuser -u march vim +BundleInstall +qall
 
-        # setup timezone
-        chroot /mnt ln -s /usr/share/zoneinfo/America/Los_Angeles /etc/localtime
+		# setup timezone
+		chroot /mnt ln -s /usr/share/zoneinfo/America/Los_Angeles /etc/localtime
 
-        # setup locale
-        chroot /mnt sed -i -e 's|^#\(en_US\.UTF-8\)|\1|' /etc/locale.gen
-        chroot /mnt locale-gen
+		# setup locale
+		chroot /mnt sed -i -e 's|^#\(en_US\.UTF-8\)|\1|' /etc/locale.gen
+		chroot /mnt locale-gen
 
-        # systemd service
-        chroot /mnt systemctl enable multi-user.target cups.service connman.service 
-        : > /tmp/$FUNCNAME
-    fi
+		# systemd service
+		chroot /mnt systemctl enable multi-user.target cups.service connman.service 
+		: > /tmp/$FUNCNAME
+	fi
 }
