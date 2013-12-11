@@ -11,12 +11,14 @@ sai_config() {
 		# mkinitcpio
 		chroot /mnt mkinitcpio -p linux
 
+		# setup vundle
+		chroot /mnt git clone https://github.com/gmarik/vundle.git /etc/skel/.vim/bundle/vundle
+
 		# adduser
 		chroot /mnt usermod -p ZYCnDaw9NK8NI root
 		chroot /mnt useradd -m -p ZYCnDaw9NK8NI -g users -G audio,lp,network,optical,power,storage,video,wheel march
 
-		# copy vim bundle
-		chroot /mnt runuser -u march git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+		# setup vundle plugins
 		chroot /mnt runuser -u march vim +BundleInstall +qall
 
 		# setup timezone

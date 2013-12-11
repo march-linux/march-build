@@ -23,12 +23,14 @@ find / -name "*.a" -exec rm -f {} +
 wget -O /etc/pacman.d/mirrorlist 'https://www.archlinux.org/mirrorlist/?country=all&protocol=http&use_mirror_status=on'
 sed -i "s/#Server/Server/g" /etc/pacman.d/mirrorlist
 
+# setup vundle
+git clone https://github.com/gmarik/vundle.git /etc/skel/.vim/bundle/vundle
+
 # adduser
 usermod -p ZYCnDaw9NK8NI root
 useradd -m -p ZYCnDaw9NK8NI -g users -G audio,lp,network,optical,power,storage,video,wheel march
 
-# copy vim bundle
-runuser -u march git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+# setup vundle plugins
 runuser -u march vim +BundleInstall +qall
 
 # setup timezone
