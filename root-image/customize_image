@@ -41,4 +41,4 @@ sed -i -e 's|^#\(en_US\.UTF-8\)|\1|' /etc/locale.gen
 locale-gen
 
 # systemd service
-systemctl enable multi-user.target cups.service connman.service
+systemctl enable multi-user.target cups.service connman.service connman-vpn.service

@@ -29,7 +29,7 @@ sai_config() {
 		chroot /mnt locale-gen
 
 		# systemd service
-		chroot /mnt systemctl enable multi-user.target cups.service connman.service 
+		chroot /mnt systemctl enable multi-user.target cups.service connman.service connman-vpn.service
 		: > /tmp/$FUNCNAME
 	fi
 }
