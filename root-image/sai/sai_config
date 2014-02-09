@@ -29,7 +29,10 @@ sai_config() {
 		chroot /mnt locale-gen
 
 		# systemd service
-		chroot /mnt systemctl enable multi-user.target cups.service connman.service connman-vpn.service zramswap.service
+		chroot /mnt systemctl enable multi-user.target cups.service connman.service connman-vpn.service psd.service
 		: > /tmp/$FUNCNAME
+
+		# setup boot
+		chroot /mnt sed -i "s|dummy|zswap.enabled=1 i915.i915_enable_rc6=7 i915.i915_enable_fbc=1 i915.lvds_downclock=1 pcie_aspm=force|g" /boot/syslinux/syslinux.cfg
 	fi
 }

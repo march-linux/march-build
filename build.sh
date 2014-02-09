@@ -8,7 +8,7 @@ iso_label="MARCH_$(date +%Y%m)"
 iso_version=$(date +%Y.%m.%d)
 install_dir=install_dir
 arch=$(uname -m)
-work_dir=work
+work_dir=/tmp/work
 out_dir=out
 # remove the old build
 rm -rf "${work_dir}" "${out_dir}"
