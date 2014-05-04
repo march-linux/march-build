@@ -12,7 +12,7 @@ sai_config() {
 		chroot /mnt mkinitcpio -p linux
 
 		# setup vundle
-		chroot /mnt git clone https://github.com/gmarik/vundle.git /etc/skel/.vim/bundle/vundle
+		chroot /mnt git clone https://github.com/gmarik/Vundle.vim.git /etc/skel/.vim/bundle/Vundle.vim
 
 		# adduser
 		chroot /mnt usermod -p ZYCnDaw9NK8NI root
