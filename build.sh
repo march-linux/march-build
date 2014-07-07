@@ -31,15 +31,15 @@ make_basefs() {
     set -e
 }
 
-# Customize installation (root-image)
+# Customize installation (airootfs)
 make_customize_root_image() {
     # copy march config
-    cp -r ${script_path}/root-image/ ${work_dir}
-    cat ${work_dir}/march-overlay/march/{packages,extra}.list > ${work_dir}/root-image/sai/packages.list
+    cp -r ${script_path}/airootfs/ ${work_dir}
+    cat ${work_dir}/march-overlay/march/{packages,extra}.list > ${work_dir}/airootfs/sai/packages.list
 
-    chmod 755 ${work_dir}/root-image/customize_image
+    chmod 755 ${work_dir}/airootfs/customize_image
     mkarchiso -v -w "${work_dir}" -D "${install_dir}" -r '/customize_image' run
-    rm ${work_dir}/root-image/customize_image
+    rm ${work_dir}/airootfs/customize_image
 }
 
 # Copy mkinitcpio archiso hooks and build initramfs (airootfs)
