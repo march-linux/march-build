@@ -14,7 +14,7 @@ out_dir=out
 rm -rf "${work_dir}" "${out_dir}"
 script_path=$(readlink -f ${0%/*})
 
-options="i915.modeset=1 i915.lvds_channel_mode=2 i915.lvds_use_ssc=0 radeon.modeset=1"
+options=""
 
 # Helper function to run make_*() only one time per architecture.
 run_once() {
