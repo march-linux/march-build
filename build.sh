@@ -14,7 +14,7 @@ out_dir=out
 rm -rf "${work_dir}" "${out_dir}"
 script_path=$(readlink -f ${0%/*})
 
-options="i915.i915_enable_rc6=7 i915.i915_enable_fbc=1 i915.lvds_downclock=1 pcie_aspm=force radeon.modeset=0 i915.modeset=1 i915.lvds_channel_mode=2"
+options="i915.modeset=1 i915.lvds_channel_mode=2 i915.lvds_use_ssc=0 radeon.modeset=1"
 
 # Helper function to run make_*() only one time per architecture.
 run_once() {
@@ -38,6 +38,7 @@ make_customize_airootfs() {
     # copy march config
     cp -r ${script_path}/airootfs/ ${work_dir}
     cat ${work_dir}/march-overlay/march/{packages,extra}.list > ${work_dir}/airootfs/sai/packages.list
+    sed -i "s|%ARCHISO_OPTIONS%|${options}|g" ${work_dir}/airootfs/sai/sai_config
 
     chmod 755 ${work_dir}/airootfs/customize_image
     mkarchiso -v -w "${work_dir}" -D "${install_dir}" -r '/customize_image' run

@@ -30,9 +30,10 @@ sai_config() {
 
 		# systemd service
 		chroot /mnt systemctl enable multi-user.target cups.service zramswap.service connman.service connman-vpn.service psd.service
-		: > /tmp/$FUNCNAME
 
 		# setup boot
-		chroot /mnt sed -i "s|dummy|i915.i915_enable_rc6=7 i915.i915_enable_fbc=1 i915.lvds_downclock=1 pcie_aspm=force|g" /boot/syslinux/syslinux.cfg
+		chroot /mnt sed -i "s|dummy|%ARCHISO_OPTIONS%|g" /boot/syslinux/syslinux.cfg
+
+		: > /tmp/$FUNCNAME
 	fi
 }
