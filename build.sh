@@ -58,15 +58,17 @@ make_boot() {
     mkdir -p ${work_dir}/iso/${install_dir}/boot/${arch}
     cp ${work_dir}/airootfs/boot/archiso.img ${work_dir}/iso/${install_dir}/boot/${arch}/archiso.img
     cp ${work_dir}/airootfs/boot/vmlinuz-linux ${work_dir}/iso/${install_dir}/boot/${arch}/vmlinuz
+
+    cp ${work_dir}/airootfs/boot/intel-ucode.img ${work_dir}/iso/${install_dir}/boot/intel-ucode.img
 }
 
 # Prepare /${install_dir}/boot/syslinux
 make_syslinux() {
     mkdir -p ${work_dir}/iso/${install_dir}/boot/syslinux
     sed "s|%ARCHISO_LABEL%|${iso_label}|g;
-         s|%INSTALL_DIR%|${install_dir}|g;
-         s|%ARCHISO_OPTIONS%|${options}|g;
-         s|%ARCH%|${arch}|g" ${script_path}/syslinux/syslinux.cfg > ${work_dir}/iso/${install_dir}/boot/syslinux/syslinux.cfg
+    s|%INSTALL_DIR%|${install_dir}|g;
+    s|%ARCHISO_OPTIONS%|${options}|g;
+    s|%ARCH%|${arch}|g" ${script_path}/syslinux/syslinux.cfg > ${work_dir}/iso/${install_dir}/boot/syslinux/syslinux.cfg
     cp ${work_dir}/airootfs/usr/lib/syslinux/bios/ldlinux.c32 ${work_dir}/iso/${install_dir}/boot/syslinux/
     cp ${work_dir}/airootfs/usr/lib/syslinux/bios/menu.c32 ${work_dir}/iso/${install_dir}/boot/syslinux/
     cp ${work_dir}/airootfs/usr/lib/syslinux/bios/libutil.c32 ${work_dir}/iso/${install_dir}/boot/syslinux/
@@ -95,8 +97,8 @@ make_efi() {
     cp ${script_path}/efiboot/loader/entries/uefi-shell-v1-x86_64.conf ${work_dir}/iso/loader/entries/
 
     sed "s|%ARCHISO_LABEL%|${iso_label}|g;
-         s|%ARCHISO_OPTIONS%|${options}|g;
-         s|%INSTALL_DIR%|${install_dir}|g" \
+    s|%ARCHISO_OPTIONS%|${options}|g;
+    s|%INSTALL_DIR%|${install_dir}|g" \
         ${script_path}/efiboot/loader/entries/archiso-x86_64-usb.conf > ${work_dir}/iso/loader/entries/archiso-x86_64.conf
 
     # EFI Shell 2.0 for UEFI 2.3+ ( http://sourceforge.net/apps/mediawiki/tianocore/index.php?title=UEFI_Shell )
@@ -118,6 +120,8 @@ make_efiboot() {
     cp ${work_dir}/iso/${install_dir}/boot/x86_64/vmlinuz ${work_dir}/efiboot/EFI/archiso/vmlinuz.efi
     cp ${work_dir}/iso/${install_dir}/boot/x86_64/archiso.img ${work_dir}/efiboot/EFI/archiso/archiso.img
 
+    cp ${work_dir}/iso/${install_dir}/boot/intel-ucode.img ${work_dir}/efiboot/EFI/archiso/intel-ucode.img
+
     mkdir -p ${work_dir}/efiboot/EFI/boot
     cp ${work_dir}/airootfs/usr/lib/prebootloader/PreLoader.efi ${work_dir}/efiboot/EFI/boot/bootx64.efi
     cp ${work_dir}/airootfs/usr/lib/prebootloader/HashTool.efi ${work_dir}/efiboot/EFI/boot/
@@ -130,8 +134,8 @@ make_efiboot() {
     cp ${script_path}/efiboot/loader/entries/uefi-shell-v1-x86_64.conf ${work_dir}/efiboot/loader/entries/
 
     sed "s|%ARCHISO_LABEL%|${iso_label}|g;
-         s|%ARCHISO_OPTIONS%|${options}|g;
-         s|%INSTALL_DIR%|${install_dir}|g" \
+    s|%ARCHISO_OPTIONS%|${options}|g;
+    s|%INSTALL_DIR%|${install_dir}|g" \
         ${script_path}/efiboot/loader/entries/archiso-x86_64-cd.conf > ${work_dir}/efiboot/loader/entries/archiso-x86_64.conf
 
     cp ${work_dir}/iso/EFI/shellx64_v2.efi ${work_dir}/efiboot/EFI/
