@@ -33,9 +33,6 @@ useradd -m -p ZYCnDaw9NK8NI -g users -G audio,lp,network,optical,power,storage,v
 # setup vundle plugins
 runuser -u march vim +PluginInstall +qall
 
-# setup timezone
-ln -s /usr/share/zoneinfo/America/Los_Angeles /etc/localtime
-
 # setup locale
 sed -i -e 's|^#\(en_US\.UTF-8\)|\1|' /etc/locale.gen
 locale-gen

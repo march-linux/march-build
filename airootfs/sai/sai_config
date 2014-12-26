@@ -21,9 +21,6 @@ sai_config() {
 		# setup vundle plugins
 		chroot /mnt runuser -u march vim +PluginInstall +qall
 
-		# setup timezone
-		chroot /mnt ln -s /usr/share/zoneinfo/America/Los_Angeles /etc/localtime
-
 		# setup locale
 		chroot /mnt sed -i -e 's|^#\(en_US\.UTF-8\)|\1|' /etc/locale.gen
 		chroot /mnt locale-gen
