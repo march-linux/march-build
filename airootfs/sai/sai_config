@@ -26,7 +26,7 @@ sai_config() {
 		chroot /mnt locale-gen
 
 		# systemd service
-		chroot /mnt systemctl enable multi-user.target org.cups.cupsd.service zramswap.service connman.service connman-vpn.service psd.service
+		chroot /mnt systemctl enable multi-user.target org.cups.cupsd.service zramswap.service connman.service connman-vpn.service psd.service tlp.service tlp-sleep.service ldm.service
 
 		# setup boot
 		chroot /mnt sed -i "s|dummy|%ARCHISO_OPTIONS%|g" /boot/syslinux/syslinux.cfg
