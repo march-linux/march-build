@@ -1,35 +1,14 @@
 #!/bin/bash
 
 sai_config() {
-	say "$FUNCNAME: March customized"
+	say "$FUNCNAME: March"
 	if [[ ! -f /tmp/$FUNCNAME ]]; then
-		# march overlay
-		chroot /mnt march-reset
+		# mirrorlist is updated by sai
 
-		# mirrorlist is updated by sai 
-
-		# mkinitcpio
-		chroot /mnt mkinitcpio -p linux
-
-		# setup vundle
-		chroot /mnt git clone https://github.com/gmarik/Vundle.vim.git /etc/skel/.vim/bundle/Vundle.vim
-
-		# adduser
-		chroot /mnt usermod -p ZYCnDaw9NK8NI root
-		chroot /mnt useradd -m -p ZYCnDaw9NK8NI -G wheel march
-
-		# setup vundle plugins
-		chroot /mnt runuser -u march vim +PluginInstall +qall
-
-		# setup locale
-		chroot /mnt sed -i -e 's|^#\(en_US\.UTF-8\)|\1|' /etc/locale.gen
-		chroot /mnt locale-gen
-
-		# systemd service
-		chroot /mnt systemctl enable multi-user.target org.cups.cupsd.service zramswap.service connman.service connman-vpn.service psd.service tlp.service tlp-sleep.service ldm.service
+		/sai/customize
 
 		# setup boot
-		chroot /mnt sed -i "s|dummy|%ARCHISO_OPTIONS%|g" /boot/syslinux/syslinux.cfg
+		sed -i "s|dummy|%ARCHISO_OPTIONS%|g" /boot/syslinux/syslinux.cfg
 
 		: > /tmp/$FUNCNAME
 	fi

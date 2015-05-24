@@ -1,41 +1,15 @@
 #!/bin/bash
 
-# march overlay
-march-reset
-
-# change permission
-chmod 440 /etc/sudoers
-chmod 755 /install
-
-# remove unused manual
-rm -rf /usr/share/man/
-rm -rf /usr/share/doc/
-rm -rf /usr/share/gtk-doc/
-rm -rf /usr/share/licenses/
-rm -rf /usr/share/info/
-rm -rf /usr/share/gtk-2.0/
-rm -rf /usr/share/gtk-3.0/
-
-# remove static library
-find / -name "*.a" -exec rm -f {} +
-
 # setup mirrorlist
 curl -o /etc/pacman.d/mirrorlist 'https://www.archlinux.org/mirrorlist/?country=all&protocol=http&use_mirror_status=on'
 sed -i "s/#Server/Server/g" /etc/pacman.d/mirrorlist
 
-# setup vundle
-git clone https://github.com/gmarik/Vundle.vim.git /etc/skel/.vim/bundle/Vundle.vim
+# sai
+/sai/customize
 
-# adduser
-usermod -p ZYCnDaw9NK8NI root
-useradd -m -p ZYCnDaw9NK8NI -G wheel march
+# remove unused manual
+rm -rf /usr/share/{man,doc,gtk-doc,licenses,info,gtk-2.0,gtk-3.0}/
 
-# setup vundle plugins
-runuser -u march vim +PluginInstall +qall
+# remove static library
+find / -name "*.a" -exec rm -f {} +
 
-# setup locale
-sed -i -e 's|^#\(en_US\.UTF-8\)|\1|' /etc/locale.gen
-locale-gen
-
-# systemd service
-systemctl enable multi-user.target org.cups.cupsd.service zramswap.service connman.service connman-vpn.service psd.service tlp.service tlp-sleep.service ldm.service

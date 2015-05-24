@@ -37,7 +37,7 @@ make_basefs() {
 make_customize_airootfs() {
     # copy march config
     cp -r ${script_path}/airootfs/ ${work_dir}
-    cat ${work_dir}/march-overlay/march/{packages,extra}.list > ${work_dir}/airootfs/sai/packages.list
+    cp ${work_dir}/march-overlay/march/packages.list ${work_dir}/airootfs/sai/packages.list
     sed -i "s|%ARCHISO_OPTIONS%|${options}|g" ${work_dir}/airootfs/sai/sai_config
 
     chmod 755 ${work_dir}/airootfs/customize_image

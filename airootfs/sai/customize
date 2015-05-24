@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# march overlay
+march-reset
+
+# mkinitcpio
+mkinitcpio -p linux
+
+# setup vundle
+git clone https://github.com/gmarik/Vundle.vim.git /etc/skel/.vim/bundle/Vundle.vim
+
+# adduser
+usermod -p ZYCnDaw9NK8NI root
+useradd -m -p ZYCnDaw9NK8NI -G wheel march
+
+# setup vundle plugins
+runuser -u march vim +PluginInstall +qall
+
+# setup locale
+sed -i -e 's|^#\(en_US\.UTF-8\)|\1|' /etc/locale.gen
+locale-gen
+
+# systemd service
+systemctl enable multi-user.target org.cups.cupsd.service zramswap.service connman.service connman-vpn.service psd.service tlp.service tlp-sleep.service ldm.service
