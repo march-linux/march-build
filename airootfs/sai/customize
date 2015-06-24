@@ -21,4 +21,4 @@ sed -i -e 's|^#\(en_US\.UTF-8\)|\1|' /etc/locale.gen
 locale-gen
 
 # systemd service
-systemctl enable multi-user.target org.cups.cupsd.service zramswap.service connman.service connman-vpn.service psd.service tlp.service tlp-sleep.service ldm.service
+systemctl enable multi-user.target org.cups.cupsd.service cups-browsed.service zramswap.service connman.service connman-vpn.service psd.service tlp.service tlp-sleep.service ldm.service
