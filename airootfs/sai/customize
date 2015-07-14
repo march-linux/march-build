@@ -2,6 +2,7 @@
 
 # march overlay
 march-reset
+chattr +i /etc/resolv.conf
 
 # mkinitcpio
 mkinitcpio -p linux
