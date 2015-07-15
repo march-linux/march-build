@@ -29,7 +29,7 @@ make_basefs() {
     git clone https://github.com/taylorchu/march-overlay.git ${work_dir}/march-overlay
     mkarchiso -v -w "${work_dir}" -D "${install_dir}" init
     set +e
-    mkarchiso -v -w "${work_dir}" -D "${install_dir}" -p "device-mapper sai-git prebootloader gummiboot $(grep -v ^# "${work_dir}/march-overlay/march/packages.list")" install
+    mkarchiso -v -w "${work_dir}" -D "${install_dir}" -p "sai-git prebootloader $(grep -v ^# "${work_dir}/march-overlay/march/packages.list")" install
     set -e
 }
 
@@ -89,7 +89,7 @@ make_efi() {
     cp ${work_dir}/airootfs/usr/lib/prebootloader/PreLoader.efi ${work_dir}/iso/EFI/boot/bootx64.efi
     cp ${work_dir}/airootfs/usr/lib/prebootloader/HashTool.efi ${work_dir}/iso/EFI/boot/
 
-    cp ${work_dir}/airootfs/usr/lib/gummiboot/gummibootx64.efi ${work_dir}/iso/EFI/boot/loader.efi
+    cp ${work_dir}/airootfs/usr/lib/systemd/boot/efi/systemd-bootx64.efi ${work_dir}/iso/EFI/boot/loader.efi
 
     mkdir -p ${work_dir}/iso/loader/entries
     cp ${script_path}/efiboot/loader/loader.conf ${work_dir}/iso/loader/
@@ -126,7 +126,7 @@ make_efiboot() {
     cp ${work_dir}/airootfs/usr/lib/prebootloader/PreLoader.efi ${work_dir}/efiboot/EFI/boot/bootx64.efi
     cp ${work_dir}/airootfs/usr/lib/prebootloader/HashTool.efi ${work_dir}/efiboot/EFI/boot/
 
-    cp ${work_dir}/airootfs/usr/lib/gummiboot/gummibootx64.efi ${work_dir}/efiboot/EFI/boot/loader.efi
+    cp ${work_dir}/airootfs/usr/lib/systemd/boot/efi/systemd-bootx64.efi ${work_dir}/efiboot/EFI/boot/loader.efi
 
     mkdir -p ${work_dir}/efiboot/loader/entries
     cp ${script_path}/efiboot/loader/loader.conf ${work_dir}/efiboot/loader/
