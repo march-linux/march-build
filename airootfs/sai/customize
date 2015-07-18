@@ -16,6 +16,9 @@ useradd -m -p ZYCnDaw9NK8NI -G wheel march
 
 # setup vundle plugins
 runuser -u march vim +PluginInstall +qall
+# YCM
+cd /home/march/.vim/bundle/YouCompleteMe
+runuser -u march ./install.sh
 
 # setup locale
 sed -i -e 's|^#\(en_US\.UTF-8\)|\1|' /etc/locale.gen
