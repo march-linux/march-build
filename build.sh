@@ -160,7 +160,11 @@ run_once make_setup_mkinitcpio
 run_once make_boot
 run_once make_syslinux
 run_once make_isolinux
-run_once make_efi
-run_once make_efiboot
+
+if [[ "$arch" == x86_64 ]]; then
+	run_once make_efi
+	run_once make_efiboot
+fi
+
 run_once make_prepare
 run_once make_iso
